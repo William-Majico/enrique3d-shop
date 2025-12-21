@@ -1,0 +1,27 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="Página no encontrada">
+    <main class="min-h-[70vh] flex flex-col items-center justify-center text-center px-4 pt-32 pb-16">
+        
+        <div class="relative mb-8">
+            <div class="absolute inset-0 bg-orange-500 blur-3xl opacity-20 rounded-full animate-pulse"></div>
+            <i class="ri-ghost-line text-9xl text-gray-300 dark:text-gray-700 relative z-10"></i>
+            <div class="absolute -bottom-4 right-0 bg-orange-500 text-white text-xs font-bold px-2 py-1 rounded-md rotate-12">404</div>
+        </div>
+
+        <h1 class="text-4xl md:text-6xl font-bold text-gray-800 dark:text-white mb-4 tracking-tight">
+            ¡Ups! Te has perdido
+        </h1>
+        <p class="text-lg text-gray-500 dark:text-gray-400 max-w-md mb-10">
+            La página que buscas no existe o el modelo 3D ha sido movido a otra dimensión.
+        </p>
+
+        <a href="/" class="group flex items-center gap-2 bg-gray-900 dark:bg-white text-white dark:text-gray-900 px-8 py-3 rounded-full font-medium transition-all hover:scale-105 hover:shadow-xl">
+            <i class="ri-arrow-left-line transition-transform group-hover:-translate-x-1 text-lg text-gray-500 dark:text-gray-400 max-w-md mb-10"></i>
+            <span class="text-lg text-gray-500 dark:text-gray-400 max-w-md mb-10">Volver a la tienda</span>
+        </a>
+
+    </main>
+</Layout>

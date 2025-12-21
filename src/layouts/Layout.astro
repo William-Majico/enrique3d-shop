@@ -1,0 +1,182 @@
+---
+import '../styles/global.css';
+
+// 1. Recibimos los datos dinámicos de cada página
+const { title, description, image } = Astro.props;
+
+// 2. Configuración por defecto
+const siteTitle = "Enrique 3D - Premium Assets";
+const pageTitle = title ? `${title} | Enrique 3D` : siteTitle;
+const pageDescription = description || "Creación de activos 3D premium para creadores, desarrolladores y diseñadores de todo el mundo.";
+
+// 3. URL imagen social
+const siteUrl = Astro.site ? Astro.site : Astro.url.origin;
+const pageImage = image 
+    ? new URL(image, siteUrl).href 
+    : new URL('/assets/default-social.jpg', siteUrl).href; 
+---
+
+<!doctype html>
+<html lang="es">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        
+        <title>{pageTitle}</title>
+        <meta name="description" content={pageDescription} />
+
+        <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+        
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content={Astro.url} />
+        <meta property="og:title" content={pageTitle} />
+        <meta property="og:description" content={pageDescription} />
+        <meta property="og:image" content={pageImage} />
+
+        <meta property="twitter:card" content="summary_large_image" />
+        <meta property="twitter:url" content={Astro.url} />
+        <meta property="twitter:title" content={pageTitle} />
+        <meta property="twitter:description" content={pageDescription} />
+        <meta property="twitter:image" content={pageImage} />
+
+        <link href="https://cdn.jsdelivr.net/npm/remixicon@4.0.0/fonts/remixicon.css" rel="stylesheet">
+        
+        <script is:inline>
+            if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+                document.documentElement.classList.add('dark');
+            } else {
+                document.documentElement.classList.remove('dark');
+            }
+        </script>
+    </head>
+    <body>
+        <div id="root">
+            <div class="min-h-screen bg-warm-cream dark:bg-warm-dark-bg transition-colors">
+                
+                <nav class="fixed top-0 left-0 right-0 z-50 bg-white dark:bg-warm-dark-bg border-b border-gray-200 dark:border-gray-800">
+                    <div class="px-4 md:px-8 py-4">
+                        <div class="flex items-center justify-between">
+                            
+                            <a class="flex items-center gap-2 group" href="/">
+                                <img 
+                                    src="/assets/logo-dark.svg" 
+                                    alt="Enrique 3D" 
+                                    class="h-9 w-auto block dark:hidden transition-opacity"
+                                />
+
+                                <img 
+                                    src="/assets/logo-light.svg"
+                                    alt="Enrique 3D" 
+                                    class="h-9 w-auto hidden dark:block transition-opacity"
+                                />
+                            </a>
+                            <div class="hidden md:flex items-center gap-8">
+                                <a class="text-sm font-medium text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition-colors" href="/">Tienda</a>
+                                <a class="text-sm font-medium text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition-colors" href="/about">Nosotros</a>
+                                <a class="text-sm font-medium text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition-colors" href="/terms">Términos</a>
+                            </div>
+
+                            <div class="flex items-center gap-2 md:gap-4">
+                                <div class="hidden md:block relative">
+                                    <div class="flex items-center gap-2 px-4 py-2 bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-full">
+                                        <i class="ri-search-line text-base text-gray-500 dark:text-gray-400"></i>
+                                        <input class="search-input w-40 bg-transparent text-sm text-gray-800 dark:text-white focus:outline-none" placeholder="Buscar assets..." type="text">
+                                    </div>
+                                </div>
+
+                                <button id="theme-toggle" class="w-9 h-9 flex items-center justify-center text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition-colors cursor-pointer" aria-label="Toggle theme">
+                                    <i id="theme-icon" class="ri-sun-line text-xl"></i>
+                                </button>
+
+                                <button id="mobile-menu-btn" class="md:hidden w-9 h-9 flex items-center justify-center text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition-colors cursor-pointer">
+                                    <i id="mobile-menu-icon" class="ri-menu-line text-xl"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="mobile-menu" class="hidden md:hidden absolute top-full left-0 w-full bg-white dark:bg-warm-dark-bg border-b border-gray-200 dark:border-gray-800 shadow-lg px-4 py-6 flex flex-col gap-4 z-40">
+                        <a class="text-base font-medium text-gray-600 dark:text-gray-300 hover:text-orange-500 dark:hover:text-white transition-colors py-2 border-b border-gray-100 dark:border-gray-700" href="/">Tienda</a>
+                        <a class="text-base font-medium text-gray-600 dark:text-gray-300 hover:text-orange-500 dark:hover:text-white transition-colors py-2 border-b border-gray-100 dark:border-gray-700" href="/contact">Contacto</a>
+                        <a class="text-base font-medium text-gray-600 dark:text-gray-300 hover:text-orange-500 dark:hover:text-white transition-colors py-2" href="/terms">Términos</a>
+                        
+                        <div class="mt-2 flex items-center gap-2 px-4 py-3 bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg">
+                            <i class="ri-search-line text-base text-gray-500 dark:text-gray-400"></i>
+                            <input class="search-input w-full bg-transparent text-sm text-gray-800 dark:text-white focus:outline-none" placeholder="Buscar assets..." type="text">
+                        </div>
+                    </div>
+                </nav>
+
+                <slot />
+
+                <footer class="border-t border-gray-200 dark:border-gray-800 bg-white dark:bg-warm-dark-bg">
+                    <div class="px-8 py-12">
+                        <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8">
+                            <div>
+                                <h3 class="text-lg font-bold text-gray-800 dark:text-white mb-4">Enrique 3D</h3>
+                                <p class="text-sm text-gray-600 dark:text-gray-300">Activos 3D premium para creadores y desarrolladores.</p>
+                            </div>
+                            <div>
+                                <h4 class="text-sm font-semibold text-gray-800 dark:text-white mb-4 uppercase tracking-wide">Enlaces rápidos</h4>
+                                <ul class="space-y-2 text-sm">
+                                    <li><a class="text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition-colors cursor-pointer" href="/">Tienda</a></li>
+                                    <li><a class="text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition-colors cursor-pointer" href="/contact">Contacto</a></li>
+                                    <li><a class="text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition-colors cursor-pointer" href="/terms">Términos y condiciones</a></li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h4 class="text-sm font-semibold text-gray-800 dark:text-white mb-4 uppercase tracking-wide">Conectar</h4>
+                                <p class="text-sm text-gray-600 dark:text-gray-300">support@enrique3d.shop</p>
+                            </div>
+                        </div>
+                        <div class="max-w-7xl mx-auto mt-12 pt-8 border-t border-gray-200 dark:border-gray-800 flex flex-col md:flex-row justify-between items-center gap-4">
+                            <p class="text-sm text-gray-500 dark:text-gray-400">© 2025 Enrique 3D. Todos los derechos reservados.</p>
+                            <a href="https://readdy.ai/?ref=logo" target="_blank" rel="noopener noreferrer" class="text-sm text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors">Desarrollado por Readdy</a>
+                        </div>
+                    </div>
+                </footer>
+
+            </div>
+        </div>
+
+        <script is:inline>
+            // Lógica Tema Oscuro
+            const themeToggleBtn = document.getElementById('theme-toggle');
+            const themeIcon = document.getElementById('theme-icon');
+
+            const updateIcon = () => {
+                const isDark = document.documentElement.classList.contains('dark');
+                if (isDark) {
+                    themeIcon.classList.remove('ri-sun-line');
+                    themeIcon.classList.add('ri-moon-line');
+                } else {
+                    themeIcon.classList.remove('ri-moon-line');
+                    themeIcon.classList.add('ri-sun-line');
+                }
+            };
+            updateIcon();
+
+            themeToggleBtn.addEventListener('click', () => {
+                document.documentElement.classList.toggle('dark');
+                localStorage.theme = document.documentElement.classList.contains('dark') ? 'dark' : 'light';
+                updateIcon();
+            });
+
+            // Lógica Menú Móvil
+            const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+            const mobileMenuIcon = document.getElementById('mobile-menu-icon');
+            const mobileMenu = document.getElementById('mobile-menu');
+
+            mobileMenuBtn.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+                if (mobileMenu.classList.contains('hidden')) {
+                    mobileMenuIcon.classList.remove('ri-close-line');
+                    mobileMenuIcon.classList.add('ri-menu-line');
+                } else {
+                    mobileMenuIcon.classList.remove('ri-menu-line');
+                    mobileMenuIcon.classList.add('ri-close-line');
+                }
+            });
+        </script>
+    </body>
+</html>
