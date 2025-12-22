@@ -1,16 +1,16 @@
 [
   {
     "id": "duo-npc-01",
-    "title": "Duo de NPC",
-    "price": "10",
+    "title": "Duo de NPCs",
+    "price": "4.99",
     "description": "Pack de 2 personajes NPC optimizados al máximo para rendimiento (Mobile/Web/VR). Incluye variantes de sombrero azul y morado (editables en color). Cuentan con Rig avanzado (Cinemática Inversa/IK) en las piernas para animaciones precisas. Ideales para llenar ciudades sin perder FPS.",
     "specs": {
-      "formats": ".blend, .fbx, .obj",
-      "polyCount": "12,450",
-      "vertexCount": "13,200",
-      "rigged": "Sí",
-      "animations": "Idle, Walk, Run, Attack",
-      "textures": "4K PBR"
+      "Formato": ".rbxm",
+      "Triángulos": "500 (c/u)",
+      "Vértices": "300 (c/u)",
+      "Rig": "Sí",
+      "Animaciones": "Idle (c/u)",
+      "Texturas": "Base Color (Sin Texturas)"
     },
     "images": [
       "/assets/duo-npc-01/foto3.png",
@@ -21,32 +21,7 @@
       "/assets/duo-npc-01/ejemplo.mp4"
     ],
     "wompiLink": "https://wompi.co/...", 
-    "discordLink": "https://discord.gg/..."
-  },
-  {
-    "id": "sdawda",
-    "title": "Mdwadw",
-    "price": "49",
-    "description": "Una silla ergonómica diseñada para comodidad y estilo. Perfecta para oficinas modernas.",
-    "specs": {
-      "formats": ".blend, .fbx, .obj",
-      "polyCount": "12,450",
-      "vertexCount": "13,200",
-      "rigged": "Sí",
-      "animations": "Idle, Walk, Run, Attack",
-      "textures": "4K PBR"
-    },
-    "images": [
-      "https://images.cults3d.com/owYudiqaDb9ylaxIMhSIlILtFWk=/516x516/filters:no_upscale()/https://fbi.cults3d.com/uploaders/42904766/illustration-file/dd346cc6-1ecc-4a35-a744-37279f7094c6/cool-skeleton-candy-halloween-3d-model-printable.jpeg",
-      "/assets/esok.mp4",
-      "https://i.pinimg.com/736x/84/91/03/8491036e6e8549174a6f03aab8759529.jpg",
-      "/assets/esok.mp4",
-      "https://images.cults3d.com/owYudiqaDb9ylaxIMhSIlILtFWk=/516x516/filters:no_upscale()/https://fbi.cults3d.com/uploaders/42904766/illustration-file/dd346cc6-1ecc-4a35-a744-37279f7094c6/cool-skeleton-candy-halloween-3d-model-printable.jpeg",
-      "/assets/esok.mp4",
-      "https://images.cults3d.com/owYudiqaDb9ylaxIMhSIlILtFWk=/516x516/filters:no_upscale()/https://fbi.cults3d.com/uploaders/42904766/illustration-file/dd346cc6-1ecc-4a35-a744-37279f7094c6/cool-skeleton-candy-halloween-3d-model-printable.jpeg",
-      "/assets/esok.mp4"
-    ],
-    "wompiLink": "https://wompi.co/...", 
-    "discordLink": "https://discord.gg/..."
+    "discordLink": "https://discord.gg/VdjfVeRm",
+    "downloadUrl": "https://7ehhgrxskhqapzo3.public.blob.vercel-storage.com/Enrique3D-Duo-NPCs.rar"
   }
 ]

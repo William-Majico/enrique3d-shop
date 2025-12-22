@@ -128,3 +128,40 @@ import products from '../data/products.json';
         });
     });
 </script>
+
+<script is:inline>
+  // Esta función se encarga de hablar con tu backend y pedir el link de Wompi
+  // --- FUNCIÓN DE COMPRA (Pégalo al final de tu script existente) ---
+  window.comprar = async (nombre, precio, btn) => {
+    const textoOriginal = btn.innerText;
+    btn.innerText = "Cargando...";
+    btn.disabled = true;
+
+    try {
+      const respuesta = await fetch('/api/crear-pago', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ 
+          nombreProducto: nombre, 
+          precio: parseFloat(precio) 
+        })
+      });
+
+      const datos = await respuesta.json();
+
+      if (datos.url) {
+        window.location.href = datos.url; 
+      } else {
+        alert("Error: " + (datos.error || "No se pudo generar el pago"));
+        btn.innerText = textoOriginal;
+        btn.disabled = false;
+      }
+
+    } catch (error) {
+      console.error(error);
+      alert("Ocurrió un error inesperado");
+      btn.innerText = textoOriginal;
+      btn.disabled = false;
+    }
+  };
+</script>

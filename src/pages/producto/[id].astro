@@ -1,6 +1,7 @@
 ---
-import Layout from '../../layouts/Layout.astro';
-import products from '../../data/products.json';
+export const prerender = true;
+import Layout from "../../layouts/Layout.astro";
+import products from "../../data/products.json";
 
 export async function getStaticPaths() {
   return products.map((product) => ({
@@ -11,160 +12,245 @@ export async function getStaticPaths() {
 
 const { product } = Astro.props;
 
-// Función para detectar si es video
-const isVideo = (filename: string) => filename.toLowerCase().endsWith('.mp4');
+if (!product) {
+  return Astro.redirect("/"); // Si el producto no existe, te devuelve al inicio
+}
 
-// TRUCO INTELIGENTE: Buscamos la primera imagen normal (JPG/PNG) para usarla de portada (poster)
-// Así el video no se ve negro/blanco antes de cargar.
-const posterImage = product.images.find(img => !isVideo(img)) || '';
+const isVideo = (filename: string) => filename.toLowerCase().endsWith(".mp4");
+
+const posterImage = product.images.find((img) => !isVideo(img)) || "";
 
 // --- LÓGICA DE RELACIONADOS ---
-const otherProducts = products.filter(p => p.id !== product.id);
-const relatedProducts = otherProducts.sort(() => 0.5 - Math.random()).slice(0, 3);
+const otherProducts = products.filter((p) => p.id !== product.id);
+const relatedProducts = otherProducts
+  .sort(() => 0.5 - Math.random())
+  .slice(0, 3);
 ---
 
-<Layout title={product.title} description={product.description} image={product.images[0]}>
+<Layout
+  title={product.title}
+  description={product.description}
+  image={product.images[0]}
+>
   <main class="pt-24 md:pt-32 pb-16 md:pb-24 px-4 md:px-8">
     <div class="max-w-7xl mx-auto">
-      
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12">
-        
         <div class="w-full">
           <div class="w-full h-full flex flex-col gap-4">
-            
-            <div id="main-viewport" class="group relative bg-gray-100 dark:bg-gray-800 rounded-xl shadow-md aspect-video w-full overflow-hidden">
-              <div 
-                id="carousel-container" 
+            <div
+              id="main-viewport"
+              class="group relative bg-gray-100 dark:bg-gray-800 rounded-xl shadow-md aspect-video w-full overflow-hidden"
+            >
+              <div
+                id="carousel-container"
                 class="flex w-full h-full overflow-x-auto snap-x snap-mandatory scrollbar-hide"
                 style="scroll-behavior: smooth;"
               >
-                {product.images.map((media, index) => (
-                  <div class="w-full h-full flex-shrink-0 snap-center flex items-center justify-center relative bg-black/5" data-index={index}>
-                    {isVideo(media) ? (
-                      /* --- AQUÍ ESTÁ LA OPTIMIZACIÓN --- */
-                      /* 1. preload="none": No descarga nada hasta que se reproduce */
-                      /* 2. poster={posterImage}: Muestra una foto mientras carga */
-                      <video 
-                        src={media} 
-                        preload="none"
-                        poster={posterImage}
-                        playsinline 
-                        muted 
-                        loop 
-                        class="carousel-video w-full h-full object-cover"
-                      ></video>
-                    ) : (
-                      /* Para imágenes normales usamos loading="lazy" también por si acaso */
-                      <img src={media} alt={`View ${index}`} loading="lazy" class="max-w-full max-h-full object-contain" />
-                    )}
-                  </div>
-                ))}
+                {
+                  product.images.map((media, index) => (
+                    <div
+                      class="w-full h-full flex-shrink-0 snap-center flex items-center justify-center relative bg-black/5"
+                      data-index={index}
+                    >
+                      {isVideo(media) ? (
+                        <video
+                          src={media}
+                          preload="none"
+                          poster={posterImage}
+                          playsinline
+                          muted
+                          loop
+                          class="carousel-video w-full h-full object-cover"
+                        />
+                      ) : (
+                        <img
+                          src={media}
+                          alt={`View ${index}`}
+                          loading="lazy"
+                          class="max-w-full max-h-full object-contain"
+                        />
+                      )}
+                    </div>
+                  ))
+                }
               </div>
 
-              <button id="prev-btn" class="hidden md:flex absolute left-4 top-1/2 -translate-y-1/2 z-40 w-12 h-12 items-center justify-center rounded-full bg-white/90 text-gray-800 shadow-xl hover:bg-orange-500 hover:text-white transition-all cursor-pointer border border-gray-100 hover:scale-110 active:scale-95">
+              <button
+                id="prev-btn"
+                class="hidden md:flex absolute left-4 top-1/2 -translate-y-1/2 z-40 w-12 h-12 items-center justify-center rounded-full bg-white/90 text-gray-800 shadow-xl hover:bg-orange-500 hover:text-white transition-all cursor-pointer border border-gray-100 hover:scale-110 active:scale-95"
+              >
                 <i class="ri-arrow-left-s-line text-2xl"></i>
               </button>
-              <button id="next-btn" class="hidden md:flex absolute right-4 top-1/2 -translate-y-1/2 z-40 w-12 h-12 items-center justify-center rounded-full bg-white/90 text-gray-800 shadow-xl hover:bg-orange-500 hover:text-white transition-all cursor-pointer border border-gray-100 hover:scale-110 active:scale-95">
+              <button
+                id="next-btn"
+                class="hidden md:flex absolute right-4 top-1/2 -translate-y-1/2 z-40 w-12 h-12 items-center justify-center rounded-full bg-white/90 text-gray-800 shadow-xl hover:bg-orange-500 hover:text-white transition-all cursor-pointer border border-gray-100 hover:scale-110 active:scale-95"
+              >
                 <i class="ri-arrow-right-s-line text-2xl"></i>
               </button>
 
-              <div class="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-3 md:hidden z-30 pointer-events-none items-center p-2 rounded-full bg-black/20 backdrop-blur-sm">
-                {product.images.map((_, index) => (
-                  <div class={`dot h-2 rounded-full transition-all duration-300 shadow-sm ${index === 0 ? 'bg-orange-500 w-8' : 'bg-white/90 w-2'}`}></div>
-                ))}
+              <div
+                class="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-3 md:hidden z-30 pointer-events-none items-center p-2 rounded-full bg-black/20 backdrop-blur-sm"
+              >
+                {
+                  product.images.map((_, index) => (
+                    <div
+                      class={`dot h-2 rounded-full transition-all duration-300 shadow-sm ${index === 0 ? "bg-orange-500 w-8" : "bg-white/90 w-2"}`}
+                    />
+                  ))
+                }
               </div>
             </div>
 
-            <div class="flex gap-2 md:gap-3 overflow-x-auto pb-2 scrollbar-hide snap-x snap-mandatory">
-              {product.images.map((media, index) => (
-                <button 
-                  class={`thumbnail-btn relative flex-shrink-0 w-16 h-16 md:w-20 md:h-20 rounded-lg overflow-hidden border-2 transition-all cursor-pointer snap-center ${index === 0 ? 'border-orange-500' : 'border-gray-200 dark:border-gray-700'}`}
-                  data-index={index}
-                >
-                  {isVideo(media) ? (
-                    <div class="w-full h-full relative bg-black/10">
-                        <video src={media} preload="metadata" class="w-full h-full object-cover opacity-80 pointer-events-none"></video>
-                        <i class="ri-play-circle-fill text-white absolute inset-0 m-auto text-2xl drop-shadow-md"></i>
-                    </div>
-                  ) : (
-                    <img class="w-full h-full object-cover pointer-events-none" src={media} loading="lazy" />
-                  )}
-                </button>
-              ))}
+            <div
+              class="flex gap-2 md:gap-3 overflow-x-auto pb-2 scrollbar-hide snap-x snap-mandatory"
+            >
+              {
+                product.images.map((media, index) => (
+                  <button
+                    class={`thumbnail-btn relative flex-shrink-0 w-16 h-16 md:w-20 md:h-20 rounded-lg overflow-hidden border-2 transition-all cursor-pointer snap-center ${index === 0 ? "border-orange-500" : "border-gray-200 dark:border-gray-700"}`}
+                    data-index={index}
+                  >
+                    {isVideo(media) ? (
+                      <div class="w-full h-full relative bg-black/10">
+                        <video
+                          src={media}
+                          preload="metadata"
+                          class="w-full h-full object-cover opacity-80 pointer-events-none"
+                        />
+                        <i class="ri-play-circle-fill text-white absolute inset-0 m-auto text-2xl drop-shadow-md" />
+                      </div>
+                    ) : (
+                      <img
+                        class="w-full h-full object-cover pointer-events-none"
+                        src={media}
+                        loading="lazy"
+                      />
+                    )}
+                  </button>
+                ))
+              }
             </div>
-
           </div>
         </div>
 
         <div class="w-full">
-           <div class="h-full flex flex-col">
+          <div class="h-full flex flex-col">
             <div class="mb-6 md:mb-8">
-              <p class="text-sm text-gray-500 dark:text-gray-400 mb-2">3D Model</p>
-              <h1 class="text-2xl md:text-4xl font-bold text-gray-800 dark:text-white mb-4 tracking-tight">{product.title}</h1>
-              <p class="text-2xl md:text-3xl font-semibold text-gray-800 dark:text-white">${product.price} USD</p>
+              <p class="text-sm text-gray-500 dark:text-gray-400 mb-2">
+                Modelo 3D
+              </p>
+              <h1
+                class="text-2xl md:text-4xl font-bold text-gray-800 dark:text-white mb-4 tracking-tight"
+              >
+                {product.title}
+              </h1>
+              <p
+                class="text-2xl md:text-3xl font-semibold text-gray-800 dark:text-white"
+              >
+                ${product.price} USD
+              </p>
             </div>
-            
+
             <div class="mb-6 md:mb-8">
-              <p class="text-sm text-gray-600 dark:text-gray-300 leading-relaxed">{product.description}</p>
+              <p
+                class="text-sm text-gray-600 dark:text-gray-300 leading-relaxed"
+              >
+                {product.description}
+              </p>
             </div>
 
             <div class="mb-6 md:mb-8 flex-grow">
-              <h2 class="text-sm font-semibold text-gray-800 dark:text-white mb-4 uppercase tracking-wide">Technical Specifications</h2>
+              <h2
+                class="text-sm font-semibold text-gray-800 dark:text-white mb-4 uppercase tracking-wide"
+              >
+                Características
+              </h2>
               <div class="space-y-3 text-sm">
-                {product.specs && Object.entries(product.specs).map(([key, value]) => (
-                   <div class="flex justify-between py-2 border-b border-gray-200 dark:border-gray-700">
-                    <span class="text-gray-500 dark:text-gray-400 capitalize">{key.replace(/([A-Z])/g, ' $1').trim()}</span>
-                    <span class="text-gray-800 dark:text-white font-medium">{value}</span>
-                  </div>
-                ))}
+                {
+                  product.specs &&
+                    Object.entries(product.specs).map(([key, value]) => (
+                      <div class="flex justify-between py-2 border-b border-gray-200 dark:border-gray-700">
+                        <span class="text-gray-500 dark:text-gray-400 capitalize">
+                          {key.replace(/([A-Z])/g, " $1").trim()}
+                        </span>
+                        <span class="text-gray-800 dark:text-white font-medium">
+                          {value}
+                        </span>
+                      </div>
+                    ))
+                }
               </div>
             </div>
 
             <div class="flex flex-col sm:flex-row gap-3">
-               {product.wompiLink && (
-              <a href={product.wompiLink} target="_blank" class="flex-1 flex items-center justify-center gap-2 py-4 bg-orange-500 text-white font-semibold rounded-lg hover:bg-orange-600 transition-colors cursor-pointer text-center">
+              <button
+                class="flex-1 flex items-center justify-center gap-2 py-4 bg-orange-500 text-white font-semibold rounded-lg hover:bg-orange-600 transition-colors cursor-pointer text-center shadow-md hover:shadow-lg"
+                onclick={`window.comprar('${product.id}', '${product.title}', '${product.price}', this)`}
+              >
                 <i class="ri-bank-card-line text-lg"></i>
-                <span>Comprar con Wompi</span>
-              </a>
-              )}
-              <a href={product.discordLink || '#'} target="_blank" class="flex-1 flex items-center justify-center gap-2 py-4 bg-indigo-600 text-white font-semibold rounded-lg hover:bg-indigo-700 transition-colors cursor-pointer text-center">
+                <span>Comprar Ahora</span>
+              </button>
+
+              <a
+                href={product.discordLink || "#"}
+                target="_blank"
+                class="flex-1 flex items-center justify-center gap-2 py-4 bg-indigo-600 text-white font-semibold rounded-lg hover:bg-indigo-700 transition-colors cursor-pointer text-center shadow-md hover:shadow-lg"
+              >
                 <i class="ri-discord-line text-lg"></i>
-                <span>Discord</span>
+                <span>Dudas a Discord</span>
               </a>
             </div>
           </div>
         </div>
       </div>
-      
-      <div style="margin-top: 4rem;" class="mt-32 border-t border-gray-200 dark:border-gray-800 pt-16">
-        <h2 class="text-2xl font-bold text-gray-800 dark:text-white mb-8">También te podría interesar</h2>
-        
+
+      <div
+        style="margin-top: 4rem;"
+        class="mt-32 border-t border-gray-200 dark:border-gray-800 pt-16"
+      >
+        <h2 class="text-2xl font-bold text-gray-800 dark:text-white mb-8">
+          También te podría interesar
+        </h2>
+
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {relatedProducts.map((related) => (
-                <a href={`/producto/${related.id}`} class="group block bg-white dark:bg-gray-800 rounded-xl overflow-hidden border border-gray-100 dark:border-gray-800 hover:shadow-lg transition-all hover:-translate-y-1">
-                    <div class="aspect-video w-full overflow-hidden bg-gray-100 dark:bg-gray-900">
-                        <img src={related.images[0]} alt={related.title} loading="lazy" class="w-full h-full object-cover" />
-                    </div>
-                    <div class="p-4">
-                        <h3 class="font-bold text-gray-800 dark:text-white group-hover:text-orange-500 transition-colors truncate">{related.title}</h3>
-                        <p class="text-sm text-gray-500 dark:text-gray-400 mt-1">${related.price} USD</p>
-                    </div>
-                </a>
-            ))}
+          {
+            relatedProducts.map((related) => (
+              <a
+                href={`/producto/${related.id}`}
+                class="group block bg-white dark:bg-gray-800 rounded-xl overflow-hidden border border-gray-100 dark:border-gray-800 hover:shadow-lg transition-all hover:-translate-y-1"
+              >
+                <div class="aspect-video w-full overflow-hidden bg-gray-100 dark:bg-gray-900">
+                  <img
+                    src={related.images[0]}
+                    alt={related.title}
+                    loading="lazy"
+                    class="w-full h-full object-cover"
+                  />
+                </div>
+                <div class="p-4">
+                  <h3 class="font-bold text-gray-800 dark:text-white group-hover:text-orange-500 transition-colors truncate">
+                    {related.title}
+                  </h3>
+                  <p class="text-sm text-gray-500 dark:text-gray-400 mt-1">
+                    ${related.price} USD
+                  </p>
+                </div>
+              </a>
+            ))
+          }
         </div>
       </div>
-
     </div>
   </main>
 </Layout>
 
 <script is:inline>
-  const container = document.getElementById('carousel-container');
-  const prevBtn = document.getElementById('prev-btn');
-  const nextBtn = document.getElementById('next-btn');
-  const dots = document.querySelectorAll('.dot');
-  const thumbs = document.querySelectorAll('.thumbnail-btn');
-  const videos = container.querySelectorAll('.carousel-video');
+  const container = document.getElementById("carousel-container");
+  const prevBtn = document.getElementById("prev-btn");
+  const nextBtn = document.getElementById("next-btn");
+  const dots = document.querySelectorAll(".dot");
+  const thumbs = document.querySelectorAll(".thumbnail-btn");
+  const videos = container.querySelectorAll(".carousel-video");
 
   let currentIndex = 0;
   const totalSlides = dots.length;
@@ -172,68 +258,114 @@ const relatedProducts = otherProducts.sort(() => 0.5 - Math.random()).slice(0, 3
   const updateState = (index) => {
     currentIndex = index;
     dots.forEach((dot, i) => {
-        if (i === index) {
-            dot.classList.remove('bg-white/90', 'w-2');
-            dot.classList.add('bg-orange-500', 'w-8');
-        } else {
-            dot.classList.add('bg-white/90', 'w-2');
-            dot.classList.remove('bg-orange-500', 'w-8');
-        }
+      if (i === index) {
+        dot.classList.remove("bg-white/90", "w-2");
+        dot.classList.add("bg-orange-500", "w-8");
+      } else {
+        dot.classList.add("bg-white/90", "w-2");
+        dot.classList.remove("bg-orange-500", "w-8");
+      }
     });
     thumbs.forEach((thumb, i) => {
-        if (i === index) {
-            thumb.classList.remove('border-gray-200', 'dark:border-gray-700');
-            thumb.classList.add('border-orange-500');
-            thumb.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
-        } else {
-            thumb.classList.add('border-gray-200', 'dark:border-gray-700');
-            thumb.classList.remove('border-orange-500');
-        }
+      if (i === index) {
+        thumb.classList.remove("border-gray-200", "dark:border-gray-700");
+        thumb.classList.add("border-orange-500");
+        thumb.scrollIntoView({
+          behavior: "smooth",
+          block: "nearest",
+          inline: "center",
+        });
+      } else {
+        thumb.classList.add("border-gray-200", "dark:border-gray-700");
+        thumb.classList.remove("border-orange-500");
+      }
     });
-    
+
     // AQUÍ OCURRE LA MAGIA DEL PRELOAD="NONE"
     videos.forEach((video) => {
-        const slideParent = video.closest('div'); 
-        const slideIndex = parseInt(slideParent.getAttribute('data-index'));
-        if (slideIndex === index) {
-            // Al hacer .play(), el navegador entiende que AHORA sí debe descargar el video
-            video.play().catch(e => {}); 
-            video.setAttribute('controls', 'true');
-        } else {
-            video.pause();
-            video.currentTime = 0;
-            video.removeAttribute('controls');
-        }
+      const slideParent = video.closest("div");
+      const slideIndex = parseInt(slideParent.getAttribute("data-index"));
+      if (slideIndex === index) {
+        // Al hacer .play(), el navegador entiende que AHORA sí debe descargar el video
+        video.play().catch((e) => {});
+        video.setAttribute("controls", "true");
+      } else {
+        video.pause();
+        video.currentTime = 0;
+        video.removeAttribute("controls");
+      }
     });
-  }
+  };
 
-  container.addEventListener('scroll', () => {
+  container.addEventListener("scroll", () => {
     const slideWidth = container.offsetWidth;
     const newIndex = Math.round(container.scrollLeft / slideWidth);
     if (newIndex !== currentIndex && newIndex >= 0 && newIndex < totalSlides) {
-        updateState(newIndex);
+      updateState(newIndex);
     }
   });
 
   const manualScroll = (index) => {
     const slideWidth = container.offsetWidth;
-    container.scrollTo({ left: index * slideWidth, behavior: 'smooth' });
-  }
+    container.scrollTo({ left: index * slideWidth, behavior: "smooth" });
+  };
 
-  nextBtn.addEventListener('click', () => { manualScroll((currentIndex + 1) % totalSlides); });
-  prevBtn.addEventListener('click', () => { manualScroll((currentIndex - 1 + totalSlides) % totalSlides); });
+  nextBtn.addEventListener("click", () => {
+    manualScroll((currentIndex + 1) % totalSlides);
+  });
+  prevBtn.addEventListener("click", () => {
+    manualScroll((currentIndex - 1 + totalSlides) % totalSlides);
+  });
 
-  thumbs.forEach(thumb => {
-    thumb.addEventListener('click', () => {
-        const idx = parseInt(thumb.getAttribute('data-index'));
-        manualScroll(idx);
+  thumbs.forEach((thumb) => {
+    thumb.addEventListener("click", () => {
+      const idx = parseInt(thumb.getAttribute("data-index"));
+      manualScroll(idx);
     });
   });
 
   setTimeout(() => updateState(0), 100);
+
+  window.comprar = async (id, nombre, precio, btn) => {
+    const textoOriginal = btn.innerText;
+    btn.innerText = "Cargando...";
+    btn.disabled = true;
+
+    try {
+      const respuesta = await fetch("/api/crear-pago", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          productId: id, // <--- ¡AQUI ENVIAMOS EL ID!
+          nombreProducto: nombre,
+          precio: parseFloat(precio),
+        }),
+      });
+
+      const datos = await respuesta.json();
+
+      if (datos.url) {
+        window.location.href = datos.url;
+      } else {
+        alert("Error: " + (datos.error || "No se pudo generar el pago"));
+        btn.innerText = textoOriginal;
+        btn.disabled = false;
+      }
+    } catch (error) {
+      console.error(error);
+      alert("Ocurrió un error");
+      btn.innerText = textoOriginal;
+      btn.disabled = false;
+    }
+  };
 </script>
 
 <style>
-  .scrollbar-hide::-webkit-scrollbar { display: none; }
-  .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
 </style>

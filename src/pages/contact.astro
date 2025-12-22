@@ -1,0 +1,171 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="Comisiones y Contacto">
+  <main class="pt-32 pb-20 px-6">
+    <div class="max-w-6xl mx-auto">
+      
+      <div class="text-center mb-16">
+        <h1 class="text-4xl md:text-5xl font-bold text-gray-800 dark:text-white mb-4 tracking-tight">
+          ¿Necesitas algo único?
+        </h1>
+        <p class="text-lg text-gray-500 dark:text-gray-400 max-w-2xl mx-auto">
+          Trabajemos juntos para crear el activo perfecto para tu juego de Roblox. 
+          Cuéntame tu idea y la haremos realidad.
+        </p>
+      </div>
+
+      <div class="grid lg:grid-cols-2 gap-12 items-start">
+        
+        <div class="space-y-8">
+          
+          <div class="bg-indigo-50 dark:bg-indigo-900/20 p-8 rounded-2xl border border-indigo-100 dark:border-indigo-900/20">
+            <h3 class="text-2xl font-bold text-gray-800 dark:text-white mb-6">
+              <i class="ri-discord-fill text-2xl"></i>
+              Vía Rápida: Discord
+            </h3>
+            <p class="text-indigo-700 dark:text-gray-300 mb-6 text-sm leading-relaxed">
+              La forma más rápida de cotizar es abriendo un ticket en mi servidor. Hablemos en tiempo real.
+            </p>
+            <a 
+              href="https://discord.gg/VdjfVeRm" 
+              target="_blank" 
+              class="inline-flex items-center justify-center gap-2 px-6 py-3 bg-indigo-600 hover:bg-indigo-700 text-white font-semibold rounded-xl transition-all shadow-lg w-full sm:w-auto"
+            >
+              Unirme al Servidor
+            </a>
+          </div>
+
+          <div>
+            <h3 class="text-2xl font-bold text-gray-800 dark:text-white mb-6">
+              ¿Por qué encargar una comisión?
+            </h3>
+            <ul class="space-y-6">
+              <li class="flex gap-4">
+                <div class="w-12 h-12 rounded-full bg-orange-100 dark:bg-orange-900/20 flex items-center justify-center flex-shrink-0 text-orange-600 dark:text-orange-500">
+                  <i class="ri-ruler-2-line text-xl"></i>
+                </div>
+                <div>
+                  <h4 class="font-bold text-gray-800 dark:text-white">A tu medida</h4>
+                  <p class="text-sm text-gray-600 dark:text-gray-400 mt-1">
+                    Diseñado específicamente para encajar con el estilo y necesidades de tu juego.
+                  </p>
+                </div>
+              </li>
+              <li class="flex gap-4">
+                <div class="w-12 h-12 rounded-full bg-orange-100 dark:bg-orange-900/20 flex items-center justify-center flex-shrink-0 text-orange-600 dark:text-orange-500">
+                  <i class="ri-speed-line text-xl"></i>
+                </div>
+                <div>
+                  <h4 class="font-bold text-gray-800 dark:text-white">Optimización Extrema</h4>
+                  <p class="text-sm text-gray-600 dark:text-gray-400 mt-1">
+                    Garantizo topología limpia y bajo poly-count para cero lag.
+                  </p>
+                </div>
+              </li>
+              <li class="flex gap-4">
+                <div class="w-12 h-12 rounded-full bg-orange-100 dark:bg-orange-900/20 flex items-center justify-center flex-shrink-0 text-orange-600 dark:text-orange-500">
+                  <i class="ri-lock-2-line text-xl"></i>
+                </div>
+                <div>
+                  <h4 class="font-bold text-gray-800 dark:text-white">Derechos Exclusivos</h4>
+                  <p class="text-sm text-gray-600 dark:text-gray-400 mt-1">
+                    El modelo será 100% tuyo. No lo venderé en la tienda pública.
+                  </p>
+                </div>
+              </li>
+            </ul>
+          </div>
+
+        </div>
+
+        <div class="bg-white dark:bg-warm-dark-card p-8 md:p-10 rounded-xl shadow-xl border border-gray-100 dark:border-gray-700">
+          <h3 class="text-2xl font-bold text-gray-800 dark:text-white mb-6">
+            Cotiza tu proyecto
+          </h3>
+          
+          <form action="https://formspree.io/f/mbdranbr" method="POST" class="space-y-5">
+            
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+              <div class="space-y-2">
+                <label for="name" class="text-sm font-medium text-gray-700 dark:text-gray-300">Tu Nombre</label>
+                <input 
+                  type="text" 
+                  id="name" 
+                  name="name" 
+                  required
+                  placeholder="Ej. Juan Pérez"
+                  class="w-full px-4 py-3 rounded-xl bg-gray-50 dark:bg-warm-dark-bg border border-gray-200 dark:border-gray-700 text-gray-800 dark:text-white focus:outline-none focus:ring-2 focus:ring-orange-500 transition-all placeholder:text-gray-400"
+                />
+              </div>
+              <div class="space-y-2">
+                <label for="discord" class="text-sm font-medium text-gray-700 dark:text-gray-300">Usuario de Discord</label>
+                <input 
+                  type="text" 
+                  id="discord" 
+                  name="discord" 
+                  required
+                  placeholder="Ej. usuario#1234"
+                  class="w-full px-4 py-3 rounded-xl bg-gray-50 dark:bg-warm-dark-bg border border-gray-200 dark:border-gray-700 text-gray-800 dark:text-white focus:outline-none focus:ring-2 focus:ring-indigo-600 transition-all placeholder:text-gray-400"
+                />
+              </div>
+            </div>
+
+            <div class="space-y-2">
+              <label for="type" class="text-sm font-medium text-gray-700 dark:text-gray-300">Tipo de Encargo</label>
+              <select 
+                id="type" 
+                name="type" 
+                class="w-full px-4 py-3 rounded-xl bg-gray-50 dark:bg-warm-dark-bg border border-gray-200 dark:border-gray-700 text-gray-800 dark:text-white focus:outline-none focus:ring-2 focus:ring-orange-500 transition-all cursor-pointer"
+              >
+                <option>Modelado de Personaje (NPC/Avatar)</option>
+                <option>Armaduras / Ropa 3D</option>
+                <option>Armas / Herramientas</option>
+                <option>Assets de Mapa / Props</option>
+                <option>Otro</option>
+              </select>
+            </div>
+
+            <div class="space-y-2">
+              <label for="budget" class="text-sm font-medium text-gray-700 dark:text-gray-300">Presupuesto Estimado (USD)</label>
+              <input 
+                type="text" 
+                id="budget" 
+                name="budget" 
+                placeholder="Ej. $50 - $100"
+                class="w-full px-4 py-3 rounded-xl bg-gray-50 dark:bg-warm-dark-bg border border-gray-200 dark:border-gray-700 text-gray-800 dark:text-white focus:outline-none focus:ring-2 focus:ring-orange-500 transition-all placeholder:text-gray-400"
+              />
+            </div>
+
+            <div class="space-y-2">
+              <label for="message" class="text-sm font-medium text-gray-700 dark:text-gray-300">Detalles de la idea</label>
+              <textarea 
+                id="message" 
+                name="message" 
+                rows="4" 
+                required
+                placeholder="Describe lo que necesitas..."
+                class="w-full px-4 py-3 rounded-xl bg-gray-50 dark:bg-warm-dark-bg border border-gray-200 dark:border-gray-700 text-gray-800 dark:text-white focus:outline-none focus:ring-2 focus:ring-orange-500 transition-all resize-none placeholder:text-gray-400"
+              ></textarea>
+            </div>
+
+            <button 
+              type="submit" 
+              class="w-full py-4 bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white font-bold rounded-xl transition-all duration-300 shadow-lg flex items-center justify-center gap-2 group"
+            >
+              <span>Enviar Solicitud</span>
+              <i class="ri-send-plane-fill group-hover:translate-x-1 transition-transform"></i>
+            </button>
+            
+            <p class="text-xs text-center text-gray-400 mt-4">
+              Responderé en un plazo máximo de 24 horas vía Discord o Email.
+            </p>
+
+          </form>
+        </div>
+
+      </div>
+    </div>
+  </main>
+</Layout>
