@@ -1,0 +1,220 @@
+---
+// src/pages/mantenimiento.astro
+---
+
+<!DOCTYPE html>
+<html lang="es" class="light">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>En Mantenimiento | Enrique 3D</title>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        'warm-cream': '#faf8f5',
+                        'warm-terracotta': '#f97316',
+                    },
+                    animation: {
+                        'bounce-subtle': 'bounce-subtle 3s ease-in-out infinite',
+                    },
+                    keyframes: {
+                        'bounce-subtle': {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-5px)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <script>
+        if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark');
+        } else {
+            document.documentElement.classList.remove('dark');
+        }
+    </script>
+</head>
+<body class="bg-warm-cream dark:bg-[#111827] text-gray-800 dark:text-white h-screen w-full flex flex-col items-center justify-center overflow-hidden transition-colors duration-500 relative font-sans">
+
+    <button id="theme-toggle" class="absolute top-6 right-6 z-50 p-3 rounded-full bg-white dark:bg-gray-800 text-gray-800 dark:text-yellow-400 shadow-lg border border-gray-200 dark:border-gray-700 hover:scale-110 transition-all duration-300 focus:outline-none group">
+        <i class="ri-sun-fill text-xl hidden dark:block"></i>
+        <i class="ri-moon-clear-fill text-xl block dark:hidden text-gray-600 group-hover:text-indigo-500"></i>
+    </button>
+
+    <div class="absolute inset-0 overflow-hidden pointer-events-none">
+        <div class="absolute -top-20 -left-20 w-96 h-96 bg-orange-200 dark:bg-orange-900/20 rounded-full blur-[100px] opacity-60 transition-colors duration-500"></div>
+        <div class="absolute bottom-0 right-0 w-80 h-80 bg-orange-100 dark:bg-orange-800/10 rounded-full blur-[80px] opacity-60 transition-colors duration-500"></div>
+    </div>
+
+    <main class="relative z-10 px-6 text-center max-w-xl mx-auto flex flex-col items-center">
+        
+        <div class="relative w-32 h-32 mb-10 flex items-center justify-center perspective-container cursor-pointer group">
+            <div class="cube">
+                <div class="face front"></div>
+                <div class="face back"></div>
+                <div class="face right"></div>
+                <div class="face left"></div>
+                <div class="face top"></div>
+                <div class="face bottom"></div>
+                
+                <div class="inner-logo transition-transform duration-500 group-hover:scale-125">
+                    <img 
+                        src="/favicon.svg" 
+                        alt="Logo Enrique 3D" 
+                        class="w-14 h-14 object-contain drop-shadow-[0_0_15px_rgba(249,115,22,0.6)] transition-all duration-500 group-hover:drop-shadow-[0_0_30px_rgba(249,115,22,1)]"
+                    />
+                </div>
+            </div>
+
+            <div class="absolute -bottom-6 bg-gray-900 dark:bg-white text-white dark:text-gray-900 text-xs font-bold px-4 py-1.5 rounded-full shadow-xl animate-bounce-subtle border border-gray-100 dark:border-gray-200 transition-colors duration-300">
+                En breve
+            </div>
+        </div>
+
+        <h1 class="text-4xl md:text-5xl font-bold mb-5 tracking-tight text-gray-900 dark:text-white transition-colors duration-300">
+            Sitio en <span class="text-warm-terracotta">Mantenimiento</span>
+        </h1>
+        
+        <p class="text-lg text-gray-600 dark:text-gray-300 mb-12 leading-relaxed transition-colors duration-300">
+            Estamos realizando mejoras importantes en la tienda para brindarte una mejor experiencia. ¡Volveremos en unos minutos!
+        </p>
+
+        <div class="flex flex-col items-center gap-4">
+            <span class="text-xs font-bold tracking-widest text-gray-400 uppercase">Mientras tanto, síguenos en:</span>
+            
+            <div class="flex gap-4">
+                 <a href="https://www.tiktok.com/@enrique3d" target="_blank" class="group relative w-12 h-12 flex items-center justify-center bg-white dark:bg-gray-800 rounded-2xl shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 border border-gray-100 dark:border-gray-700">
+                    <i class="ri-tiktok-fill text-xl text-gray-700 dark:text-gray-300 group-hover:text-warm-terracotta transition-colors"></i>
+                </a>
+                 <a href="#" class="group relative w-12 h-12 flex items-center justify-center bg-white dark:bg-gray-800 rounded-2xl shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 border border-gray-100 dark:border-gray-700">
+                    <i class="ri-instagram-line text-xl text-gray-700 dark:text-gray-300 group-hover:text-warm-terracotta transition-colors"></i>
+                </a>
+            </div>
+        </div>
+
+    </main>
+    
+    <div class="absolute bottom-6 text-sm text-gray-400 opacity-60">
+        &copy; {new Date().getFullYear()} Enrique 3D
+    </div>
+
+    <script>
+        // Revisar estado del servidor cada 2 segundos
+        setInterval(() => {
+            fetch('/', { method: 'HEAD' })
+                .then(response => {
+                    // Si el servidor responde con la URL final que NO es mantenimiento
+                    // (significa que nos redirigió al Home o nos dio el Home directamente)
+                    if (!response.url.includes('/mantenimiento')) {
+                        window.location.href = '/';
+                    }
+                })
+                .catch(() => {
+                    // Si falla, seguimos intentando en silencio
+                });
+        }, 2000);
+    </script>
+
+    <script>
+        const themeToggleBtn = document.getElementById('theme-toggle');
+        
+        themeToggleBtn!.addEventListener('click', () => {
+            const html = document.documentElement;
+            
+            if (html.classList.contains('dark')) {
+                html.classList.remove('dark');
+                localStorage.theme = 'light';
+            } else {
+                html.classList.add('dark');
+                localStorage.theme = 'dark';
+            }
+        });
+    </script>
+
+</body>
+</html>
+
+<style>
+    .perspective-container {
+        perspective: 800px;
+    }
+
+    .cube {
+        width: 80px;
+        height: 80px;
+        position: relative;
+        transform-style: preserve-3d;
+        animation: rotateCube 12s infinite linear;
+        /* Al hacer hover en el contenedor padre (.perspective-container), pausamos el cubo */
+    }
+    
+    /* Pausar rotación al pasar el mouse */
+    .perspective-container:hover .cube {
+        animation-play-state: paused;
+    }
+    
+    /* El logo interno sigue girando (o puedes pausarlo también si quieres) */
+    .perspective-container:hover .inner-logo {
+        animation-play-state: paused;
+    }
+
+    .face {
+        position: absolute;
+        width: 80px;
+        height: 80px;
+        background: rgba(249, 115, 22, 0.05);
+        border: 2px solid rgba(249, 115, 22, 0.5); 
+        box-shadow: 0 0 10px rgba(249, 115, 22, 0.1);
+        
+        /* Transiciones suaves para la animación de expansión */
+        transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275), 
+                    border-color 0.3s, 
+                    box-shadow 0.3s, 
+                    background-color 0.3s;
+    }
+
+    /* --- ESTADOS NORMALES --- */
+    .front  { transform: rotateY(0deg) translateZ(40px); }
+    .back   { transform: rotateY(180deg) translateZ(40px); }
+    .right  { transform: rotateY(90deg) translateZ(40px); }
+    .left   { transform: rotateY(-90deg) translateZ(40px); }
+    .top    { transform: rotateX(90deg) translateZ(40px); }
+    .bottom { transform: rotateX(-90deg) translateZ(40px); }
+
+    /* --- ESTADOS HOVER (EFECTO DESPIECE/EXPLOSIÓN) --- */
+    /* Aumentamos el translateZ de 40px a 90px para separar las caras */
+    .perspective-container:hover .front  { transform: rotateY(0deg) translateZ(90px); }
+    .perspective-container:hover .back   { transform: rotateY(180deg) translateZ(90px); }
+    .perspective-container:hover .right  { transform: rotateY(90deg) translateZ(90px); }
+    .perspective-container:hover .left   { transform: rotateY(-90deg) translateZ(90px); }
+    .perspective-container:hover .top    { transform: rotateX(90deg) translateZ(90px); }
+    .perspective-container:hover .bottom { transform: rotateX(-90deg) translateZ(90px); }
+
+    /* Efectos visuales adicionales en hover (Brillo intenso) */
+    .perspective-container:hover .face {
+        border-color: rgba(249, 115, 22, 0.9);
+        background: rgba(249, 115, 22, 0.15);
+        box-shadow: 0 0 25px rgba(249, 115, 22, 0.4);
+    }
+
+    .inner-logo {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        animation: rotateCube 12s infinite reverse linear;
+    }
+
+    @keyframes rotateCube {
+        0%   { transform: rotateX(0deg) rotateY(0deg); }
+        100% { transform: rotateX(360deg) rotateY(360deg); }
+    }
+</style>

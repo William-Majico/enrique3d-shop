@@ -9,18 +9,18 @@ const getPriceLabel = (tuto: any) => {
   return `$${tuto.price} USD`;
 };
 
-// Lógica para el color del TEXTO del precio (Sin fondos ni bordes raros)
+// Lógica para el color del TEXTO del precio
 const getPriceTextColor = (tuto: any) => {
-  if (tuto.priceType === 'free') return 'text-green-400 dark:text-green-400';
+  if (tuto.priceType === 'free') return 'text-green-500 dark:text-green-400';
   if (tuto.priceType === 'donation') return 'text-indigo-600 dark:text-indigo-400';
   return 'text-orange-600 dark:text-orange-400';
 };
 
-// Lógica de Estilos de la etiqueta sobre la imagen (Se mantiene igual)
+// Lógica de Estilos de la etiqueta sobre la imagen
 const getPriceClass = (tuto: any) => {
-  if (tuto.priceType === 'free') return 'bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-400';
-  if (tuto.priceType === 'donation') return 'bg-indigo-50 text-indigo-600 dark:bg-indigo-900/30 dark:text-indigo-400';
-  return 'bg-orange-100 text-orange-600 dark:bg-orange-900/30 dark:text-orange-400';
+  if (tuto.priceType === 'free') return 'bg-green-100 text-green-700 dark:bg-green-900/40 dark:text-green-400 border border-green-200 dark:border-green-800';
+  if (tuto.priceType === 'donation') return 'bg-indigo-50 text-indigo-700 dark:bg-indigo-900/40 dark:text-indigo-300 border border-indigo-200 dark:border-indigo-800';
+  return 'bg-orange-50 text-orange-700 dark:bg-orange-900/40 dark:text-orange-300 border border-orange-200 dark:border-orange-800';
 };
 ---
 
@@ -40,7 +40,8 @@ const getPriceClass = (tuto: any) => {
       </h1>
       
       <p class="text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto mb-8 leading-relaxed">
-        Aprende técnicas profesionales de modelado 3D, animación y más. Todos los recursos descargables de mis videos de TikTok en un solo lugar.
+        Aprende técnicas profesionales de modelado 3D, animación y más.
+        Todos los recursos descargables de mis videos de TikTok en un solo lugar.
       </p>
       
       <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
@@ -56,52 +57,61 @@ const getPriceClass = (tuto: any) => {
     </div>
   </section>
 
-  <div id="tutoriales" class="bg-gray-50 dark:bg-gray-900/50 min-h-screen">
+  <div id="tutoriales" class="bg-gray-50 dark:bg-gray-900/50 min-h-screen transition-colors duration-300">
     <section class="px-4 md:px-8 py-16">
       <div class="max-w-7xl mx-auto">
         
-        <div class="mb-12 text-center md:text-left">
+        <div class="mb-10 text-center max-w-3xl mx-auto">
           <h2 class="text-3xl font-bold text-gray-800 dark:text-white mb-3">Catálogo de Aprendizaje</h2>
-          <p class="text-gray-600 dark:text-gray-400">Recursos optimizados para Roblox Studio y Blender.</p>
+          <p class="text-gray-600 dark:text-gray-400 text-lg">Recursos optimizados para Roblox Studio y Blender.</p>
         </div>
 
-        <div class="mb-20">
+        <div class="mb-16">
           
-          <div class="relative max-w-3xl mx-auto mb-10">
-            <div class="search-icon-wrapper">
-                <i class="ri-search-line"></i>
+          <div class="relative max-w-xl mx-auto mb-10 group">
+            <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none z-10">
+              <i class="ri-search-line text-xl text-gray-400 group-focus-within:text-orange-500 transition-colors"></i>
             </div>
             
             <input 
               id="search-input"
-              placeholder="Buscar tutoriales (ej: low poly, script)..." 
-              class="custom-search-input w-full" 
+              placeholder="Buscar tutoriales..." 
+              class="w-full pl-12 pr-4 py-3 rounded-lg text-base bg-white dark:bg-warm-dark-card 
+                     text-gray-800 dark:text-white placeholder-gray-400 dark:placeholder-gray-500
+                     border border-gray-300 dark:border-gray-700
+                     focus:border-orange-500 focus:ring-2 focus:ring-orange-500/20 focus:outline-none
+                     shadow-sm transition-all duration-200" 
               type="text" 
             >
           </div>
-
-          <div class="flex flex-col items-center justify-center gap-6 py-4">
+          <div class="flex flex-col items-center justify-center gap-6">
             <div class="text-xs font-bold text-gray-500 dark:text-gray-400 uppercase tracking-widest mb-2">
               FILTRAR POR CATEGORÍA
             </div>
 
             <div class="flex flex-wrap justify-center gap-3">
-              <button class="filter-btn active px-8 py-3 rounded-full text-sm font-bold bg-orange-500 text-white shadow-lg shadow-orange-500/20 hover:bg-orange-600 hover:scale-105 transition-all cursor-pointer border border-transparent" data-filter="all">
+              <button 
+                class="filter-btn active px-8 py-3 rounded-full text-sm font-bold bg-orange-500 text-white shadow-lg shadow-orange-500/20 hover:bg-orange-600 hover:scale-105 transition-all cursor-pointer border border-transparent" 
+                data-filter="all">
                 Ver Todos
               </button>
               
-              <button class="filter-btn px-8 py-3 rounded-full text-sm font-medium bg-white dark:bg-gray-800 text-gray-600 dark:text-gray-200 border border-gray-200 dark:border-gray-700 hover:border-orange-500 dark:hover:border-orange-500 hover:text-orange-500 transition-all cursor-pointer shadow-sm" data-filter="Blender">
+              <button 
+                class="filter-btn px-8 py-3 rounded-full text-sm font-medium bg-white dark:bg-warm-dark-card text-gray-600 dark:text-gray-200 border border-gray-200 dark:border-gray-700 hover:border-orange-500 dark:hover:border-orange-500 hover:text-orange-500 transition-all cursor-pointer shadow-sm" 
+                data-filter="Blender">
                 <i class="ri-box-3-line mr-2"></i>Blender
               </button>
               
-              <button class="filter-btn px-8 py-3 rounded-full text-sm font-medium bg-white dark:bg-gray-800 text-gray-600 dark:text-gray-200 border border-gray-200 dark:border-gray-700 hover:border-orange-500 dark:hover:border-orange-500 hover:text-orange-500 transition-all cursor-pointer shadow-sm" data-filter="Roblox Studio">
+              <button 
+                class="filter-btn px-8 py-3 rounded-full text-sm font-medium bg-white dark:bg-warm-dark-card text-gray-600 dark:text-gray-200 border border-gray-200 dark:border-gray-700 hover:border-orange-500 dark:hover:border-orange-500 hover:text-orange-500 transition-all cursor-pointer shadow-sm" 
+                data-filter="Roblox Studio">
                 <i class="ri-gamepad-line mr-2"></i>Roblox Studio
               </button>
             </div>
           </div>
         </div>
         
-        <div class="mb-6 text-sm text-gray-500 dark:text-gray-400 font-medium">
+        <div class="mb-6 text-sm text-gray-500 dark:text-gray-400 font-medium text-center">
           Mostrando {tutorials.length} tutoriales
         </div>
 
@@ -110,7 +120,7 @@ const getPriceClass = (tuto: any) => {
             <div class="tutorial-card group cursor-pointer block" data-category={tuto.category} data-title={tuto.title.toLowerCase()}>
               <a href={`/tutorial/${tuto.id}`}>
                 <div class="relative w-full aspect-videos mb-4 overflow-hidden rounded-2xl bg-white dark:bg-warm-dark-card shadow-sm group-hover:shadow-xl group-hover:-translate-y-1 transition-all duration-300 border border-gray-100 dark:border-warm-grey/10">
-                  <img alt={tuto.title} class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" src={tuto.image} />
+                  <img alt={tuto.title} class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" src={tuto.image} loading="lazy" />
                   
                   <div class="absolute inset-0 bg-black/10 group-hover:bg-black/40 transition-colors flex items-center justify-center">
                     <div class="w-14 h-14 flex items-center justify-center bg-orange-500/90 rounded-full opacity-0 scale-50 group-hover:opacity-100 group-hover:scale-100 transition-all duration-300 shadow-lg backdrop-blur-sm">
@@ -129,7 +139,7 @@ const getPriceClass = (tuto: any) => {
 
                 <div class="space-y-2 px-1">
                   <div class="flex items-center justify-between text-xs font-medium text-gray-500 dark:text-gray-400">
-                    <span class="px-2 py-1 text-xs bg-white dark:bg-warm-dark-card border-2  dark:border-warm-grey/10 rounded-lg  tracking-wider">{tuto.category}</span>
+                    <span class="px-2 py-1 text-xs bg-white dark:bg-warm-dark-card border border-gray-200 dark:border-warm-grey/10 rounded-lg tracking-wider uppercase font-semibold text-[10px]">{tuto.category}</span>
                     
                     <span class={`flex items-center gap-1 font-bold ${getPriceTextColor(tuto)}`}>
                       {getPriceLabel(tuto)}
@@ -166,6 +176,7 @@ const getPriceClass = (tuto: any) => {
 
   const applyFilters = () => {
     let visibleCount = 0;
+
     cards.forEach(card => {
       const category = card.getAttribute('data-category');
       const title = card.getAttribute('data-title');
@@ -174,7 +185,7 @@ const getPriceClass = (tuto: any) => {
 
       if (matchesCategory && matchesSearch) {
         card.classList.remove('hidden');
-        card.classList.add('block'); // Mantiene el bloque original
+        card.classList.add('block');
         visibleCount++;
       } else {
         card.classList.add('hidden');
@@ -193,13 +204,15 @@ const getPriceClass = (tuto: any) => {
 
   filterBtns.forEach(btn => {
     btn.addEventListener('click', () => {
+      // 1. RESETEAR TODOS LOS BOTONES A "INACTIVO"
       filterBtns.forEach(b => {
-        b.classList.remove('bg-orange-500', 'text-white', 'shadow-lg', 'shadow-orange-500/20', 'scale-105', 'border-transparent');
-        b.classList.add('bg-white', 'dark:bg-gray-800', 'text-gray-600', 'dark:text-gray-200', 'border-gray-200', 'dark:border-gray-700');
+        b.classList.remove('bg-orange-500', 'text-white', 'shadow-lg', 'shadow-orange-500/20', 'scale-105', 'border-transparent', 'hover:bg-orange-600');
+        b.classList.add('bg-white', 'dark:bg-warm-dark-card', 'text-gray-600', 'dark:text-gray-200', 'border-gray-200', 'dark:border-gray-700', 'hover:text-orange-500', 'hover:border-orange-500');
       });
       
-      btn.classList.remove('bg-white', 'dark:bg-gray-800', 'text-gray-600', 'dark:text-gray-200', 'border-gray-200', 'dark:border-gray-700');
-      btn.classList.add('bg-orange-500', 'text-white', 'shadow-lg', 'shadow-orange-500/20', 'scale-105', 'border-transparent');
+      // 2. ACTIVAR EL BOTÓN CLICKEADO
+      btn.classList.remove('bg-white', 'dark:bg-warm-dark-card', 'text-gray-600', 'dark:text-gray-200', 'border-gray-200', 'dark:border-gray-700', 'hover:text-orange-500', 'hover:border-orange-500');
+      btn.classList.add('bg-orange-500', 'text-white', 'shadow-lg', 'shadow-orange-500/20', 'scale-105', 'border-transparent', 'hover:bg-orange-600');
       
       currentFilter = btn.getAttribute('data-filter');
       applyFilters();
@@ -211,46 +224,3 @@ const getPriceClass = (tuto: any) => {
     applyFilters();
   });
 </script>
-
-<style>
-  .search-icon-wrapper {
-    position: absolute;
-    left: 1.25rem;
-    top: 50%;
-    transform: translateY(-50%);
-    pointer-events: none;
-    z-index: 10;
-    color: #94a3b8;
-    font-size: 1.25rem;
-  }
-
-  .custom-search-input {
-    padding-left: 3.5rem !important; 
-    padding-right: 1.5rem;
-    padding-top: 1rem;
-    padding-bottom: 1rem;
-    border-radius: 9999px;
-    font-size: 1.125rem;
-    line-height: 1.75rem;
-    outline: none;
-    transition: all 0.3s ease;
-    background-color: #f8fafc;
-    border: 1px solid #e2e8f0;
-    color: #0f172a;
-  }
-
-  :global(.dark) .custom-search-input {
-    background-color: #1f2937 !important;
-    border: 1px solid #374151 !important;
-    color: #f3f4f6 !important;
-  }
-
-  .custom-search-input:focus {
-    border-color: #f97316 !important;
-    box-shadow: 0 0 0 4px rgba(249, 115, 22, 0.2);
-  }
-
-  .custom-search-input:focus + .search-icon-wrapper {
-    color: #f97316;
-  }
-</style>
