@@ -1,0 +1,256 @@
+---
+import Layout from '../layouts/Layout.astro';
+import tutorials from '../data/tutorials.json';
+
+// Lógica de Etiquetas de Precio (Texto)
+const getPriceLabel = (tuto: any) => {
+  if (tuto.priceType === 'free') return 'GRATIS';
+  if (tuto.priceType === 'donation') return 'DONACIÓN';
+  return `$${tuto.price} USD`;
+};
+
+// Lógica para el color del TEXTO del precio (Sin fondos ni bordes raros)
+const getPriceTextColor = (tuto: any) => {
+  if (tuto.priceType === 'free') return 'text-green-400 dark:text-green-400';
+  if (tuto.priceType === 'donation') return 'text-indigo-600 dark:text-indigo-400';
+  return 'text-orange-600 dark:text-orange-400';
+};
+
+// Lógica de Estilos de la etiqueta sobre la imagen (Se mantiene igual)
+const getPriceClass = (tuto: any) => {
+  if (tuto.priceType === 'free') return 'bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-400';
+  if (tuto.priceType === 'donation') return 'bg-indigo-50 text-indigo-600 dark:bg-indigo-900/30 dark:text-indigo-400';
+  return 'bg-orange-100 text-orange-600 dark:bg-orange-900/30 dark:text-orange-400';
+};
+---
+
+<Layout title="Tutoriales - Enrique 3D">
+  
+  <section class="relative pt-32 pb-16 px-4 md:px-8 overflow-hidden bg-warm-cream dark:bg-warm-dark-bg transition-colors duration-300">
+    <div class="absolute inset-0 bg-gradient-to-br from-orange-50 via-transparent to-orange-50 dark:from-warm-dark-bg dark:via-warm-dark-bg dark:to-gray-900 opacity-50"></div>
+    
+    <div class="relative max-w-7xl mx-auto text-center">
+      <div class="inline-flex items-center gap-2 px-4 py-2 bg-white dark:bg-warm-dark-card border border-gray-200 dark:border-warm-grey/10 rounded-full text-orange-600 dark:text-orange-400 text-sm font-medium mb-6 shadow-sm">
+        <i class="ri-video-line"></i>
+        <span>Contenido de TikTok</span>
+      </div>
+      
+      <h1 class="text-4xl md:text-6xl font-bold text-gray-900 dark:text-white mb-6 tracking-tight">
+        Tutoriales y <span class="text-orange-500">Recursos</span>
+      </h1>
+      
+      <p class="text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto mb-8 leading-relaxed">
+        Aprende técnicas profesionales de modelado 3D, animación y más. Todos los recursos descargables de mis videos de TikTok en un solo lugar.
+      </p>
+      
+      <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+        <a href="https://www.tiktok.com/@enrique3d" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 px-8 py-3 bg-gray-900 dark:bg-white text-white dark:text-gray-900 rounded-xl font-bold hover:scale-105 transition-transform shadow-lg cursor-pointer">
+          <i class="ri-tiktok-fill text-xl"></i>
+          <span>Sígueme en TikTok</span>
+        </a>
+        <a href="#tutoriales" class="inline-flex items-center gap-2 px-8 py-3 bg-white dark:bg-warm-dark-card text-gray-900 dark:text-white border border-gray-200 dark:border-warm-grey/20 rounded-xl font-bold hover:border-orange-500 transition-colors shadow-sm cursor-pointer">
+          <span>Ver Tutoriales</span>
+          <i class="ri-arrow-down-line"></i>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <div id="tutoriales" class="bg-gray-50 dark:bg-gray-900/50 min-h-screen">
+    <section class="px-4 md:px-8 py-16">
+      <div class="max-w-7xl mx-auto">
+        
+        <div class="mb-12 text-center md:text-left">
+          <h2 class="text-3xl font-bold text-gray-800 dark:text-white mb-3">Catálogo de Aprendizaje</h2>
+          <p class="text-gray-600 dark:text-gray-400">Recursos optimizados para Roblox Studio y Blender.</p>
+        </div>
+
+        <div class="mb-20">
+          
+          <div class="relative max-w-3xl mx-auto mb-10">
+            <div class="search-icon-wrapper">
+                <i class="ri-search-line"></i>
+            </div>
+            
+            <input 
+              id="search-input"
+              placeholder="Buscar tutoriales (ej: low poly, script)..." 
+              class="custom-search-input w-full" 
+              type="text" 
+            >
+          </div>
+
+          <div class="flex flex-col items-center justify-center gap-6 py-4">
+            <div class="text-xs font-bold text-gray-500 dark:text-gray-400 uppercase tracking-widest mb-2">
+              FILTRAR POR CATEGORÍA
+            </div>
+
+            <div class="flex flex-wrap justify-center gap-3">
+              <button class="filter-btn active px-8 py-3 rounded-full text-sm font-bold bg-orange-500 text-white shadow-lg shadow-orange-500/20 hover:bg-orange-600 hover:scale-105 transition-all cursor-pointer border border-transparent" data-filter="all">
+                Ver Todos
+              </button>
+              
+              <button class="filter-btn px-8 py-3 rounded-full text-sm font-medium bg-white dark:bg-gray-800 text-gray-600 dark:text-gray-200 border border-gray-200 dark:border-gray-700 hover:border-orange-500 dark:hover:border-orange-500 hover:text-orange-500 transition-all cursor-pointer shadow-sm" data-filter="Blender">
+                <i class="ri-box-3-line mr-2"></i>Blender
+              </button>
+              
+              <button class="filter-btn px-8 py-3 rounded-full text-sm font-medium bg-white dark:bg-gray-800 text-gray-600 dark:text-gray-200 border border-gray-200 dark:border-gray-700 hover:border-orange-500 dark:hover:border-orange-500 hover:text-orange-500 transition-all cursor-pointer shadow-sm" data-filter="Roblox Studio">
+                <i class="ri-gamepad-line mr-2"></i>Roblox Studio
+              </button>
+            </div>
+          </div>
+        </div>
+        
+        <div class="mb-6 text-sm text-gray-500 dark:text-gray-400 font-medium">
+          Mostrando {tutorials.length} tutoriales
+        </div>
+
+        <div id="tutorials-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+          {tutorials.map((tuto) => (
+            <div class="tutorial-card group cursor-pointer block" data-category={tuto.category} data-title={tuto.title.toLowerCase()}>
+              <a href={`/tutorial/${tuto.id}`}>
+                <div class="relative w-full aspect-videos mb-4 overflow-hidden rounded-2xl bg-white dark:bg-warm-dark-card shadow-sm group-hover:shadow-xl group-hover:-translate-y-1 transition-all duration-300 border border-gray-100 dark:border-warm-grey/10">
+                  <img alt={tuto.title} class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" src={tuto.image} />
+                  
+                  <div class="absolute inset-0 bg-black/10 group-hover:bg-black/40 transition-colors flex items-center justify-center">
+                    <div class="w-14 h-14 flex items-center justify-center bg-orange-500/90 rounded-full opacity-0 scale-50 group-hover:opacity-100 group-hover:scale-100 transition-all duration-300 shadow-lg backdrop-blur-sm">
+                      <i class="ri-play-fill text-white text-2xl ml-1"></i>
+                    </div>
+                  </div>
+                  
+                  <div class="absolute bottom-3 right-3 px-2 py-1 bg-black/60 backdrop-blur-md rounded-md text-white text-xs font-bold border border-white/10">
+                    {tuto.duration}
+                  </div>
+                  
+                  <div class={`absolute top-3 left-3 px-2 py-1 rounded-md text-xs font-bold shadow-sm backdrop-blur-sm ${getPriceClass(tuto)}`}>
+                    {getPriceLabel(tuto)}
+                  </div>
+                </div>
+
+                <div class="space-y-2 px-1">
+                  <div class="flex items-center justify-between text-xs font-medium text-gray-500 dark:text-gray-400">
+                    <span class="px-2 py-1 text-xs bg-white dark:bg-warm-dark-card border-2  dark:border-warm-grey/10 rounded-lg  tracking-wider">{tuto.category}</span>
+                    
+                    <span class={`flex items-center gap-1 font-bold ${getPriceTextColor(tuto)}`}>
+                      {getPriceLabel(tuto)}
+                    </span>
+                  </div>
+                  <h3 class="text-base font-bold text-gray-900 dark:text-white line-clamp-2 leading-snug group-hover:text-orange-500 transition-colors">{tuto.title}</h3>
+                </div>
+              </a>
+            </div>
+          ))}
+        </div>
+
+        <div id="no-results" class="hidden flex-col items-center justify-center text-center py-20">
+          <div class="w-20 h-20 bg-gray-100 dark:bg-warm-dark-card rounded-full flex items-center justify-center mb-4">
+            <i class="ri-search-2-line text-3xl text-gray-400"></i>
+          </div>
+          <h3 class="text-xl font-bold text-gray-800 dark:text-white mb-2">No encontramos nada</h3>
+          <p class="text-gray-500 dark:text-gray-400">Intenta con "Blender" o "Script".</p>
+        </div>
+
+      </div>
+    </section>
+  </div>
+</Layout>
+
+<script is:inline>
+  const filterBtns = document.querySelectorAll('.filter-btn');
+  const searchInput = document.getElementById('search-input');
+  const cards = document.querySelectorAll('.tutorial-card');
+  const noResults = document.getElementById('no-results');
+
+  let currentFilter = 'all';
+  let currentSearch = '';
+
+  const applyFilters = () => {
+    let visibleCount = 0;
+    cards.forEach(card => {
+      const category = card.getAttribute('data-category');
+      const title = card.getAttribute('data-title');
+      const matchesCategory = currentFilter === 'all' || category === currentFilter;
+      const matchesSearch = title.includes(currentSearch.toLowerCase());
+
+      if (matchesCategory && matchesSearch) {
+        card.classList.remove('hidden');
+        card.classList.add('block'); // Mantiene el bloque original
+        visibleCount++;
+      } else {
+        card.classList.add('hidden');
+        card.classList.remove('block');
+      }
+    });
+
+    if (visibleCount === 0) {
+      noResults.classList.remove('hidden');
+      noResults.classList.add('flex');
+    } else {
+      noResults.classList.add('hidden');
+      noResults.classList.remove('flex');
+    }
+  };
+
+  filterBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      filterBtns.forEach(b => {
+        b.classList.remove('bg-orange-500', 'text-white', 'shadow-lg', 'shadow-orange-500/20', 'scale-105', 'border-transparent');
+        b.classList.add('bg-white', 'dark:bg-gray-800', 'text-gray-600', 'dark:text-gray-200', 'border-gray-200', 'dark:border-gray-700');
+      });
+      
+      btn.classList.remove('bg-white', 'dark:bg-gray-800', 'text-gray-600', 'dark:text-gray-200', 'border-gray-200', 'dark:border-gray-700');
+      btn.classList.add('bg-orange-500', 'text-white', 'shadow-lg', 'shadow-orange-500/20', 'scale-105', 'border-transparent');
+      
+      currentFilter = btn.getAttribute('data-filter');
+      applyFilters();
+    });
+  });
+
+  searchInput.addEventListener('input', (e) => {
+    currentSearch = e.target.value;
+    applyFilters();
+  });
+</script>
+
+<style>
+  .search-icon-wrapper {
+    position: absolute;
+    left: 1.25rem;
+    top: 50%;
+    transform: translateY(-50%);
+    pointer-events: none;
+    z-index: 10;
+    color: #94a3b8;
+    font-size: 1.25rem;
+  }
+
+  .custom-search-input {
+    padding-left: 3.5rem !important; 
+    padding-right: 1.5rem;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    border-radius: 9999px;
+    font-size: 1.125rem;
+    line-height: 1.75rem;
+    outline: none;
+    transition: all 0.3s ease;
+    background-color: #f8fafc;
+    border: 1px solid #e2e8f0;
+    color: #0f172a;
+  }
+
+  :global(.dark) .custom-search-input {
+    background-color: #1f2937 !important;
+    border: 1px solid #374151 !important;
+    color: #f3f4f6 !important;
+  }
+
+  .custom-search-input:focus {
+    border-color: #f97316 !important;
+    box-shadow: 0 0 0 4px rgba(249, 115, 22, 0.2);
+  }
+
+  .custom-search-input:focus + .search-icon-wrapper {
+    color: #f97316;
+  }
+</style>

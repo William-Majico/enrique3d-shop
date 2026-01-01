@@ -2177,3 +2177,34 @@ img,video {
         grid-template-columns:repeat(4,minmax(0,1fr))
     }
 }
+
+
+
+/**/
+
+/* === AGREGA ESTO AL FINAL DE TU CSS === */
+
+/* Aspect Ratio para las imágenes de video */
+.aspect-videos {
+    aspect-ratio: 16 / 9;
+}
+
+/* Bordes cálidos para modo oscuro */
+.dark .border-warm-grey\/10 {
+    border-color: rgba(156, 163, 175, 0.1);
+}
+
+/* Sombras suaves para modo oscuro */
+.dark .shadow-warm {
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3), 0 2px 4px -2px rgba(0, 0, 0, 0.15);
+}
+
+/* === AGREGA ESTO AL FINAL DE TU global.css === */
+
+
+/* Para centrar elementos absolutos perfectamente */
+.center-absolute {
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}

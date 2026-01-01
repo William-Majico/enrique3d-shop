@@ -1,5 +1,5 @@
 [
-  {
+  { 
     "id": "duo-npc-01",
     "title": "Duo de NPCs",
     "price": "4.99",
@@ -13,12 +13,12 @@
       "Texturas": "Base Color (Sin Texturas)"
     },
     "images": [
-      "/assets/duo-npc-01/foto3.png",
-      "/assets/duo-npc-01/npc-1.mp4",
-      "/assets/duo-npc-01/npc-01.mp4",
-      "/assets/duo-npc-01/npc-2.mp4",
-      "/assets/duo-npc-01/npc-02.mp4",
-      "/assets/duo-npc-01/ejemplo.mp4"
+      "/assets/duo-npcs-01/foto3.png",
+      "/assets/duo-npcs-01/npc-1.mp4",
+      "/assets/duo-npcs-01/npc-01.mp4",
+      "/assets/duo-npcs-01/npc-2.mp4",
+      "/assets/duo-npcs-01/npc-02.mp4",
+      "/assets/duo-npcs-01/ejemplo.mp4"
     ],
     "wompiLink": "https://wompi.co/...", 
     "discordLink": "https://discord.gg/VdjfVeRm",

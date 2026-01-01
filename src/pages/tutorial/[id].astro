@@ -1,0 +1,283 @@
+---
+export const prerender = true;
+import Layout from "../../layouts/Layout.astro";
+import tutorials from "../../data/tutorials.json";
+
+export async function getStaticPaths() {
+  return tutorials.map((tuto) => ({
+    params: { id: tuto.id.toString() },
+    props: { tuto },
+  }));
+}
+
+const { tuto } = Astro.props;
+
+if (!tuto) {
+  return Astro.redirect("/404");
+}
+
+const images = [tuto.image]; 
+
+const isVideo = (filename) => filename && (filename.toLowerCase().endsWith(".mp4") || filename.includes("youtube"));
+
+const otherTutorials = tutorials.filter((t) => t.id !== tuto.id);
+const relatedTutorials = otherTutorials
+  .sort(() => 0.5 - Math.random())
+  .slice(0, 3);
+
+const getPriceLabel = (tuto) => {
+  if (tuto.priceType === 'free') return 'GRATIS';
+  if (tuto.priceType === 'donation') return 'Donación';
+  return `$${tuto.price} USD`;
+};
+---
+
+<Layout
+  title={`${tuto.title} - Enrique 3D`}
+  description={`Aprende ${tuto.category} con este tutorial.`}
+  image={tuto.image}
+>
+  <main class="pt-24 md:pt-32 pb-16 md:pb-24 px-4 md:px-8 bg-white dark:bg-warm-dark-bg min-h-screen transition-colors duration-300">
+    <div class="max-w-7xl mx-auto">
+      
+      <a href="/tutoriales" class="inline-flex items-center gap-2 text-gray-500 hover:text-orange-500 dark:text-gray-400 dark:hover:text-orange-400 transition-colors mb-6 font-medium group">
+        <i class="ri-arrow-left-line group-hover:-translate-x-1 transition-transform"></i>
+        <span>Volver a Tutoriales</span>
+      </a>
+
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12">
+        
+        <div class="w-full">
+          <div class="w-full h-full flex flex-col gap-4">
+            <div
+              id="main-viewport"
+              class="group relative bg-gray-100 dark:bg-warm-dark-card rounded-xl shadow-md aspect-video w-full overflow-hidden border border-gray-200 dark:border-warm-grey/10 transition-colors duration-300"
+            >
+              <div class="w-full h-full flex items-center justify-center relative bg-black/5 dark:bg-black/20">
+                  <img
+                    src={tuto.image}
+                    alt={tuto.title}
+                    loading="lazy"
+                    class="w-full h-full object-cover"
+                  />
+                  <div class="absolute inset-0 bg-black/30 flex items-center justify-center backdrop-blur-[1px] transition-opacity duration-300 hover:bg-black/40">
+                    <a href={tuto.url} target="_blank" class="w-16 h-16 md:w-20 md:h-20 bg-orange-500 rounded-full flex items-center justify-center text-white shadow-lg hover:scale-110 transition-transform cursor-pointer">
+                      <i class="ri-play-fill text-3xl md:text-4xl ml-1"></i>
+                    </a>
+                  </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="w-full">
+          <div class="h-full flex flex-col">
+            
+            <div class="mb-6 md:mb-8">
+              <div class="flex items-center gap-3 mb-3">
+                <span class="px-3 py-1 bg-orange-100 dark:bg-orange-900/30 text-orange-600 dark:text-orange-400 text-xs font-bold uppercase rounded-md tracking-wider border border-orange-200 dark:border-orange-800">
+                  {tuto.category}
+                </span>
+                <span class="text-sm text-gray-500 dark:text-gray-400 font-medium flex items-center gap-1">
+                  <i class="ri-time-line"></i> {tuto.duration}
+                </span>
+              </div>
+              
+              <h1 class="text-2xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4 tracking-tight transition-colors duration-300">
+                {tuto.title}
+              </h1>
+              
+              <p class="text-2xl md:text-3xl font-semibold text-gray-800 dark:text-gray-100 transition-colors duration-300">
+                {getPriceLabel(tuto)}
+              </p>
+            </div>
+
+            <div class="mb-6 md:mb-8">
+              <p class="text-sm text-gray-600 dark:text-gray-300 leading-relaxed border-l-4 border-orange-500 pl-4 py-1 transition-colors duration-300">
+                Aprende paso a paso con este recurso profesional. Incluye archivos optimizados para Roblox Studio y Blender listos para usar en tus proyectos.
+              </p>
+            </div>
+
+            <div class="mb-8 flex-grow">
+              <h2 class="text-sm font-semibold text-gray-800 dark:text-white mb-4 uppercase tracking-wide transition-colors duration-300">
+                Lo que obtienes
+              </h2>
+              <div class="space-y-3 text-sm">
+                <div class="flex justify-between py-3 border-b border-gray-200 dark:border-gray-700 transition-colors duration-300">
+                  <span class="text-gray-500 dark:text-gray-400">Archivos Fuente</span>
+                  <span class="text-gray-800 dark:text-white font-medium">.blend, .rbxl</span>
+                </div>
+                <div class="flex justify-between py-3 border-b border-gray-200 dark:border-gray-700 transition-colors duration-300">
+                  <span class="text-gray-500 dark:text-gray-400">Calidad</span>
+                  <span class="text-gray-800 dark:text-white font-medium">Profesional / Optimizado</span>
+                </div>
+                <div class="flex justify-between py-3 border-b border-gray-200 dark:border-gray-700 transition-colors duration-300">
+                  <span class="text-gray-500 dark:text-gray-400">Licencia</span>
+                  <span class="text-green-600 dark:text-green-400 font-bold flex items-center gap-1">
+                    <i class="ri-check-line"></i> Uso Comercial
+                  </span>
+                </div>
+              </div>
+            </div>
+
+            <div class="flex flex-col gap-4 mt-auto">
+              
+              {tuto.priceType === 'free' && (
+                <a 
+                  href={tuto.downloadUrl || "#"} 
+                  target="_blank"
+                  class="w-full flex items-center justify-center gap-2 py-4 bg-green-600 text-white font-semibold rounded-xl hover:bg-green-700 transition-all cursor-pointer text-center shadow-md hover:shadow-lg active:scale-95"
+                >
+                  <i class="ri-download-cloud-2-line text-xl"></i>
+                  <span>Descargar Gratis</span>
+                </a>
+              )}
+
+              {tuto.priceType === 'fixed' && (
+                <button
+                  class="w-full flex items-center justify-center gap-2 py-4 bg-orange-500 text-white font-semibold rounded-xl hover:bg-orange-600 transition-all cursor-pointer text-center shadow-md hover:shadow-lg active:scale-95"
+                  onclick={`window.comprar('${tuto.id}', '${tuto.title}', '${tuto.price}', this)`}
+                >
+                  <i class="ri-shopping-cart-2-line text-xl"></i>
+                  <span>Comprar Ahora</span>
+                </button>
+              )}
+
+              {tuto.priceType === 'donation' && (
+                <div class="bg-gray-50 dark:bg-warm-dark-card p-5 rounded-xl border border-gray-200 dark:border-warm-grey/10 transition-colors duration-300 shadow-sm">
+                  <label class="block text-xs font-bold text-gray-500 dark:text-gray-400 uppercase tracking-wider mb-3">Tu Aporte (Mínimo ${tuto.minPrice})</label>
+                  <div class="flex flex-col sm:flex-row gap-3">
+                    <div class="relative w-full sm:w-1/3">
+                      <span class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500 dark:text-gray-400 font-bold">$</span>
+                      <input 
+                        type="number" 
+                        id="donation-input" 
+                        value={tuto.minPrice} 
+                        min={tuto.minPrice} 
+                        step="0.50"
+                        class="w-full pl-7 pr-3 py-3 rounded-lg bg-white dark:bg-black/20 border border-gray-300 dark:border-gray-600 text-gray-900 dark:text-white font-bold focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-all duration-300 text-center"
+                      />
+                    </div>
+                    <button 
+                      id="btn-donate"
+                      data-id={tuto.id}
+                      data-title={tuto.title}
+                      class="w-full sm:flex-1 flex items-center justify-center gap-2 py-3 bg-indigo-600 text-white font-semibold rounded-lg hover:bg-indigo-700 transition-all cursor-pointer text-center shadow-md hover:shadow-lg active:scale-95"
+                    >
+                      <i class="ri-heart-3-fill text-lg"></i>
+                      <span>Donar y Obtener</span>
+                    </button>
+                  </div>
+                </div>
+              )}
+
+              <p class="text-xs text-center text-gray-400 dark:text-gray-500 flex items-center justify-center gap-1 mt-2">
+                <i class="ri-shield-check-line"></i> Transacción segura vía Wompi
+              </p>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+      <div style="margin-top: 4rem;" class="mt-32 border-t border-gray-200 dark:border-gray-800 pt-16 transition-colors duration-300">
+        <h2 class="text-2xl font-bold text-gray-800 dark:text-white mb-8 transition-colors duration-300">
+          También te podría interesar
+        </h2>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          {relatedTutorials.map((related) => (
+            <a
+              href={`/tutorial/${related.id}`}
+              class="group block bg-white dark:bg-warm-dark-card rounded-xl overflow-hidden border border-gray-100 dark:border-warm-grey/10 hover:shadow-lg transition-all hover:-translate-y-1 duration-300"
+            >
+              <div class="aspect-video w-full overflow-hidden bg-gray-100 dark:bg-gray-900 relative">
+                <img
+                  src={related.image}
+                  alt={related.title}
+                  loading="lazy"
+                  class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                />
+                <div class="absolute bottom-2 right-2 px-2 py-1 bg-black/70 backdrop-blur-sm rounded text-white text-xs font-bold shadow-sm">
+                   {related.priceType === 'free' ? 'GRATIS' : `$${related.price}`}
+                </div>
+              </div>
+              <div class="p-4">
+                <h3 class="font-bold text-gray-800 dark:text-white group-hover:text-orange-500 transition-colors truncate mb-1">
+                  {related.title}
+                </h3>
+                <p class="text-sm text-gray-500 dark:text-gray-400 mt-1 uppercase tracking-wide text-xs font-medium">
+                  {related.category}
+                </p>
+              </div>
+            </a>
+          ))}
+        </div>
+      </div>
+
+    </div>
+  </main>
+</Layout>
+
+<script is:inline>
+  window.comprar = async (id, nombre, precio, btn) => {
+    const textoOriginal = btn.innerHTML;
+    btn.innerHTML = "<i class='ri-loader-4-line animate-spin text-xl'></i>";
+    btn.disabled = true;
+
+    try {
+      const respuesta = await fetch("/api/crear-pago", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          productId: id,
+          nombreProducto: nombre,
+          precio: parseFloat(precio),
+        }),
+      });
+
+      const datos = await respuesta.json();
+
+      if (datos.url) {
+        window.location.href = datos.url;
+      } else {
+        alert("Error: " + (datos.error || "No se pudo generar el pago"));
+        btn.innerHTML = textoOriginal;
+        btn.disabled = false;
+      }
+    } catch (error) {
+      console.error(error);
+      alert("Ocurrió un error");
+      btn.innerHTML = textoOriginal;
+      btn.disabled = false;
+    }
+  };
+
+  const btnDonate = document.getElementById('btn-donate');
+  const inputDonate = document.getElementById('donation-input');
+
+  if (btnDonate && inputDonate) {
+    btnDonate.addEventListener('click', () => {
+      const monto = parseFloat(inputDonate.value);
+      const min = parseFloat(inputDonate.min);
+      const id = btnDonate.getAttribute('data-id');
+      const titulo = btnDonate.getAttribute('data-title');
+
+      if (monto < min) { 
+        alert(`El monto mínimo es $${min}`); 
+        return; 
+      }
+      window.comprar(id, titulo + " (Donación)", monto, btnDonate);
+    });
+  }
+</script>
+
+<style>
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+</style>
