@@ -46,6 +46,7 @@ export const onRequest = defineMiddleware(async (context, next) => {
         return redirect("/mantenimiento");
     }
 
-    // Si todo está bien, dejar pasar
+    // Si todo está bien, dejar pasa
     return next();
+    
 });
