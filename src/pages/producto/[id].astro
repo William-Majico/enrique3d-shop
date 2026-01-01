@@ -185,7 +185,7 @@ const relatedProducts = otherProducts
             <div class="flex flex-col sm:flex-row gap-3">
               <button
                 class="flex-1 flex items-center justify-center gap-2 py-4 bg-orange-500 text-white font-semibold rounded-lg hover:bg-orange-600 transition-colors cursor-pointer text-center shadow-md hover:shadow-lg"
-                onclick={`window.comprar('${product.id}', '${product.title}', '${product.price}', this)`}
+                onclick={`window.comprar('${product.id}', this)`}
               >
                 <i class="ri-bank-card-line text-lg"></i>
                 <span>Comprar Ahora</span>
@@ -326,19 +326,23 @@ const relatedProducts = otherProducts
 
   setTimeout(() => updateState(0), 100);
 
-  window.comprar = async (id, nombre, precio, btn) => {
-    const textoOriginal = btn.innerText;
-    btn.innerText = "Cargando...";
+  // --- LÓGICA DE PAGO SEGURA ---
+  window.comprar = async (id, btn) => {
+    // Guardamos el texto original (ej: contenido del botón)
+    const originalContent = btn.innerHTML;
+    
+    // Feedback visual de carga
+    btn.innerHTML = `<span class="animate-pulse">Procesando...</span>`;
     btn.disabled = true;
+    btn.classList.add('opacity-75', 'cursor-not-allowed');
 
     try {
+      // Solo enviamos el ID. El servidor sabe el precio.
       const respuesta = await fetch("/api/crear-pago", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          productId: id, // <--- ¡AQUI ENVIAMOS EL ID!
-          nombreProducto: nombre,
-          precio: parseFloat(precio),
+          productId: id
         }),
       });
 
@@ -347,15 +351,15 @@ const relatedProducts = otherProducts
       if (datos.url) {
         window.location.href = datos.url;
       } else {
-        alert("Error: " + (datos.error || "No se pudo generar el pago"));
-        btn.innerText = textoOriginal;
-        btn.disabled = false;
+        throw new Error(datos.error || "No se pudo generar el pago");
       }
     } catch (error) {
       console.error(error);
-      alert("Ocurrió un error");
-      btn.innerText = textoOriginal;
+      alert("Error: " + error.message);
+      // Restauramos el botón si falla
+      btn.innerHTML = originalContent;
       btn.disabled = false;
+      btn.classList.remove('opacity-75', 'cursor-not-allowed');
     }
   };
 </script>
