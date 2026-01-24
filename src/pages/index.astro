@@ -1,134 +1,196 @@
 ---
 export const prerender = false;
 
-import Layout from '../layouts/Layout.astro';
-import products from '../data/products.json';
+import Layout from "../layouts/Layout.astro";
+import products from "../data/products.json";
 ---
 
 <Layout>
-    <section class="pt-24 md:pt-32 pb-16 md:pb-24 px-4 md:px-8">
-        <div class="max-w-4xl mx-auto text-center">
-            <h1 class="text-4xl md:text-6xl font-bold text-gray-800 dark:text-white mb-4 md:mb-6 tracking-tight">Assets 3D para Roblox Studio</h1>
-            <p class="text-base md:text-lg text-gray-500 dark:text-gray-400 max-w-2xl mx-auto">Modelos optimizados y listos para usar. Ahorra tiempo de desarrollo y mejora la calidad de tus juegos.</p>
+  <section class="pt-24 md:pt-32 pb-16 md:pb-24 px-4 md:px-8">
+    <div class="max-w-4xl mx-auto text-center">
+      <h1
+        class="text-4xl md:text-6xl font-bold text-gray-800 dark:text-white mb-4 md:mb-6 tracking-tight"
+      >
+        Assets 3D para Roblox Studio
+      </h1>
+      <p
+        class="text-base md:text-lg text-gray-500 dark:text-gray-400 max-w-2xl mx-auto"
+      >
+        Modelos optimizados y listos para usar. Ahorra tiempo de desarrollo y
+        mejora la calidad de tus juegos.
+      </p>
+    </div>
+  </section>
+
+  <section class="px-4 md:px-8 py-12 md:py-16 min-h-[500px]">
+    <div class="max-w-7xl mx-auto">
+      <h2
+        class="text-2xl md:text-3xl font-bold text-gray-800 dark:text-white mb-8 md:mb-12 text-center"
+      >
+        Modelos Disponibles
+      </h2>
+
+      <div
+        id="products-grid"
+        class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-6 mb-24 transition-all"
+      >
+        {
+          products.map((product) => (
+            <a
+              href={`/producto/${product.id}`}
+              class="product-item group cursor-pointer transition-transform hover:-translate-y-1 duration-200 block"
+              data-title={product.title.toLowerCase()}
+            >
+              <div class="relative w-full aspect-square mb-4 overflow-hidden rounded-xl bg-gray-50 dark:bg-gray-800">
+                {/* Etiqueta de Oferta */}
+                {product.onSale && (
+                  <span class="absolute top-2 left-2 z-10 bg-orange-500 text-white text-[10px] font-bold px-2 py-1 rounded shadow-sm">
+                    OFERTA
+                  </span>
+                )}
+
+                <img
+                  alt={product.title}
+                  class="w-full h-full object-cover object-center"
+                  src={product.images[0]}
+                />
+              </div>
+              <div class="space-y-1">
+                <h3 class="text-base font-semibold text-gray-800 dark:text-white group-hover:text-orange-500 transition-colors">
+                  {product.title}
+                </h3>
+
+                <div class="flex items-center gap-2">
+                  {/* Precio Actual */}
+                  <p class="text-base font-bold text-gray-800 dark:text-white">
+                    ${product.price} USD
+                  </p>
+
+                  {/* Precio Tachado (Solo aparece si onSale es true) */}
+                  {product.onSale && (
+                    <p class="text-sm text-gray-500 dark:text-gray-400 line-through">
+                      ${product.oldPrice}
+                    </p>
+                  )}
+                </div>
+              </div>
+            </a>
+          ))
+        }
+      </div>
+
+      <div
+        id="no-results"
+        class="hidden flex-col items-center justify-center text-center py-12"
+      >
+        <div
+          class="w-16 h-16 bg-gray-100 dark:bg-gray-800 rounded-full flex items-center justify-center mb-4"
+        >
+          <i class="ri-search-2-line text-2xl text-gray-400"></i>
         </div>
-    </section>
+        <h3 class="text-lg font-bold text-gray-800 dark:text-white">
+          Sin resultados
+        </h3>
+        <p class="text-gray-500 dark:text-gray-400">
+          No encontramos ningún producto con ese nombre.
+        </p>
+      </div>
 
-    <section class="px-4 md:px-8 py-12 md:py-16 min-h-[500px]">
-        <div class="max-w-7xl mx-auto">
-            <h2 class="text-2xl md:text-3xl font-bold text-gray-800 dark:text-white mb-8 md:mb-12 text-center">Modelos Disponibles</h2>
-            
-            <div id="products-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-6 mb-24 transition-all">
-                
-                {products.map((product) => (
-                    <a 
-                        href={`/producto/${product.id}`} 
-                        class="product-item group cursor-pointer transition-transform hover:-translate-y-1 duration-200 block"
-                        data-title={product.title.toLowerCase()} 
-                    >
-                        <div class="relative w-full aspect-square mb-4 overflow-hidden rounded-xl bg-gray-50 dark:bg-gray-800">
-                            <img 
-                                alt={product.title} 
-                                class="w-full h-full object-cover object-center" 
-                                src={product.images[0]} 
-                            />
-                        </div>
-                        <div class="space-y-1">
-                            <h3 class="text-base font-semibold text-gray-800 dark:text-white group-hover:text-orange-500 transition-colors">
-                                {product.title}
-                            </h3>
-                            <p class="text-sm text-gray-500 dark:text-gray-400">
-                                ${product.price} USD
-                            </p>
-                        </div>
-                    </a>
-                ))}
-
-            </div>
-
-            <div id="no-results" class="hidden flex-col items-center justify-center text-center py-12">
-                <div class="w-16 h-16 bg-gray-100 dark:bg-gray-800 rounded-full flex items-center justify-center mb-4">
-                    <i class="ri-search-2-line text-2xl text-gray-400"></i>
-                </div>
-                <h3 class="text-lg font-bold text-gray-800 dark:text-white">Sin resultados</h3>
-                <p class="text-gray-500 dark:text-gray-400">No encontramos ningún producto con ese nombre.</p>
-            </div>
-
-            <div id="end-message" class="relative py-12">
-                <div class="absolute inset-0 flex items-center" aria-hidden="true">
-                    <div class="w-full border-t border-gray-200 dark:border-gray-800"></div>
-                </div>
-                <div class="relative flex justify-center">
-                    <div class="flex flex-col items-center bg-warm-cream dark:bg-warm-dark-bg px-6 py-2">
-                        <div class="group mb-6">
-                            <div class="w-16 h-16 bg-white dark:bg-green-900/20 rounded-2xl flex items-center justify-center border border-gray-200 dark:border-green-900/30 shadow-sm group-hover:scale-110 transition-transform duration-300">
-                                <div class="w-8 h-8 rounded-full flex items-center justify-center shadow-sm bg-green-100 dark:bg-green-500 transition-colors">
-                                    <i class="ri-check-line text-gray-600 dark:text-gray-400 group-hover:text-orange-700 transition-colors"></i>
-                                </div>
-                            </div>
-                        </div>
-                        <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2 tracking-tight">¡Has visto todos los productos!</h3>
-                        <p class="text-gray-500 dark:text-gray-400 text-sm md:text-base max-w-sm text-center mb-8 leading-relaxed">
-                            Ya exploraste todo nuestro catálogo disponible por ahora. Vuelve pronto para ver más novedades.
-                        </p>
-                        <button 
-                            onclick="window.scrollTo({top: 0, behavior: 'smooth'})"
-                            class="group relative flex items-center gap-3 px-8 py-3 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-full text-gray-700 dark:text-white font-medium shadow-sm hover:shadow-lg hover:border-orange-200 dark:hover:border-orange-900/50 hover:-translate-y-1 transition-all duration-300 cursor-pointer"
-                        >
-                            <span class="w-8 h-8 rounded-full bg-gray-50 dark:bg-gray-700 flex items-center justify-center group-hover:bg-orange-50 dark:group-hover:bg-orange-900/30 transition-colors">
-                                <i class="ri-arrow-up-line text-gray-600 dark:text-gray-300 group-hover:text-orange-500 transition-colors"></i>
-                            </span>
-                            <span>Volver al inicio</span>
-                        </button>
-                    </div>
-                </div>
-            </div>
-
+      <div id="end-message" class="relative py-12">
+        <div class="absolute inset-0 flex items-center" aria-hidden="true">
+          <div class="w-full border-t border-gray-200 dark:border-gray-800">
+          </div>
         </div>
-    </section>
+        <div class="relative flex justify-center">
+          <div
+            class="flex flex-col items-center bg-warm-cream dark:bg-warm-dark-bg px-6 py-2"
+          >
+            <div class="group mb-6">
+              <div
+                class="w-16 h-16 bg-white dark:bg-green-900/20 rounded-2xl flex items-center justify-center border border-gray-200 dark:border-green-900/30 shadow-sm group-hover:scale-110 transition-transform duration-300"
+              >
+                <div
+                  class="w-8 h-8 rounded-full flex items-center justify-center shadow-sm bg-green-100 dark:bg-green-500 transition-colors"
+                >
+                  <i
+                    class="ri-check-line text-gray-600 dark:text-gray-400 group-hover:text-orange-700 transition-colors"
+                  ></i>
+                </div>
+              </div>
+            </div>
+            <h3
+              class="text-xl font-bold text-gray-900 dark:text-white mb-2 tracking-tight"
+            >
+              ¡Has visto todos los productos!
+            </h3>
+            <p
+              class="text-gray-500 dark:text-gray-400 text-sm md:text-base max-w-sm text-center mb-8 leading-relaxed"
+            >
+              Ya exploraste todo nuestro catálogo disponible por ahora. Vuelve
+              pronto para ver más novedades.
+            </p>
+            <button
+              onclick="window.scrollTo({top: 0, behavior: 'smooth'})"
+              class="group relative flex items-center gap-3 px-8 py-3 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-full text-gray-700 dark:text-white font-medium shadow-sm hover:shadow-lg hover:border-orange-200 dark:hover:border-orange-900/50 hover:-translate-y-1 transition-all duration-300 cursor-pointer"
+            >
+              <span
+                class="w-8 h-8 rounded-full bg-gray-50 dark:bg-gray-700 flex items-center justify-center group-hover:bg-orange-50 dark:group-hover:bg-orange-900/30 transition-colors"
+              >
+                <i
+                  class="ri-arrow-up-line text-gray-600 dark:text-gray-300 group-hover:text-orange-500 transition-colors"
+                ></i>
+              </span>
+              <span>Volver al inicio</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 </Layout>
 
 <script is:inline>
-    const searchInputs = document.querySelectorAll('.search-input');
-    const productItems = document.querySelectorAll('.product-item');
-    const noResultsMsg = document.getElementById('no-results');
-    const endMessage = document.getElementById('end-message');
+  const searchInputs = document.querySelectorAll(".search-input");
+  const productItems = document.querySelectorAll(".product-item");
+  const noResultsMsg = document.getElementById("no-results");
+  const endMessage = document.getElementById("end-message");
 
-    const filterProducts = (searchTerm) => {
-        const term = searchTerm.toLowerCase();
-        let visibleCount = 0;
+  const filterProducts = (searchTerm) => {
+    const term = searchTerm.toLowerCase();
+    let visibleCount = 0;
 
-        productItems.forEach(item => {
-            const title = item.getAttribute('data-title');
-            
-            if (title.includes(term)) {
-                item.classList.remove('hidden');
-                visibleCount++;
-            } else {
-                item.classList.add('hidden');
-            }
-        });
+    productItems.forEach((item) => {
+      const title = item.getAttribute("data-title");
 
-        if (visibleCount === 0) {
-            noResultsMsg.classList.remove('hidden');
-            noResultsMsg.classList.add('flex');
-            endMessage.classList.add('hidden');
-        } else {
-            noResultsMsg.classList.add('hidden');
-            noResultsMsg.classList.remove('flex');
-            if (term === '') {
-                endMessage.classList.remove('hidden');
-            } else {
-                endMessage.classList.add('hidden');
-            }
-        }
-    };
-
-    searchInputs.forEach(input => {
-        input.addEventListener('input', (e) => {
-            searchInputs.forEach(i => i.value = e.target.value);
-            filterProducts(e.target.value);
-        });
+      if (title.includes(term)) {
+        item.classList.remove("hidden");
+        visibleCount++;
+      } else {
+        item.classList.add("hidden");
+      }
     });
+
+    if (visibleCount === 0) {
+      noResultsMsg.classList.remove("hidden");
+      noResultsMsg.classList.add("flex");
+      endMessage.classList.add("hidden");
+    } else {
+      noResultsMsg.classList.add("hidden");
+      noResultsMsg.classList.remove("flex");
+      if (term === "") {
+        endMessage.classList.remove("hidden");
+      } else {
+        endMessage.classList.add("hidden");
+      }
+    }
+  };
+
+  searchInputs.forEach((input) => {
+    input.addEventListener("input", (e) => {
+      searchInputs.forEach((i) => (i.value = e.target.value));
+      filterProducts(e.target.value);
+    });
+  });
 </script>
 
 <script is:inline>
@@ -140,25 +202,24 @@ import products from '../data/products.json';
     btn.disabled = true;
 
     try {
-      const respuesta = await fetch('/api/crear-pago', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ 
-          nombreProducto: nombre, 
-          precio: parseFloat(precio) 
-        })
+      const respuesta = await fetch("/api/crear-pago", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          nombreProducto: nombre,
+          precio: parseFloat(precio),
+        }),
       });
 
       const datos = await respuesta.json();
 
       if (datos.url) {
-        window.location.href = datos.url; 
+        window.location.href = datos.url;
       } else {
         alert("Error: " + (datos.error || "No se pudo generar el pago"));
         btn.innerText = textoOriginal;
         btn.disabled = false;
       }
-
     } catch (error) {
       console.error(error);
       alert("Ocurrió un error inesperado");

@@ -3,6 +3,8 @@
     "id": "duo-npc-01",
     "title": "Duo de NPCs",
     "price": "4.99",
+    "oldPrice": "9.99",
+    "onSale": true,
     "description": "Pack de 2 personajes NPC optimizados al máximo para rendimiento (Mobile/Web/VR). Incluye variantes de sombrero azul y morado (editables en color). Cuentan con Rig avanzado (Cinemática Inversa/IK) en las piernas para animaciones precisas. Ideales para llenar ciudades sin perder FPS.",
     "specs": {
       "Formato": ".rbxm",
