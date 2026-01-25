@@ -1,71 +1,78 @@
 ---
 import "../styles/global.css";
 
-// 1. Recibimos los datos dinámicos de cada página
-const { title, description, image } = Astro.props;
+interface Props {
+  title: string;
+  description?: string;
+  image?: string;
+}
 
-// 2. Configuración por defecto
-const siteTitle = "Enrique 3D - Premium Assets";
-const pageTitle = title ? `${title} | Enrique 3D` : siteTitle;
-const pageDescription =
-  description ||
-  "Creación de activos 3D premium para creadores, desarrolladores y diseñadores de todo el mundo.";
+const { 
+  title, 
+  description = "Tienda oficial de assets 3D para Roblox. Modelos optimizados, scripts y rigs de alta calidad.", 
+  image = "/MiLogo.png" 
+} = Astro.props;
 
-// 3. URL imagen social
-const siteUrl = Astro.site ? Astro.site : Astro.url.origin;
-const pageImage = image
-  ? new URL(image, siteUrl).href
-  : new URL("/assets/default-social.jpg", siteUrl).href;
+const siteUrl = Astro.url.origin;
+const imageUrl = image.startsWith('http') ? image : `${siteUrl}${image}`;
 ---
 
 <!doctype html>
 <html lang="es">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-    <title>{pageTitle}</title>
-    <meta name="description" content={pageDescription} />
-
+    <meta name="viewport" content="width=device-width" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
+    
+    <title>{title}</title>
+    <meta name="description" content={description} />
 
     <meta property="og:type" content="website" />
     <meta property="og:url" content={Astro.url} />
-    <meta property="og:title" content={pageTitle} />
-    <meta property="og:description" content={pageDescription} />
-    <meta property="og:image" content={pageImage} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={imageUrl} />
 
-    <meta property="twitter:card" content="summary_large_image" />
-    <meta property="twitter:url" content={Astro.url} />
-    <meta property="twitter:title" content={pageTitle} />
-    <meta property="twitter:description" content={pageDescription} />
-    <meta property="twitter:image" content={pageImage} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:domain" content="enrique3d.shop" />
+    <meta name="twitter:url" content={Astro.url} />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={imageUrl} />
 
-    <link
-      href="https://cdn.jsdelivr.net/npm/remixicon@4.0.0/fonts/remixicon.css"
-      rel="stylesheet"
-    />
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <script is:inline>
+        // Accessing tailwind from the window object or just defining the config
+        // The CDN script exposes a global `tailwind` object.
+        window.tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        'warm-cream': '#faf8f5',
+                        'warm-dark-bg': '#0f1117',
+                    }
+                }
+            }
+        }
+    </script>
 
     <script is:inline>
-      if (
-        localStorage.theme === "dark" ||
-        (!("theme" in localStorage) &&
-          window.matchMedia("(prefers-color-scheme: dark)").matches)
-      ) {
-        document.documentElement.classList.add("dark");
-      } else {
-        document.documentElement.classList.remove("dark");
-      }
+        if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark');
+        } else {
+            document.documentElement.classList.remove('dark');
+        }
     </script>
   </head>
   <body>
     <div id="root">
-      <div
-        class="min-h-screen bg-warm-cream dark:bg-warm-dark-bg transition-colors"
-      >
-        <nav
-          class="fixed top-0 left-0 right-0 z-50 bg-white dark:bg-warm-dark-bg border-b border-gray-200 dark:border-gray-800"
-        >
+      <div class="min-h-screen bg-warm-cream dark:bg-warm-dark-bg transition-colors">
+        <nav class="fixed top-0 left-0 right-0 z-50 bg-white dark:bg-warm-dark-bg border-b border-gray-200 dark:border-gray-800">
           <div class="px-4 md:px-8 py-4">
             <div class="flex items-center justify-between">
               <a class="flex items-center gap-2 group" href="/">
@@ -74,7 +81,6 @@ const pageImage = image
                   alt="Enrique 3D"
                   class="h-9 w-auto block dark:hidden transition-opacity"
                 />
-
                 <img
                   src="/assets/logo-light.svg"
                   alt="Enrique 3D"
@@ -82,221 +88,84 @@ const pageImage = image
                 />
               </a>
               <div class="hidden md:flex items-center gap-8">
-                <a
-                  class="text-sm font-medium text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition-colors"
-                  href="/">Tienda</a
-                >
-                <a
-                  class="text-sm font-medium text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition-colors"
-                  href="/contact">Comisiones</a
-                >
-                <a
-                  class="text-sm font-medium text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition-colors"
-                  href="/about">Nosotros</a
-                >
-                <a
-                  class="text-sm font-medium text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition-colors"
-                  href="/terms">Términos</a
-                >
+                <a class="text-sm font-medium text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition-colors" href="/">Tienda</a>
+                <a class="text-sm font-medium text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition-colors" href="/contact">Comisiones</a>
+                <a class="text-sm font-medium text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition-colors" href="/about">Nosotros</a>
+                <a class="text-sm font-medium text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition-colors" href="/terms">Términos</a>
               </div>
 
               <div class="flex items-center gap-2 md:gap-4">
                 <div class="hidden md:block relative">
-                  <div
-                    class="flex items-center gap-2 px-4 py-2 bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-full"
-                  >
-                    <i
-                      class="ri-search-line text-base text-gray-500 dark:text-gray-400"
-                    ></i>
-                    <input
-                      class="search-input w-40 bg-transparent text-sm text-gray-800 dark:text-white focus:outline-none"
-                      placeholder="Buscar assets..."
-                      type="text"
-                    />
+                  <div class="flex items-center gap-2 px-4 py-2 bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-full">
+                    <i class="ri-search-line text-base text-gray-500 dark:text-gray-400"></i>
+                    <input class="search-input w-40 bg-transparent text-sm text-gray-800 dark:text-white focus:outline-none" placeholder="Buscar assets..." type="text" />
                   </div>
                 </div>
 
-                <button
-                  id="theme-toggle"
-                  class="w-9 h-9 flex items-center justify-center text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition-colors cursor-pointer"
-                  aria-label="Toggle theme"
-                >
+                <button id="theme-toggle" class="w-9 h-9 flex items-center justify-center text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition-colors cursor-pointer" aria-label="Toggle theme">
                   <i id="theme-icon" class="ri-sun-line text-xl"></i>
                 </button>
 
-                <button
-                  id="mobile-menu-btn"
-                  class="md:hidden w-9 h-9 flex items-center justify-center text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition-colors cursor-pointer"
-                >
+                <button id="mobile-menu-btn" class="md:hidden w-9 h-9 flex items-center justify-center text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition-colors cursor-pointer">
                   <i id="mobile-menu-icon" class="ri-menu-line text-xl"></i>
                 </button>
               </div>
             </div>
           </div>
 
-          <div
-            id="mobile-menu"
-            class="hidden md:hidden absolute top-full left-0 w-full bg-white dark:bg-warm-dark-bg border-b border-gray-200 dark:border-gray-800 shadow-lg px-4 py-6 flex flex-col gap-4 z-40"
-          >
-            <a
-              class="text-base font-medium text-gray-600 dark:text-gray-300 hover:text-orange-500 dark:hover:text-white transition-colors py-2 border-b border-gray-100 dark:border-gray-700"
-              href="/">Tienda</a
-            >
-            <a
-              class="text-base font-medium text-gray-600 dark:text-gray-300 hover:text-orange-500 dark:hover:text-white transition-colors py-2 border-b border-gray-100 dark:border-gray-700"
-              href="/contact">Comisiones</a
-            >
-            <a
-              class="text-base font-medium text-gray-600 dark:text-gray-300 hover:text-orange-500 dark:hover:text-white transition-colors py-2 border-b border-gray-100 dark:border-gray-700"
-              href="/about">Nosotros</a
-            >
-            <a
-              class="text-base font-medium text-gray-600 dark:text-gray-300 hover:text-orange-500 dark:hover:text-white transition-colors py-2"
-              href="/terms">Términos</a
-            >
+          <div id="mobile-menu" class="hidden md:hidden absolute top-full left-0 w-full bg-white dark:bg-warm-dark-bg border-b border-gray-200 dark:border-gray-800 shadow-lg px-4 py-6 flex flex-col gap-4 z-40">
+            <a class="text-base font-medium text-gray-600 dark:text-gray-300 hover:text-orange-500 dark:hover:text-white transition-colors py-2 border-b border-gray-100 dark:border-gray-700" href="/">Tienda</a>
+            <a class="text-base font-medium text-gray-600 dark:text-gray-300 hover:text-orange-500 dark:hover:text-white transition-colors py-2 border-b border-gray-100 dark:border-gray-700" href="/contact">Comisiones</a>
+            <a class="text-base font-medium text-gray-600 dark:text-gray-300 hover:text-orange-500 dark:hover:text-white transition-colors py-2 border-b border-gray-100 dark:border-gray-700" href="/about">Nosotros</a>
+            <a class="text-base font-medium text-gray-600 dark:text-gray-300 hover:text-orange-500 dark:hover:text-white transition-colors py-2" href="/terms">Términos</a>
 
-            <div
-              class="mt-2 flex items-center gap-2 px-4 py-3 bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg"
-            >
-              <i
-                class="ri-search-line text-base text-gray-500 dark:text-gray-400"
-              ></i>
-              <input
-                class="search-input w-full bg-transparent text-sm text-gray-800 dark:text-white focus:outline-none"
-                placeholder="Buscar assets..."
-                type="text"
-              />
+            <div class="mt-2 flex items-center gap-2 px-4 py-3 bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg">
+              <i class="ri-search-line text-base text-gray-500 dark:text-gray-400"></i>
+              <input class="search-input w-full bg-transparent text-sm text-gray-800 dark:text-white focus:outline-none" placeholder="Buscar assets..." type="text" />
             </div>
           </div>
         </nav>
 
         <slot />
 
-        <footer
-          class="border-t border-gray-200 dark:border-gray-800 bg-white dark:bg-warm-dark-bg transition-colors duration-300"
-        >
+        <footer class="border-t border-gray-200 dark:border-gray-800 bg-white dark:bg-warm-dark-bg transition-colors duration-300">
           <div class="px-8 py-12">
-            <div
-              class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8"
-            >
+            <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8">
               <div>
-                <h3
-                  class="text-lg font-bold text-gray-800 dark:text-white mb-4"
-                >
-                  Enrique 3D
-                </h3>
-                <p class="text-sm text-gray-600 dark:text-gray-400">
-                  Elevando tus proyectos en Roblox Studio con activos 3D
-                  premium.
-                </p>
+                <h3 class="text-lg font-bold text-gray-800 dark:text-white mb-4">Enrique 3D</h3>
+                <p class="text-sm text-gray-600 dark:text-gray-400">Elevando tus proyectos en Roblox Studio con activos 3D premium.</p>
               </div>
 
               <div>
-                <h4
-                  class="text-sm font-semibold text-gray-800 dark:text-white mb-4 uppercase tracking-wide"
-                >
-                  Menú
-                </h4>
+                <h4 class="text-sm font-semibold text-gray-800 dark:text-white mb-4 uppercase tracking-wide">Menú</h4>
                 <ul class="space-y-2 text-sm">
-                  <li>
-                    <a
-                      class="text-gray-600 dark:text-gray-400 hover:text-orange-500 dark:hover:text-orange-400 transition-colors cursor-pointer"
-                      href="/"
-                    >
-                      Tienda
-                    </a>
-                  </li>
-                  <li>
-                    <a
-                      class="text-gray-600 dark:text-gray-400 hover:text-orange-500 dark:hover:text-orange-400 transition-colors cursor-pointer"
-                      href="/contact"
-                    >
-                      Comisiones
-                    </a>
-                  </li>
-                  <li>
-                    <a
-                      class="text-gray-600 dark:text-gray-400 hover:text-orange-500 dark:hover:text-orange-400 transition-colors cursor-pointer"
-                      href="/about"
-                    >
-                      Nosotros
-                    </a>
-                  </li>
-                  <li>
-                    <a
-                      class="text-gray-600 dark:text-gray-400 hover:text-orange-500 dark:hover:text-orange-400 transition-colors cursor-pointer"
-                      href="/terms"
-                    >
-                      Términos y condiciones
-                    </a>
-                  </li>
+                  <li><a class="text-gray-600 dark:text-gray-400 hover:text-orange-500 dark:hover:text-orange-400 transition-colors cursor-pointer" href="/">Tienda</a></li>
+                  <li><a class="text-gray-600 dark:text-gray-400 hover:text-orange-500 dark:hover:text-orange-400 transition-colors cursor-pointer" href="/contact">Comisiones</a></li>
+                  <li><a class="text-gray-600 dark:text-gray-400 hover:text-orange-500 dark:hover:text-orange-400 transition-colors cursor-pointer" href="/about">Nosotros</a></li>
+                  <li><a class="text-gray-600 dark:text-gray-400 hover:text-orange-500 dark:hover:text-orange-400 transition-colors cursor-pointer" href="/terms">Términos y condiciones</a></li>
                 </ul>
               </div>
 
               <div>
-                <h4
-                  class="text-sm font-semibold text-gray-800 dark:text-white mb-4 uppercase tracking-wide"
-                >
-                  Contacto y Redes Sociales
-                </h4>
-
+                <h4 class="text-sm font-semibold text-gray-800 dark:text-white mb-4 uppercase tracking-wide">Contacto y Redes Sociales</h4>
                 <div class="flex items-center gap-4">
-                  <a
-                    href="https://discord.gg/EbEtTsyrC5"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    class="text-gray-500 dark:text-gray-400 hover:text-[#5865F2] transition-colors duration-300 transform hover:scale-110"
-                    aria-label="Discord"
-                  >
-                    <i class="ri-discord-fill text-2xl"></i>
-                  </a>
-
-                  <a
-                    href="https://www.tiktok.com/@enrique_3d"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    class="text-gray-500 dark:text-gray-400 hover:text-black dark:hover:text-white transition-colors duration-300 transform hover:scale-110"
-                    aria-label="TikTok"
-                  >
-                    <i class="ri-tiktok-fill text-2xl"></i>
-                  </a>
-
-                  <a
-                    href="mailto:enrique3d.studio@gmail.com"
-                    class="text-gray-500 dark:text-gray-400 hover:text-orange-500 transition-colors duration-300 transform hover:scale-110"
-                    aria-label="Correo Electrónico"
-                  >
-                    <i class="ri-mail-fill text-2xl"></i>
-                  </a>
+                  <a href="https://discord.gg/EbEtTsyrC5" target="_blank" rel="noopener noreferrer" class="text-gray-500 dark:text-gray-400 hover:text-[#5865F2] transition-colors duration-300 transform hover:scale-110" aria-label="Discord"><i class="ri-discord-fill text-2xl"></i></a>
+                  <a href="https://www.tiktok.com/@enrique_3d" target="_blank" rel="noopener noreferrer" class="text-gray-500 dark:text-gray-400 hover:text-black dark:hover:text-white transition-colors duration-300 transform hover:scale-110" aria-label="TikTok"><i class="ri-tiktok-fill text-2xl"></i></a>
+                  <a href="mailto:enrique3d.studio@gmail.com" class="text-gray-500 dark:text-gray-400 hover:text-orange-500 transition-colors duration-300 transform hover:scale-110" aria-label="Correo Electrónico"><i class="ri-mail-fill text-2xl"></i></a>
                 </div>
               </div>
             </div>
 
-            <div
-              class="max-w-7xl mx-auto mt-12 pt-8 border-t border-gray-200 dark:border-gray-800 text-center"
-            >
-              <p
-                class="text-xs text-gray-400 dark:text-gray-600 leading-relaxed max-w-3xl mx-auto"
-              >
-                Enrique 3D no está afiliado, asociado, autorizado, respaldado ni
-                conectado oficialmente de ninguna manera con Roblox Corporation.
-                El nombre "Roblox" y sus marcas relacionadas son propiedad de
-                sus respectivos dueños.
+            <div class="max-w-7xl mx-auto mt-12 pt-8 border-t border-gray-200 dark:border-gray-800 text-center">
+              <p class="text-xs text-gray-400 dark:text-gray-600 leading-relaxed max-w-3xl mx-auto">
+                Enrique 3D no está afiliado, asociado, autorizado, respaldado ni conectado oficialmente de ninguna manera con Roblox Corporation. El nombre "Roblox" y sus marcas relacionadas son propiedad de sus respectivos dueños.
               </p>
             </div>
 
-            <div
-              class="max-w-7xl mx-auto mt-6 flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-gray-500 dark:text-gray-500"
-            >
+            <div class="max-w-7xl mx-auto mt-6 flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-gray-500 dark:text-gray-500">
               <p>© 2026 Enrique 3D. Todos los derechos reservados.</p>
-              <a
-                href="https://www.tiktok.com/@enrique_3d?_r=1&_t=ZN-92QmPO5Gvjy"
-                target="_blank"
-                rel="noopener noreferrer"
-                class="hover:text-black dark:hover:text-white transition-colors flex items-center gap-1"
-              >
-                <i class="ri-tiktok-fill"></i>
-                Síguenos en TikTok
+              <a href="https://www.tiktok.com/@enrique_3d?_r=1&_t=ZN-92QmPO5Gvjy" target="_blank" rel="noopener noreferrer" class="hover:text-black dark:hover:text-white transition-colors flex items-center gap-1">
+                <i class="ri-tiktok-fill"></i> Síguenos en TikTok
               </a>
             </div>
           </div>
@@ -305,7 +174,6 @@ const pageImage = image
     </div>
 
     <script is:inline>
-      // Lógica Tema Oscuro
       const themeToggleBtn = document.getElementById("theme-toggle");
       const themeIcon = document.getElementById("theme-icon");
 
@@ -323,13 +191,10 @@ const pageImage = image
 
       themeToggleBtn.addEventListener("click", () => {
         document.documentElement.classList.toggle("dark");
-        localStorage.theme = document.documentElement.classList.contains("dark")
-          ? "dark"
-          : "light";
+        localStorage.theme = document.documentElement.classList.contains("dark") ? "dark" : "light";
         updateIcon();
       });
 
-      // Lógica Menú Móvil
       const mobileMenuBtn = document.getElementById("mobile-menu-btn");
       const mobileMenuIcon = document.getElementById("mobile-menu-icon");
       const mobileMenu = document.getElementById("mobile-menu");

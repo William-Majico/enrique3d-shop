@@ -11,7 +11,7 @@ const product = products.find((p) => p.id === id);
 
 // 3. Si el producto no existe, redirigimos
 if (!product) {
-  return Astro.redirect("/");
+  return Astro.redirect("/404");
 }
 
 // Funciones auxiliares
@@ -19,7 +19,7 @@ const isVideo = (filename: string) => filename.toLowerCase().endsWith(".mp4");
 const posterImage = product.images.find((img) => !isVideo(img)) || "";
 
 // Función para calcular porcentaje de descuento
-const getDiscountPercent = (price, oldPrice) => {
+const getDiscountPercent = (price: any, oldPrice: any) => {
     if (!oldPrice || oldPrice <= price) return 0;
     return Math.round(((oldPrice - price) / oldPrice) * 100);
 };
