@@ -2,7 +2,7 @@
 import Layout from "../layouts/Layout.astro";
 ---
 
-<Layout>
+<Layout title="Términos y Condiciones | Enrique 3D">
   <main class="pt-32 pb-16 px-4 md:px-8">
     <div class="max-w-4xl mx-auto">
       <h1
@@ -11,7 +11,7 @@ import Layout from "../layouts/Layout.astro";
         Términos y condiciones
       </h1>
       <p class="text-sm text-gray-500 dark:text-gray-400 mb-12">
-        Última actualización: Diciembre de 2025
+        Última actualización: Enero de 2026
       </p>
 
       <section class="mb-12">
@@ -114,7 +114,7 @@ import Layout from "../layouts/Layout.astro";
         <div
           class="space-y-4 text-sm text-gray-600 dark:text-gray-300 leading-relaxed bg-red-50 dark:bg-red-900/20 p-6 rounded-xl border border-red-200 dark:border-red-800"
         >
-          <p class="font-medium text-red-800 dark:text-white-400">
+          <p class="font-medium text-red-800 dark:text-red-200">
             Debido a la naturaleza digital de nuestros productos (archivos
             descargables), <strong
               >TODAS LAS VENTAS SON FINALES Y NO REEMBOLSABLES.</strong
@@ -133,7 +133,7 @@ import Layout from "../layouts/Layout.astro";
             <p>
               Solo se emitirá un reembolso si se comprueba que el archivo del
               modelo presenta una <strong
-                class="text-white-800 dark:text-gray-200"
+                class="text-gray-800 dark:text-gray-200"
                 >falla técnica crítica</strong
               > (archivo corrupto, geometría rota, texturas faltantes) que nosotros
               no podamos reparar.
@@ -146,15 +146,14 @@ import Layout from "../layouts/Layout.astro";
               compra.
             </li>
             <li>
-              Debe enviarnos evidencia del error (capturas de pantalla) a <strong
-              >
+              Debe enviarnos evidencia del error (capturas de pantalla) directamente a nuestro correo de soporte:
+              <strong class="block mt-1">
                 <a
-                  href="https://discord.gg/VdjfVeRm"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  class="text-indigo-600 dark:text-indigo-400 hover:underline"
+                  href="mailto:enrique3d.studio@gmail.com"
+                  class="text-indigo-600 dark:text-indigo-400 hover:underline flex items-center gap-1 w-fit"
                 >
-                  nuestro servidor de Discord
+                  <i class="ri-mail-send-line"></i>
+                  enrique3d.studio@gmail.com
                 </a>
               </strong>
             </li>
@@ -195,18 +194,36 @@ import Layout from "../layouts/Layout.astro";
             > Nos reservamos el derecho de actualizar estos términos en cualquier
             momento.
           </p>
-          <p>
-            <strong class="text-gray-800 dark:text-white">Contacto:</strong>
-            Si tiene preguntas sobre estos términos, contáctenos en
-            <a
-              href="https://discord.gg/VdjfVeRm"
-              target="_blank"
-              rel="noopener noreferrer"
-              class="text-indigo-600 dark:text-indigo-400 hover:underline font-medium"
-            >
-              nuestro servidor de Discord
-            </a>.
-          </p>
+          
+          <div class="mt-6 pt-6 border-t border-gray-200 dark:border-gray-700">
+            <p class="mb-2"><strong class="text-gray-800 dark:text-white">Contacto y Soporte:</strong></p>
+            <p class="mb-2">Si tiene preguntas sobre estos términos o necesita asistencia técnica, contáctenos a través de:</p>
+            
+            <ul class="space-y-2 pl-2">
+                <li class="flex items-center gap-2">
+                    <span class="text-xl">📧</span>
+                    <a
+                      href="mailto:enrique3d.studio@gmail.com"
+                      class="text-indigo-600 dark:text-indigo-400 hover:underline font-medium"
+                    >
+                      enrique3d.studio@gmail.com
+                    </a>
+                    <span class="text-xs text-gray-400">(Recomendado para temas legales/pagos)</span>
+                </li>
+                <li class="flex items-center gap-2">
+                    <span class="text-xl text-[#5865F2]"><i class="ri-discord-fill"></i></span>
+                    <a
+                      href="https://discord.gg/EbEtTsyrC5"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      class="text-indigo-600 dark:text-indigo-400 hover:underline font-medium"
+                    >
+                      Servidor de Discord
+                    </a>
+                    <span class="text-xs text-gray-400">(Dudas rápidas y comunidad)</span>
+                </li>
+            </ul>
+          </div>
         </div>
       </section>
 

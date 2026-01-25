@@ -2,7 +2,7 @@
   { 
     "id": "duo-npc-01",
     "title": "Duo de NPCs",
-    "price": "0.50",
+    "price": "4.99",
     "oldPrice": "9.99",
     "onSale": true,
     "badge": {
@@ -27,7 +27,7 @@
       "/assets/duo-npcs-01/npc-02.mp4",
       "/assets/duo-npcs-01/ejemplo.mp4"
     ],
-    "discordLink": "https://discord.gg/VdjfVeRm",
+    "discordLink": "https://discord.gg/EbEtTsyrC5",
     "downloadUrl": "https://7ehhgrxskhqapzo3.public.blob.vercel-storage.com/Enrique3D-Duo-NPCs.rar"
   }
 ]
