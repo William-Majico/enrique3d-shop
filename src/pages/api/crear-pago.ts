@@ -15,6 +15,10 @@ export const POST: APIRoute = async ({ request }) => {
     const body = await request.json();
     const { productId } = body; 
 
+    if (!productId || typeof productId !== 'string') {
+      return new Response(JSON.stringify({ error: "ID de producto inválido o ausente" }), { status: 400 });
+    }
+
     // 2. SEGURIDAD: Validamos que el producto exista en tu base de datos
     const product = products.find(p => p.id === productId);
 

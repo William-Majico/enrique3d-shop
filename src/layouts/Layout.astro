@@ -1,5 +1,6 @@
 ---
 import "../styles/global.css";
+import Analytics from '@vercel/analytics/astro';
 
 interface Props {
   title: string;
@@ -42,24 +43,6 @@ const imageUrl = image.startsWith('http') ? image : `${siteUrl}${image}`;
     <meta name="twitter:image" content={imageUrl} />
 
     <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
-    
-    <script src="https://cdn.tailwindcss.com"></script>
-    
-    <script is:inline>
-        // Accessing tailwind from the window object or just defining the config
-        // The CDN script exposes a global `tailwind` object.
-        window.tailwind.config = {
-            darkMode: 'class',
-            theme: {
-                extend: {
-                    colors: {
-                        'warm-cream': '#faf8f5',
-                        'warm-dark-bg': '#0f1117',
-                    }
-                }
-            }
-        }
-    </script>
 
     <script is:inline>
         if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
@@ -210,5 +193,6 @@ const imageUrl = image.startsWith('http') ? image : `${siteUrl}${image}`;
         }
       });
     </script>
+    <Analytics />
   </body>
 </html>
