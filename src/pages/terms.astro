@@ -3,241 +3,171 @@ import Layout from "../layouts/Layout.astro";
 ---
 
 <Layout title="Términos y Condiciones | Enrique 3D">
-  <main class="pt-32 pb-16 px-4 md:px-8">
-    <div class="max-w-4xl mx-auto">
-      <h1
-        class="text-4xl font-bold text-gray-800 dark:text-white mb-4 tracking-tight"
-      >
-        Términos y condiciones
-      </h1>
-      <p class="text-sm text-gray-500 dark:text-gray-400 mb-12">
-        Última actualización: Enero de 2026
-      </p>
+  <main class="pt-32 pb-20 px-6 md:px-12 bg-gray-50 dark:bg-gray-900 transition-colors duration-300">
+    <div class="max-w-3xl mx-auto">
+      
+      <div class="mb-16 border-b border-gray-200 dark:border-gray-800 pb-8">
+        <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-4">
+            <h1 class="text-3xl md:text-4xl font-extrabold text-gray-900 dark:text-white tracking-tight font-serif">
+            Términos y Condiciones
+            </h1>
+            <span class="inline-flex items-center px-3 py-1 rounded-full border border-gray-300 dark:border-gray-700 text-xs font-medium text-gray-500 dark:text-gray-400 bg-white dark:bg-gray-800">
+                Vigencia: Enero 2026
+            </span>
+        </div>
+        <p class="text-base text-gray-500 dark:text-gray-400 leading-relaxed">
+            Por favor, lea detenidamente los siguientes términos antes de adquirir cualquier activo digital en Enrique 3D.
+        </p>
+      </div>
 
-      <section class="mb-12">
-        <h2
-          class="text-2xl font-bold text-gray-800 dark:text-white mb-4 tracking-tight"
-        >
-          Licencia de uso
+      <section class="mb-16">
+        <h2 class="text-xl font-bold text-gray-900 dark:text-white mb-6 flex items-center gap-3">
+            <span class="flex items-center justify-center w-6 h-6 rounded bg-gray-200 dark:bg-gray-800 text-gray-600 dark:text-gray-400 text-xs">1</span>
+            Licencia de Uso
         </h2>
-        <div
-          class="space-y-4 text-sm text-gray-600 dark:text-gray-300 leading-relaxed"
-        >
-          <p>
-            Al comprar activos 3D de Enrique 3D, se le otorga una licencia
-            mundial no exclusiva para utilizar los activos comprados en sus
-            proyectos, sujeto a los siguientes términos:
+        <div class="prose prose-gray dark:prose-invert max-w-none text-gray-600 dark:text-gray-300 leading-loose">
+          <p class="mb-4">
+            Al comprar activos 3D de Enrique 3D, se le otorga una <strong>licencia mundial, perpetua y no exclusiva</strong> para utilizar los archivos en sus proyectos, bajo las siguientes condiciones:
           </p>
-          <ul class="list-disc pl-6 space-y-2">
-            <li>
-              <strong class="text-gray-800 dark:text-white"
-                >Uso personal:</strong
-              > Puede utilizar los activos en proyectos personales y no comerciales
-              sin restricciones.
+          <ul class="space-y-3 list-none pl-0">
+            <li class="flex gap-3 items-start">
+                <i class="ri-check-line text-green-500 mt-1.5 shrink-0"></i>
+                <span>
+                    <strong class="text-gray-900 dark:text-white">Uso Personal:</strong> 
+                    Uso ilimitado en proyectos personales, educativos o de portafolio.
+                </span>
             </li>
-            <li>
-              <strong class="text-gray-800 dark:text-white"
-                >Uso comercial:</strong
-              > Puede utilizar los activos en proyectos comerciales, incluidos juegos,
-              películas, anuncios y otras producciones multimedia.
+            <li class="flex gap-3 items-start">
+                <i class="ri-check-line text-green-500 mt-1.5 shrink-0"></i>
+                <span>
+                    <strong class="text-gray-900 dark:text-white">Uso Comercial:</strong> 
+                    Autorizado para videojuegos (Roblox, Unity, Unreal), renderizados, publicidad y multimedia monetizada.
+                </span>
             </li>
-            <li>
-              <strong class="text-gray-800 dark:text-white"
-                >Modificación:</strong
-              > Se le permite modificar, adaptar y personalizar los activos para adaptarlos
-              a las necesidades de su proyecto.
+            <li class="flex gap-3 items-start">
+                <i class="ri-check-line text-green-500 mt-1.5 shrink-0"></i>
+                <span>
+                    <strong class="text-gray-900 dark:text-white">Modificación:</strong> 
+                    Se permite editar geometría, texturas y colores para adaptar el activo a su proyecto.
+                </span>
             </li>
-            <li>
-              <strong class="text-gray-800 dark:text-white"
-                >Redistribución prohibida:</strong
-              > No puede revender, redistribuir, sublicenciar ni compartir los activos
-              originales o modificados como archivos independientes o en paquetes
-              de activos.
-            </li>
-            <li>
-              <strong class="text-gray-800 dark:text-white">Atribución:</strong> Si
-              bien no es obligatorio, la atribución a Enrique 3D se agradece en los
-              créditos de su proyecto.
+            <li class="flex gap-3 items-start">
+                <i class="ri-close-line text-red-500 mt-1.5 shrink-0"></i>
+                <span>
+                    <strong class="text-gray-900 dark:text-white">Prohibición de Reventa:</strong> 
+                    Queda estrictamente prohibido revender, sublicenciar o redistribuir los archivos (originales o modificados) como activos independientes (asset packs).
+                </span>
             </li>
           </ul>
         </div>
       </section>
 
-      <section class="mb-12">
-        <h2
-          class="text-2xl font-bold text-gray-800 dark:text-white mb-4 tracking-tight"
-        >
-          Derechos comerciales
+      <hr class="border-gray-200 dark:border-gray-800 mb-16" />
+
+      <section class="mb-16">
+        <h2 class="text-xl font-bold text-gray-900 dark:text-white mb-6 flex items-center gap-3">
+            <span class="flex items-center justify-center w-6 h-6 rounded bg-gray-200 dark:bg-gray-800 text-gray-600 dark:text-gray-400 text-xs">2</span>
+            Derechos Comerciales y Propiedad
         </h2>
-        <div
-          class="space-y-4 text-sm text-gray-600 dark:text-gray-300 leading-relaxed"
-        >
+        <div class="text-gray-600 dark:text-gray-300 leading-loose space-y-4">
           <p>
-            Todos los activos adquiridos a Enrique 3D incluyen derechos
-            comerciales completos, lo que le permite:
+            La compra le otorga derechos de explotación comercial sobre la obra final donde se integre el activo, pero <strong>no le otorga la propiedad intelectual</strong> del diseño original del modelo 3D.
           </p>
-          <ul class="list-disc pl-6 space-y-2">
-            <li>
-              Utilice los activos en proyectos comerciales ilimitados sin
-              tarifas ni regalías adicionales.
-            </li>
-            <li>
-              Incorporar los activos en productos, juegos, aplicaciones,
-              películas y otros medios comerciales.
-            </li>
-            <li>
-              Utilice los activos para trabajos de clientes y proyectos
-              encargados.
-            </li>
-            <li>
-              Generar ingresos a partir de proyectos que incluyan los activos
-              adquiridos.
-            </li>
-          </ul>
-          <p class="mt-4">
-            <strong class="text-gray-800 dark:text-white">Restricciones:</strong
-            > No puede reclamar la propiedad de los diseños de activos originales,
-            registrar los activos como marca registrada ni utilizarlos de una manera
-            que compita directamente con el modelo de negocios de Enrique 3D (como
-            crear un mercado de activos 3D competitivo).
-          </p>
-        </div>
-      </section>
-
-      <section class="mb-12">
-        <h2
-          class="text-2xl font-bold text-gray-800 dark:text-white mb-4 tracking-tight"
-        >
-          Política de reembolso
-        </h2>
-
-        <div
-          class="space-y-4 text-sm text-gray-600 dark:text-gray-300 leading-relaxed bg-red-50 dark:bg-red-900/20 p-6 rounded-xl border border-red-200 dark:border-red-800"
-        >
-          <p class="font-medium text-red-800 dark:text-red-200">
-            Debido a la naturaleza digital de nuestros productos (archivos
-            descargables), <strong
-              >TODAS LAS VENTAS SON FINALES Y NO REEMBOLSABLES.</strong
-            >
-          </p>
-
-          <p>
-            No ofrecemos reembolsos por "cambio de opinión", compras
-            accidentales o si el software que utiliza no es compatible.
-          </p>
-
-          <div class="mt-4">
-            <strong class="text-gray-900 dark:text-white block mb-1"
-              >Única Excepción (Falla Técnica):</strong
-            >
-            <p>
-              Solo se emitirá un reembolso si se comprueba que el archivo del
-              modelo presenta una <strong
-                class="text-gray-800 dark:text-gray-200"
-                >falla técnica crítica</strong
-              > (archivo corrupto, geometría rota, texturas faltantes) que nosotros
-              no podamos reparar.
-            </p>
-          </div>
-
-          <ul class="list-disc pl-6 space-y-2 mt-2">
-            <li>
-              Debe reportar la falla dentro de los 7 días posteriores a la
-              compra.
-            </li>
-            <li>
-              Debe enviarnos evidencia del error (capturas de pantalla) directamente a nuestro correo de soporte:
-              <strong class="block mt-1">
-                <a
-                  href="mailto:enrique3d.studio@gmail.com"
-                  class="text-indigo-600 dark:text-indigo-400 hover:underline flex items-center gap-1 w-fit"
-                >
-                  <i class="ri-mail-send-line"></i>
-                  enrique3d.studio@gmail.com
-                </a>
-              </strong>
-            </li>
-            <li>
-              Si no podemos enviarle una versión corregida del archivo en 48
-              horas, le devolveremos su dinero íntegramente.
-            </li>
-          </ul>
-        </div>
-      </section>
-
-      <section class="mb-12">
-        <h2
-          class="text-2xl font-bold text-gray-800 dark:text-white mb-4 tracking-tight"
-        >
-          Términos adicionales
-        </h2>
-        <div
-          class="space-y-4 text-sm text-gray-600 dark:text-gray-300 leading-relaxed"
-        >
-          <p>
-            <strong class="text-gray-800 dark:text-white"
-              >Descargo de responsabilidad de garantía:</strong
-            > Todos los activos se proporcionan "tal cual". Si bien garantizamos altos
-            estándares de calidad, es responsabilidad del comprador asegurarse de
-            tener el software adecuado para abrir los archivos.
-          </p>
-          <p>
-            <strong class="text-gray-800 dark:text-white"
-              >Limitación de responsabilidad:</strong
-            > Enrique 3D no será responsable de ningún daño indirecto, incidental
-            o consecuente que surja del uso o imposibilidad de utilizar los activos
-            adquiridos.
-          </p>
-          <p>
-            <strong class="text-gray-800 dark:text-white"
-              >Actualizaciones de los términos:</strong
-            > Nos reservamos el derecho de actualizar estos términos en cualquier
-            momento.
-          </p>
-          
-          <div class="mt-6 pt-6 border-t border-gray-200 dark:border-gray-700">
-            <p class="mb-2"><strong class="text-gray-800 dark:text-white">Contacto y Soporte:</strong></p>
-            <p class="mb-2">Si tiene preguntas sobre estos términos o necesita asistencia técnica, contáctenos a través de:</p>
+          <div class="bg-white dark:bg-gray-800 p-6 rounded-lg border border-gray-200 dark:border-gray-700 text-sm">
+            <h4 class="font-bold text-gray-900 dark:text-white mb-2 text-xs uppercase tracking-wide">Usted Puede:</h4>
+            <ul class="list-disc pl-5 space-y-1 mb-4">
+                <li>Usar el activo en juegos que generen ingresos (Robux, Ads, Ventas).</li>
+                <li>Usar el activo en comisiones para clientes (el cliente hereda la licencia de uso, no de reventa).</li>
+            </ul>
             
-            <ul class="space-y-2 pl-2">
-                <li class="flex items-center gap-2">
-                    <span class="text-xl">📧</span>
-                    <a
-                      href="mailto:enrique3d.studio@gmail.com"
-                      class="text-indigo-600 dark:text-indigo-400 hover:underline font-medium"
-                    >
-                      enrique3d.studio@gmail.com
-                    </a>
-                    <span class="text-xs text-gray-400">(Recomendado para temas legales/pagos)</span>
-                </li>
-                <li class="flex items-center gap-2">
-                    <span class="text-xl text-[#5865F2]"><i class="ri-discord-fill"></i></span>
-                    <a
-                      href="https://discord.gg/EbEtTsyrC5"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      class="text-indigo-600 dark:text-indigo-400 hover:underline font-medium"
-                    >
-                      Servidor de Discord
-                    </a>
-                    <span class="text-xs text-gray-400">(Dudas rápidas y comunidad)</span>
-                </li>
+            <h4 class="font-bold text-gray-900 dark:text-white mb-2 text-xs uppercase tracking-wide">Usted No Puede:</h4>
+            <ul class="list-disc pl-5 space-y-1">
+                <li>Registrar el diseño del activo 3D como marca propia.</li>
+                <li>Crear una tienda competidora utilizando estos archivos.</li>
             </ul>
           </div>
         </div>
       </section>
 
-      <div class="pt-8 border-t border-gray-200 dark:border-gray-700">
+      <section class="mb-16">
+        <h2 class="text-xl font-bold text-gray-900 dark:text-white mb-6 flex items-center gap-3">
+            <span class="flex items-center justify-center w-6 h-6 rounded bg-gray-200 dark:bg-gray-800 text-gray-600 dark:text-gray-400 text-xs">3</span>
+            Política de Devoluciones
+        </h2>
+
+        <div class="relative pl-6 py-2 border-l-4 border-red-500 bg-transparent">
+          <p class="font-bold text-gray-900 dark:text-white mb-2 uppercase text-sm tracking-wide">
+            Naturaleza de Bienes Digitales
+          </p>
+          <p class="text-gray-600 dark:text-gray-300 mb-4 text-sm leading-relaxed">
+            Debido a que nuestros productos son archivos digitales descargables e irrevocables, <span class="font-semibold text-gray-900 dark:text-white">todas las ventas se consideran finales y no reembolsables</span> una vez que se ha proporcionado el enlace de descarga.
+          </p>
+          
+          <div class="mt-6">
+            <p class="font-bold text-gray-900 dark:text-white text-sm mb-2">Excepción por Defecto Técnico:</p>
+            <p class="text-sm text-gray-600 dark:text-gray-300 leading-relaxed mb-3">
+                Si el archivo presenta una falla crítica verificable (corrupción de datos, geometría rota) que impida su uso y que nuestro equipo no pueda reparar en un plazo de 48 horas, se procederá al reembolso total.
+            </p>
+            <p class="text-xs text-gray-500 dark:text-gray-400">
+                * Para reportar un fallo, debe enviar evidencia visual a soporte dentro de los 7 días posteriores a la compra.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <hr class="border-gray-200 dark:border-gray-800 mb-16" />
+
+      <section class="mb-16">
+        <h2 class="text-xl font-bold text-gray-900 dark:text-white mb-6 flex items-center gap-3">
+            <span class="flex items-center justify-center w-6 h-6 rounded bg-gray-200 dark:bg-gray-800 text-gray-600 dark:text-gray-400 text-xs">4</span>
+            Garantías y Limitaciones
+        </h2>
+        <div class="text-sm text-gray-600 dark:text-gray-300 leading-loose space-y-4">
+          <p>
+            Los activos se proporcionan "tal cual" (as-is). Enrique 3D garantiza que los archivos están libres de virus en el momento de la entrega. Es responsabilidad del usuario final poseer los conocimientos y el software necesario (Blender, Roblox Studio, etc.) para utilizar los archivos.
+          </p>
+        </div>
+      </section>
+
+      <div class="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl p-8 shadow-sm">
+        <h3 class="text-lg font-bold text-gray-900 dark:text-white mb-4">Canales de Atención Oficial</h3>
+        <p class="text-sm text-gray-500 dark:text-gray-400 mb-6">
+            Para consultas legales, disputas de pagos o asistencia técnica relacionada con estos términos, utilice los siguientes medios:
+        </p>
+
+        <div class="grid sm:grid-cols-2 gap-6">
+            <a href="mailto:enrique3d.studio@gmail.com" class="flex items-start gap-4 p-4 rounded-lg bg-gray-50 dark:bg-gray-900/50 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors group">
+                <div class="mt-1 text-gray-400 group-hover:text-indigo-500 transition-colors">
+                    <i class="ri-mail-send-line text-xl"></i>
+                </div>
+                <div>
+                    <span class="block text-xs font-bold text-gray-400 uppercase tracking-wide mb-1">Soporte y Legal</span>
+                    <span class="block text-sm font-medium text-gray-900 dark:text-white break-all">enrique3d.studio@gmail.com</span>
+                </div>
+            </a>
+
+            <a href="https://discord.gg/EbEtTsyrC5" target="_blank" class="flex items-start gap-4 p-4 rounded-lg bg-gray-50 dark:bg-gray-900/50 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors group">
+                <div class="mt-1 text-gray-400 group-hover:text-[#5865F2] transition-colors">
+                    <i class="ri-discord-fill text-xl"></i>
+                </div>
+                <div>
+                    <span class="block text-xs font-bold text-gray-400 uppercase tracking-wide mb-1">Comunidad</span>
+                    <span class="block text-sm font-medium text-gray-900 dark:text-white">Servidor de Discord</span>
+                </div>
+            </a>
+        </div>
+      </div>
+
+      <div class="mt-12 text-center">
         <a
           href="/"
-          class="inline-flex items-center gap-2 text-sm text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition-colors cursor-pointer group"
+          class="inline-flex items-center gap-2 text-sm text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors cursor-pointer group"
         >
-          <i
-            class="ri-arrow-left-line transition-transform group-hover:-translate-x-1"
-          ></i>
-          Volver a la tienda
+          <i class="ri-arrow-left-line transition-transform group-hover:-translate-x-1"></i>
+          Volver al inicio
         </a>
       </div>
+
     </div>
   </main>
 </Layout>

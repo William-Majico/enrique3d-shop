@@ -1,12 +1,102 @@
 [
   { 
+    "id": "doritos-and-lays-01",
+    "title": "Doritos and Lays",
+    "price": "9.99",
+    "oldPrice": "24.99",
+    "onSale": true,
+    "badge": {
+    "text": "-60%",
+    "bgColor": "bg-orange-500",
+    "textColor": "text-white"
+    },
+    "description": "Personaje 3D estilo Voxel con diseño único Doritos and Lays, completamente riggeado y optimizado para alto rendimiento en juegos móviles y web. Su estructura de bajos polígonos incluye un esqueleto avanzado con cinemática inversa (IK) en extremidades, ideal para usarse como enemigo, jefe final o NPC en proyectos que buscan una estética de bloques llamativa y original.",
+    "specs": {
+      "Formato": ".rbxm",
+      "Triángulos": "4,670",
+      "Vértices": "2,908",
+      "Rig": "Sí",
+      "Animaciones": "Idle + Walk",
+      "Texturas": "Base Color (Sin Texturas)"
+    },
+    "images": [
+      "/assets/doritos-and-lays/foto.png",
+      "/assets/doritos-and-lays/doritos-and-lays-idle.mp4",
+      "/assets/doritos-and-lays/doritos-and-lays-walk.mp4",
+      "/assets/doritos-and-lays/video-1.mp4",
+      "/assets/doritos-and-lays/video-2.mp4"
+    ],
+    "discordLink": "https://discord.gg/EbEtTsyrC5",
+    "downloadUrl": "https://7ehhgrxskhqapzo3.public.blob.vercel-storage.com/Enrique3D-Personaje-666.rar"
+  },
+  { 
+    "id": "personaje-666-01",
+    "title": "personaje 666",
+    "price": "6.99",
+    "oldPrice": "14.99",
+    "onSale": true,
+    "badge": {
+    "text": "-53.5%",
+    "bgColor": "bg-orange-500",
+    "textColor": "text-white"
+    },
+    "description": "Personaje 3D estilo Voxel con diseño único de Number Beast 666, completamente riggeado y optimizado para alto rendimiento en juegos móviles y web. Su estructura de bajos polígonos incluye un esqueleto avanzado con cinemática inversa (IK) en extremidades, ideal para usarse como enemigo, jefe final o NPC en proyectos que buscan una estética de bloques llamativa y original.",
+    "specs": {
+      "Formato": ".rbxm",
+      "Triángulos": "2,718",
+      "Vértices": "1,524",
+      "Rig": "Sí",
+      "Animaciones": "Idle + Walk",
+      "Texturas": "Base Color (Sin Texturas)"
+    },
+    "images": [
+      "/assets/personaje-666-01/foto.png",
+      "/assets/personaje-666-01/666-idle.mp4",
+      "/assets/personaje-666-01/666-walk.mp4",
+      "/assets/personaje-666-01/video-1.mp4",
+      "/assets/personaje-666-01/video-2.mp4"
+    ],
+    "discordLink": "https://discord.gg/EbEtTsyrC5",
+    "downloadUrl": "https://7ehhgrxskhqapzo3.public.blob.vercel-storage.com/Enrique3D-Personaje-666.rar"
+  },
+  { 
+    "id": "esok-01",
+    "title": "Esok Sekolah",
+    "price": "6.99",
+    "oldPrice": "14.99",
+    "onSale": true,
+    "badge": {
+    "text": "-53.5%",
+    "bgColor": "bg-orange-500",
+    "textColor": "text-white"
+    },
+    "description": "Modelo 3D Voxel de \"Esok Monstruo\" totalmente riggeado y optimizado para alto rendimiento en plataformas móviles y WebGL. Este personaje tipo \"mímico\" fusiona arquitectura con anatomía de criatura, destacando una lengua articulada y extremidades funcionales con cinemática inversa (IK)",
+    "specs": {
+      "Formato": ".rbxm",
+      "Triángulos": "4,333",
+      "Vértices": "2,609",
+      "Rig": "Sí",
+      "Animaciones": "Idle + Walk",
+      "Texturas": "Base Color (Sin Texturas)"
+    },
+    "images": [
+      "/assets/esok-01/foto.png",
+      "/assets/esok-01/esok-idle.mp4",
+      "/assets/esok-01/esok-walk.mp4",
+      "/assets/esok-01/video-1.mp4",
+      "/assets/esok-01/video-2.mp4"
+    ],
+    "discordLink": "https://discord.gg/EbEtTsyrC5",
+    "downloadUrl": "https://7ehhgrxskhqapzo3.public.blob.vercel-storage.com/Enrique3D-Personaje-Esok-7484875.rar"
+  },
+  { 
     "id": "duo-npc-01",
     "title": "Duo de NPCs",
     "price": "4.99",
     "oldPrice": "9.99",
     "onSale": true,
     "badge": {
-    "text": "-50% DCTO",
+    "text": "-50%",
     "bgColor": "bg-orange-500",
     "textColor": "text-white"
     },
@@ -28,6 +118,6 @@
       "/assets/duo-npcs-01/ejemplo.mp4"
     ],
     "discordLink": "https://discord.gg/EbEtTsyrC5",
-    "downloadUrl": "https://7ehhgrxskhqapzo3.public.blob.vercel-storage.com/Enrique3D-Duo-NPCs.rar"
+    "downloadUrl": "https://7ehhgrxskhqapzo3.public.blob.vercel-storage.com/Enrique3D-Duo-NPCs-387487381.rar"
   }
 ]

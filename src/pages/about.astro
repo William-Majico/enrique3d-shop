@@ -2,141 +2,161 @@
 import Layout from '../layouts/Layout.astro';
 ---
 
-<Layout title="Acerca de Nosotros">
-  <main class="pt-32 pb-20 px-6 md:py-16">
-    <div class="max-w-4xl mx-auto">
+<Layout title="Acerca de Nosotros | Enrique 3D">
+  <div class="fixed inset-0 -z-10 pointer-events-none">
+    <div class="absolute top-0 right-0 w-[500px] h-[500px] bg-orange-500/10 rounded-full blur-3xl"></div>
+    <div class="absolute bottom-0 left-0 w-[500px] h-[500px] bg-indigo-500/5 rounded-full blur-3xl"></div>
+  </div>
+
+  <main class="pt-32 pb-20 px-6">
+    <div class="max-w-6xl mx-auto">
       
-      <div class="text-center mb-16 md:py-16">
-        <h1 class="text-5xl md:text-6xl font-bold text-gray-800 dark:text-white mb-6 tracking-tight">
-          Acerca de Enrique 3D
+      <div class="text-center mb-20">
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-orange-100 dark:bg-orange-900/30 text-orange-700 dark:text-orange-400 text-xs font-bold uppercase tracking-wider mb-4 border border-orange-200 dark:border-orange-800">
+          Sobre Nosotros
+        </div>
+        <h1 class="text-5xl md:text-7xl font-extrabold text-gray-800 dark:text-white mb-6 tracking-tight">
+          Más que modelos 3D, <br/>
+          <span class="text-transparent bg-clip-text bg-gradient-to-r from-orange-500 to-red-600">creamos experiencias.</span>
         </h1>
-        <p class="text-lg text-gray-500 dark:text-gray-400 max-w-2xl mx-auto">
-          Elevando el estándar de tus proyectos en Roblox Studio con activos 3D profesionales, optimizados y listos para jugar.
+        <p class="text-xl text-gray-500 dark:text-gray-400 max-w-2xl mx-auto leading-relaxed">
+          Elevando el estándar en Roblox con activos profesionales, optimizados y listos para jugar.
         </p>
       </div>
 
-      <div class="mb-20">
-        <h2 class="text-3xl font-bold text-gray-800 dark:text-white mb-6">
-          Nuestra misión en Roblox
-        </h2>
-        <div class="space-y-4 text-gray-600 dark:text-gray-300 leading-relaxed">
-          <p>
-            Enrique 3D nació de una necesidad real en la comunidad de desarrolladores: encontrar activos que se vean increíbles pero que no causen <em>lag</em>. Sabemos que en Roblox, el rendimiento lo es todo.
-          </p>
-          <p>
-            Nos especializamos en crear modelos, armaduras, armas y NPCs diseñados específicamente para la arquitectura de <strong>Roblox Studio</strong>. Ya sea que estés creando el próximo gran simulador, un RPG de mundo abierto o un juego de terror, nuestros activos están hechos para encajar perfectamente.
-          </p>
-          <p>
-            No solo vendemos modelos; vendemos herramientas para que tú, el desarrollador, puedas ahorrar tiempo y lanzar tu juego más rápido.
-          </p>
-        </div>
-      </div>
-
-      <div class="mb-20">
-        <h2 class="text-3xl font-bold text-gray-800 dark:text-white mb-8">
-          Lo que ofrecemos
-        </h2>
-        <div class="grid md:grid-cols-3 gap-8">
-          
-          <div class="border border-gray-200 dark:border-gray-700 rounded-xl p-6 hover:shadow-md transition-shadow">
-            <div class="w-12 h-12 flex items-center justify-center mb-4">
-              <i class="ri-box-3-line text-3xl text-orange-500"></i>
-            </div>
-            <h3 class="text-xl font-bold text-gray-800 dark:text-white mb-3">
-              Meshes Optimizados
-            </h3>
-            <p class="text-gray-600 dark:text-gray-400 text-sm leading-relaxed">
-              Geometría limpia y bajo conteo de polígonos (Low Poly) para garantizar FPS estables en móviles y PC.
+      <div class="grid md:grid-cols-2 gap-12 items-center mb-24">
+        
+        <div class="space-y-6 order-2 md:order-1">
+          <h2 class="text-3xl font-bold text-gray-800 dark:text-white flex items-center gap-2">
+            <span class="bg-orange-500 w-2 h-8 rounded-full"></span>
+            Nuestra misión
+          </h2>
+          <div class="space-y-4 text-gray-600 dark:text-gray-300 leading-relaxed text-lg">
+            <p>
+              Enrique 3D nació de una frustración real: encontrar activos que se vean increíbles pero que no causen <em>lag</em>. Sabemos que en Roblox, <strong class="text-orange-600 dark:text-orange-400">el rendimiento lo es todo.</strong>
+            </p>
+            <p>
+              Nos especializamos en la arquitectura de <strong>Roblox Studio</strong>. Ya sea un simulador, un RPG o un juego de terror, nuestros activos encajan matemáticamente perfecto.
+            </p>
+            <p>
+               No solo vendemos modelos; vendemos tiempo. Te damos las herramientas para que lances tu juego más rápido.
             </p>
           </div>
 
-          <div class="border border-gray-200 dark:border-gray-700 rounded-xl p-6 hover:shadow-md transition-shadow">
-            <div class="w-12 h-12 flex items-center justify-center mb-4">
-              <i class="ri-user-star-line text-3xl text-orange-500"></i>
+          <div class="grid grid-cols-3 gap-4 pt-4 border-t border-gray-100 dark:border-gray-800">
+            <div>
+              <span class="block text-2xl font-bold text-gray-900 dark:text-white">+3 Años</span>
+              <span class="text-xs text-gray-500">En Desarrollo</span>
             </div>
-            <h3 class="text-xl font-bold text-gray-800 dark:text-white mb-3">
-              Rigs R6 y R15
-            </h3>
+            <div>
+              <span class="block text-2xl font-bold text-gray-900 dark:text-white">100%</span>
+              <span class="text-xs text-gray-500">Optimizado</span>
+            </div>
+            <div>
+              <span class="block text-2xl font-bold text-gray-900 dark:text-white">R6 / R15</span>
+              <span class="text-xs text-gray-500">Compatible</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="order-1 md:order-2 relative group">
+          <div class="absolute inset-0 bg-gradient-to-br from-orange-500 to-indigo-600 rounded-2xl blur-2xl opacity-20 group-hover:opacity-30 transition-opacity"></div>
+          <div class="relative bg-gray-100 dark:bg-gray-800 rounded-2xl overflow-hidden aspect-square border border-gray-200 dark:border-gray-700 shadow-2xl flex items-center justify-center p-4">
+            
+            <img 
+              src="/public/MiLogo.png" 
+              alt="Logotipo de Enrique 3D" 
+              class="w-full h-full object-contain drop-shadow-lg animate-scale-in"
+            />
+            
+          </div>
+        </div>
+
+      </div>
+
+      <div class="mb-24">
+        <div class="text-center mb-10">
+          <h2 class="text-3xl font-bold text-gray-800 dark:text-white">Arsenal Creativo</h2>
+          <p class="text-gray-500 mt-2">Todo lo que necesitas para construir mundos.</p>
+        </div>
+
+        <div class="grid md:grid-cols-3 gap-6">
+          <div class="bg-white dark:bg-warm-dark-card p-8 rounded-2xl border border-gray-100 dark:border-gray-700 shadow-lg hover:shadow-xl hover:-translate-y-1 transition-all group">
+            <div class="w-14 h-14 rounded-xl bg-orange-100 dark:bg-orange-900/30 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+              <i class="ri-box-3-line text-3xl text-orange-600 dark:text-orange-500"></i>
+            </div>
+            <h3 class="text-xl font-bold text-gray-800 dark:text-white mb-3">Meshes Optimizados</h3>
             <p class="text-gray-600 dark:text-gray-400 text-sm leading-relaxed">
-              Personajes y armaduras riggeados profesionalmente, totalmente compatibles con los avatares de Roblox.
+              Geometría limpia y Low Poly para garantizar FPS estables en móviles, tablets y PC de gama baja.
             </p>
           </div>
 
-          <div class="border border-gray-200 dark:border-gray-700 rounded-xl p-6 hover:shadow-md transition-shadow">
-            <div class="w-12 h-12 flex items-center justify-center mb-4">
-              <i class="ri-paint-brush-line text-3xl text-orange-500"></i>
+          <div class="bg-white dark:bg-warm-dark-card p-8 rounded-2xl border border-gray-100 dark:border-gray-700 shadow-lg hover:shadow-xl hover:-translate-y-1 transition-all group">
+            <div class="w-14 h-14 rounded-xl bg-indigo-100 dark:bg-indigo-900/30 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+              <i class="ri-user-star-line text-3xl text-indigo-600 dark:text-indigo-500"></i>
             </div>
-            <h3 class="text-xl font-bold text-gray-800 dark:text-white mb-3">
-              Estilo Visual Único
-            </h3>
+            <h3 class="text-xl font-bold text-gray-800 dark:text-white mb-3">Rigs R6 y R15</h3>
             <p class="text-gray-600 dark:text-gray-400 text-sm leading-relaxed">
-              Desde el estilo 'voxel' vibrante hasta texturas pintadas a mano que destacan en la Discover Page.
+              Personajes y armaduras riggeados profesionalmente, sin deformaciones extrañas al animar.
             </p>
           </div>
 
+          <div class="bg-white dark:bg-warm-dark-card p-8 rounded-2xl border border-gray-100 dark:border-gray-700 shadow-lg hover:shadow-xl hover:-translate-y-1 transition-all group">
+            <div class="w-14 h-14 rounded-xl bg-purple-100 dark:bg-purple-900/30 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+              <i class="ri-paint-brush-line text-3xl text-purple-600 dark:text-purple-500"></i>
+            </div>
+            <h3 class="text-xl font-bold text-gray-800 dark:text-white mb-3">Estilo Visual Único</h3>
+            <p class="text-gray-600 dark:text-gray-400 text-sm leading-relaxed">
+              Desde 'voxel' vibrante hasta texturas hand-painted que destacan en la Discover Page de Roblox.
+            </p>
+          </div>
         </div>
       </div>
 
-      <div class="mb-20">
-        <h2 class="text-3xl font-bold text-gray-800 dark:text-white mb-8">
-          ¿Por qué elegirnos?
-        </h2>
-        <div class="space-y-6">
-          
-          <div class="flex gap-4">
-            <div class="w-8 h-8 flex items-center justify-center flex-shrink-0">
-              <i class="ri-flashlight-line text-2xl text-orange-500"></i>
+      <div class="bg-gray-50 dark:bg-gray-900/50 rounded-3xl p-8 md:p-12 mb-20 border border-gray-200 dark:border-gray-800">
+        <h2 class="text-3xl font-bold text-gray-800 dark:text-white mb-8 text-center">La diferencia Enrique 3D</h2>
+        
+        <div class="grid md:grid-cols-2 gap-8">
+            <div class="flex gap-4 items-start">
+                <i class="ri-flashlight-fill text-2xl text-yellow-500 mt-1"></i>
+                <div>
+                    <h4 class="font-bold text-gray-900 dark:text-white text-lg">Rendimiento Extremo</h4>
+                    <p class="text-sm text-gray-600 dark:text-gray-400">Sabemos que Roblox tiene límites de memoria. Optimizamos cada vértice.</p>
+                </div>
             </div>
-            <div>
-              <h3 class="text-lg font-bold text-gray-800 dark:text-white mb-2">
-                Rendimiento Garantizado
-              </h3>
-              <p class="text-gray-600 dark:text-gray-400 text-sm">
-                Sabemos que Roblox tiene límites de memoria. Nuestros activos están optimizados al máximo para evitar caídas de FPS.
-              </p>
+            <div class="flex gap-4 items-start">
+                <i class="ri-drag-drop-line text-2xl text-blue-500 mt-1"></i>
+                <div>
+                    <h4 class="font-bold text-gray-900 dark:text-white text-lg">Drag & Drop</h4>
+                    <p class="text-sm text-gray-600 dark:text-gray-400">Archivos .RBXM configurados para importar y usar al instante.</p>
+                </div>
             </div>
-          </div>
-
-          <div class="flex gap-4">
-            <div class="w-8 h-8 flex items-center justify-center flex-shrink-0">
-              <i class="ri-drag-drop-line text-2xl text-orange-500"></i>
+            <div class="flex gap-4 items-start">
+                <i class="ri-gamepad-fill text-2xl text-purple-500 mt-1"></i>
+                <div>
+                    <h4 class="font-bold text-gray-900 dark:text-white text-lg">Hitbox & Gameplay</h4>
+                    <p class="text-sm text-gray-600 dark:text-gray-400">Diseñamos pensando en la jugabilidad, no solo en la estética.</p>
+                </div>
             </div>
-            <div>
-              <h3 class="text-lg font-bold text-gray-800 dark:text-white mb-2">
-                Importación Sencilla
-              </h3>
-              <p class="text-gray-600 dark:text-gray-400 text-sm">
-                Archivos .RBXM .FBX configurados correctamente para que solo tengas que importar al Studio y usar.
-              </p>
+            <div class="flex gap-4 items-start">
+                <i class="ri-shield-check-fill text-2xl text-green-500 mt-1"></i>
+                <div>
+                    <h4 class="font-bold text-gray-900 dark:text-white text-lg">Garantía de Calidad</h4>
+                    <p class="text-sm text-gray-600 dark:text-gray-400">Soporte post-compra si encuentras algún fallo técnico.</p>
+                </div>
             </div>
-          </div>
-
-          <div class="flex gap-4">
-            <div class="w-8 h-8 flex items-center justify-center flex-shrink-0">
-              <i class="ri-gamepad-line text-2xl text-orange-500"></i>
-            </div>
-            <div>
-              <h3 class="text-lg font-bold text-gray-800 dark:text-white mb-2">
-                Pensado para Gameplay
-              </h3>
-              <p class="text-gray-600 dark:text-gray-400 text-sm">
-                Diseñamos hitbox coherentes y proporciones adecuadas para que la experiencia de juego sea fluida.
-              </p>
-            </div>
-          </div>
-
         </div>
       </div>
 
-      <div class="mb-12 pt-8 border-t border-gray-200 dark:border-gray-800">
+      <div class="mb-12 pt-8 border-t border-gray-200 dark:border-gray-800 opacity-60 hover:opacity-100 transition-opacity">
         <p class="text-xs text-gray-400 dark:text-gray-500 text-center leading-relaxed">
           Enrique 3D es una tienda independiente de recursos y no está afiliada, asociada, autorizada, respaldada ni conectada oficialmente de ninguna manera con Roblox Corporation. El nombre "Roblox", así como los nombres, marcas e imágenes relacionados son marcas comerciales registradas de sus respectivos propietarios.
         </p>
       </div>
 
-      <div class="pt-4 text-center sm:text-left">
-        <a href="/" class="inline-flex items-center gap-2 text-sm text-gray-600 dark:text-gray-300 hover:text-orange-500 dark:hover:text-orange-400 transition-colors cursor-pointer group">
-          <i class="ri-arrow-left-line transition-transform group-hover:-translate-x-1"></i>
+      <div class="pt-4 text-center">
+        <a href="/" class="inline-flex items-center gap-2 px-6 py-3 bg-gray-900 dark:bg-white text-white dark:text-gray-900 font-bold rounded-full hover:scale-105 transition-transform">
+          <i class="ri-arrow-left-line"></i>
           Volver a la tienda
         </a>
       </div>
@@ -144,3 +164,14 @@ import Layout from '../layouts/Layout.astro';
     </div>
   </main>
 </Layout>
+
+<style>
+    /* Pequeña animación para que el logo entre suave */
+    @keyframes scale-in-center {
+        0% { transform: scale(0.8); opacity: 0; }
+        100% { transform: scale(1); opacity: 1; }
+    }
+    .animate-scale-in {
+        animation: scale-in-center 0.6s ease-out both;
+    }
+</style>

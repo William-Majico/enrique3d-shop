@@ -5,78 +5,113 @@ import Layout from "../layouts/Layout.astro";
 import products from "../data/products.json";
 ---
 
-<Layout>
-  <section class="pt-24 md:pt-32 pb-16 md:pb-24 px-4 md:px-8">
-    <div class="max-w-4xl mx-auto text-center">
-      <h1
-        class="text-4xl md:text-6xl font-bold text-gray-800 dark:text-white mb-4 md:mb-6 tracking-tight"
-      >
-        Assets 3D para Roblox Studio
+<Layout title="Enrique 3D | Assets Profesionales para Roblox">
+  
+  <div class="fixed inset-0 -z-10 pointer-events-none bg-warm-cream dark:bg-[#0f1117]">
+    <div class="absolute inset-0" style="background-image: radial-gradient(circle at 1px 1px, rgba(128, 128, 128, 0.1) 1px, transparent 0); background-size: 40px 40px;"></div>
+  </div>
+
+  <section class="pt-40 pb-20 px-6">
+    <div class="max-w-5xl mx-auto text-center">
+      
+      <h1 class="text-5xl md:text-7xl font-bold text-gray-900 dark:text-white mb-6 tracking-tight leading-tight">
+        Assets de alto rendimiento <br />
+        para <span class="text-orange-500">Roblox Studio.</span>
       </h1>
-      <p
-        class="text-base md:text-lg text-gray-500 dark:text-gray-400 max-w-2xl mx-auto"
-      >
-        Modelos optimizados y listos para usar. Ahorra tiempo de desarrollo y
-        mejora la calidad de tus juegos.
+      
+      <p class="text-lg md:text-xl text-gray-600 dark:text-gray-400 max-w-2xl mx-auto mb-10 leading-relaxed font-light">
+        Optimización técnica y calidad visual unidas. Modelos, rigs y scripts listos para producción.
       </p>
+
+      <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+        <a href="#catalogo" class="px-8 py-3 bg-gray-900 dark:bg-white text-white dark:text-gray-900 font-bold rounded-lg hover:bg-orange-600 dark:hover:bg-gray-200 transition-colors shadow-lg shadow-gray-200/50 dark:shadow-none">
+          Ver Catálogo
+        </a>
+        <a href="contact" class="px-8 py-3 bg-transparent border border-gray-300 dark:border-gray-700 text-gray-700 dark:text-gray-300 font-medium rounded-lg hover:border-gray-800 dark:hover:border-white transition-colors">
+          Cotizar Encargo
+        </a>
+      </div>
+
     </div>
   </section>
 
-  <section class="px-4 md:px-8 py-12 md:py-16 min-h-[500px]">
+  <section id="catalogo" class="px-4 md:px-8 py-12 min-h-[600px] border-t border-gray-200 dark:border-gray-800 bg-white/50 dark:bg-[#0f1117]/50 backdrop-blur-sm">
     <div class="max-w-7xl mx-auto">
-      <h2
-        class="text-2xl md:text-3xl font-bold text-gray-800 dark:text-white mb-8 md:mb-12 text-center"
-      >
-        Modelos Disponibles
-      </h2>
+      
+      <div class="flex flex-col md:flex-row md:items-center justify-between gap-6 mb-10">
+        <div>
+          <h2 class="text-2xl font-bold text-gray-900 dark:text-white">Explorar Assets</h2>
+          <p class="text-sm text-gray-500 dark:text-gray-400 mt-1">Mostrando {products.length} productos optimizados</p>
+        </div>
+
+        <div class="relative w-full md:w-80 group">
+            <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                <i class="ri-search-line text-gray-400 group-focus-within:text-orange-500 transition-colors"></i>
+            </div>
+            <input 
+                type="text" 
+                class="search-input w-full pl-10 pr-4 py-2.5 bg-white dark:bg-gray-900 border border-gray-300 dark:border-gray-700 rounded-lg text-sm text-gray-900 dark:text-white placeholder-gray-500 focus:outline-none focus:border-orange-500 focus:ring-1 focus:ring-orange-500 transition-all"
+                placeholder="Buscar por nombre..."
+            />
+        </div>
+      </div>
 
       <div
         id="products-grid"
-        class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-6 mb-24 transition-all"
+        class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 mb-20"
       >
         {
           products.map((product) => (
             <a
               href={`/producto/${product.id}`}
-              class="product-item group cursor-pointer transition-transform hover:-translate-y-1 duration-200 block"
+              class="product-item group block bg-white dark:bg-[#1a1d26] border border-gray-200 dark:border-gray-800 rounded-xl overflow-hidden hover:border-orange-500/50 dark:hover:border-orange-500/50 transition-all duration-300"
               data-title={product.title.toLowerCase()}
             >
-              <div class="relative w-full aspect-square mb-4 overflow-hidden rounded-xl bg-gray-50 dark:bg-gray-800">
-                {/* Etiqueta de Oferta en el Grid */}
+              <div class="relative w-full aspect-[4/3] overflow-hidden bg-gray-100 dark:bg-gray-800 border-b border-gray-100 dark:border-gray-800">
+                
+                {/* --- AQUI ESTÁ LA CORRECCIÓN: LOGICA DINÁMICA --- */}
                 {product.onSale && (
-                  <span
-                    class={`absolute top-2 left-2 z-10 
-      ${product.badge?.bgColor || "bg-orange-500"} 
-      ${product.badge?.textColor || "text-white"} 
-      text-[10.5px] font-bold px-2 py-1 rounded shadow-md`}
-                  >
+                  <span class={`absolute top-3 right-3 z-10 
+                    ${product.badge?.bgColor || "bg-orange-600"} 
+                    ${product.badge?.textColor || "text-white"} 
+                    text-[10px] font-bold px-2 py-1 rounded uppercase tracking-wider`}>
                     {product.badge?.text || "OFERTA"}
                   </span>
                 )}
-
+                
                 <img
                   alt={product.title}
-                  class="w-full h-full object-cover object-center"
+                  class="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500 ease-out"
                   src={product.images[0]}
+                  loading="lazy"
                 />
               </div>
-              <div class="space-y-1">
-                <h3 class="text-base font-semibold text-gray-800 dark:text-white group-hover:text-orange-500 transition-colors">
+
+              <div class="p-5">
+                <h3 class="text-base font-bold text-gray-900 dark:text-white mb-1 group-hover:text-orange-500 transition-colors truncate">
                   {product.title}
                 </h3>
-
-                <div class="flex items-center gap-2">
-                  {/* Precio Actual */}
-                  <p class="text-base font-bold text-gray-800 dark:text-white">
-                    ${product.price} USD
-                  </p>
-
-                  {/* Precio Tachado (Solo aparece si onSale es true) */}
-                  {product.onSale && (
-                    <p class="text-sm text-gray-500 dark:text-gray-400 line-through">
-                      ${product.oldPrice}
-                    </p>
-                  )}
+                
+                <div class="flex items-center justify-between mt-4">
+                  <div class="flex flex-col">
+                    <span class="text-[10px] text-gray-400 uppercase font-semibold">Precio USD</span>
+                    <div class="flex items-baseline gap-2">
+                        <span class="text-lg font-bold text-gray-900 dark:text-white">
+                          ${product.price}
+                        </span>
+                        
+                        {/* Precio Tachado Dinámico */}
+                        {product.onSale && (
+                          <span class="text-xs text-gray-400 line-through">
+                            ${product.oldPrice}
+                          </span>
+                        )}
+                    </div>
+                  </div>
+                  
+                  <div class="w-8 h-8 flex items-center justify-center rounded bg-gray-100 dark:bg-gray-800 text-gray-400 group-hover:bg-orange-500 group-hover:text-white transition-colors">
+                    <i class="ri-arrow-right-line"></i>
+                  </div>
                 </div>
               </div>
             </a>
@@ -86,70 +121,26 @@ import products from "../data/products.json";
 
       <div
         id="no-results"
-        class="hidden flex-col items-center justify-center text-center py-12"
+        class="hidden flex-col items-center justify-center text-center py-24 border-2 border-dashed border-gray-200 dark:border-gray-800 rounded-xl"
       >
-        <div
-          class="w-16 h-16 bg-gray-100 dark:bg-gray-800 rounded-full flex items-center justify-center mb-4"
-        >
-          <i class="ri-search-2-line text-2xl text-gray-400"></i>
-        </div>
-        <h3 class="text-lg font-bold text-gray-800 dark:text-white">
-          Sin resultados
+        <i class="ri-file-search-line text-4xl text-gray-300 dark:text-gray-600 mb-4"></i>
+        <h3 class="text-lg font-medium text-gray-900 dark:text-white">
+          Sin coincidencias
         </h3>
-        <p class="text-gray-500 dark:text-gray-400">
-          No encontramos ningún producto con ese nombre.
+        <p class="text-sm text-gray-500 dark:text-gray-400 mt-1">
+          No encontramos productos con ese término.
+        </p>
+        <button onclick="document.querySelector('.search-input').value = ''; document.querySelector('.search-input').dispatchEvent(new Event('input'));" class="mt-4 text-sm text-orange-500 font-medium hover:underline cursor-pointer">
+            Ver todo
+        </button>
+      </div>
+
+      <div id="end-message" class="text-center py-12 border-t border-gray-100 dark:border-gray-800/50 mt-8">
+        <p class="text-sm text-gray-400 dark:text-gray-500">
+            Has llegado al final del catálogo
         </p>
       </div>
 
-      <div id="end-message" class="relative py-12">
-        <div class="absolute inset-0 flex items-center" aria-hidden="true">
-          <div class="w-full border-t border-gray-200 dark:border-gray-800">
-          </div>
-        </div>
-        <div class="relative flex justify-center">
-          <div
-            class="flex flex-col items-center bg-warm-cream dark:bg-warm-dark-bg px-6 py-2"
-          >
-            <div class="group mb-6">
-              <div
-                class="w-16 h-16 bg-white dark:bg-green-900/20 rounded-2xl flex items-center justify-center border border-gray-200 dark:border-green-900/30 shadow-sm group-hover:scale-110 transition-transform duration-300"
-              >
-                <div
-                  class="w-8 h-8 rounded-full flex items-center justify-center shadow-sm bg-green-100 dark:bg-green-500 transition-colors"
-                >
-                  <i
-                    class="ri-check-line text-gray-600 dark:text-gray-400 group-hover:text-orange-700 transition-colors"
-                  ></i>
-                </div>
-              </div>
-            </div>
-            <h3
-              class="text-xl font-bold text-gray-900 dark:text-white mb-2 tracking-tight"
-            >
-              ¡Has visto todos los productos!
-            </h3>
-            <p
-              class="text-gray-500 dark:text-gray-400 text-sm md:text-base max-w-sm text-center mb-8 leading-relaxed"
-            >
-              Ya exploraste todo nuestro catálogo disponible por ahora. Vuelve
-              pronto para ver más novedades.
-            </p>
-            <button
-              onclick="window.scrollTo({top: 0, behavior: 'smooth'})"
-              class="group relative flex items-center gap-3 px-8 py-3 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-full text-gray-700 dark:text-white font-medium shadow-sm hover:shadow-lg hover:border-orange-200 dark:hover:border-orange-900/50 hover:-translate-y-1 transition-all duration-300 cursor-pointer"
-            >
-              <span
-                class="w-8 h-8 rounded-full bg-gray-50 dark:bg-gray-700 flex items-center justify-center group-hover:bg-orange-50 dark:group-hover:bg-orange-900/30 transition-colors"
-              >
-                <i
-                  class="ri-arrow-up-line text-gray-600 dark:text-gray-300 group-hover:text-orange-500 transition-colors"
-                ></i>
-              </span>
-              <span>Volver al inicio</span>
-            </button>
-          </div>
-        </div>
-      </div>
     </div>
   </section>
 </Layout>
@@ -161,12 +152,11 @@ import products from "../data/products.json";
   const endMessage = document.getElementById("end-message");
 
   const filterProducts = (searchTerm) => {
-    const term = searchTerm.toLowerCase();
+    const term = searchTerm.toLowerCase().trim();
     let visibleCount = 0;
 
     productItems.forEach((item) => {
       const title = item.getAttribute("data-title");
-
       if (title.includes(term)) {
         item.classList.remove("hidden");
         visibleCount++;
@@ -192,44 +182,10 @@ import products from "../data/products.json";
 
   searchInputs.forEach((input) => {
     input.addEventListener("input", (e) => {
-      searchInputs.forEach((i) => (i.value = e.target.value));
+      searchInputs.forEach((i) => {
+          if (i !== e.target) i.value = e.target.value;
+      });
       filterProducts(e.target.value);
     });
   });
-</script>
-
-<script is:inline>
-  // Esta función se encarga de hablar con tu backend y pedir el link de Wompi
-  // --- FUNCIÓN DE COMPRA (Pégalo al final de tu script existente) ---
-  window.comprar = async (nombre, precio, btn) => {
-    const textoOriginal = btn.innerText;
-    btn.innerText = "Cargando...";
-    btn.disabled = true;
-
-    try {
-      const respuesta = await fetch("/api/crear-pago", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          nombreProducto: nombre,
-          precio: parseFloat(precio),
-        }),
-      });
-
-      const datos = await respuesta.json();
-
-      if (datos.url) {
-        window.location.href = datos.url;
-      } else {
-        alert("Error: " + (datos.error || "No se pudo generar el pago"));
-        btn.innerText = textoOriginal;
-        btn.disabled = false;
-      }
-    } catch (error) {
-      console.error(error);
-      alert("Ocurrió un error inesperado");
-      btn.innerText = textoOriginal;
-      btn.disabled = false;
-    }
-  };
 </script>

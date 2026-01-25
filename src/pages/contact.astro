@@ -2,170 +2,277 @@
 import Layout from '../layouts/Layout.astro';
 ---
 
-<Layout title="Comisiones y Contacto">
+<Layout title="Comisiones y Contacto | Enrique3D">
+  <div class="fixed inset-0 -z-10 pointer-events-none">
+    <div class="absolute top-0 left-1/2 -translate-x-1/2 w-full h-[500px] bg-gradient-to-b from-orange-500/10 via-indigo-500/5 to-transparent blur-3xl dark:from-orange-500/20 dark:via-indigo-900/10"></div>
+  </div>
+
   <main class="pt-32 pb-20 px-6">
     <div class="max-w-6xl mx-auto">
       
-      <div class="text-center mb-16">
-        <h1 class="text-4xl md:text-5xl font-bold text-gray-800 dark:text-white mb-4 tracking-tight">
-          ¿Necesitas algo único?
+      <div class="text-center mb-16 relative">
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-400 text-xs font-bold uppercase tracking-wider mb-4 border border-green-200 dark:border-green-800 animate-pulse">
+          <span class="w-2 h-2 rounded-full bg-green-500"></span>
+          Comisiones Abiertas
+        </div>
+
+        <h1 class="text-4xl md:text-6xl font-extrabold text-gray-800 dark:text-white mb-6 tracking-tight">
+          ¿Tienes una idea? <br/>
+          <span class="text-transparent bg-clip-text bg-gradient-to-r from-orange-500 to-red-600">Hagámosla Realidad.</span>
         </h1>
-        <p class="text-lg text-gray-500 dark:text-gray-400 max-w-2xl mx-auto">
-          Trabajemos juntos para crear el activo perfecto para tu juego de Roblox. 
-          Cuéntame tu idea y la haremos realidad.
+        <p class="text-lg md:text-xl text-gray-600 dark:text-gray-300 max-w-2xl mx-auto leading-relaxed">
+          Desde un simple 'prop' hasta sistemas completos de scripting. 
+          Dime qué necesita tu juego y yo me encargo de la técnica.
         </p>
       </div>
 
-      <div class="grid lg:grid-cols-2 gap-12 items-start">
+      <div class="grid lg:grid-cols-12 gap-8 lg:gap-12 items-start">
         
-        <div class="space-y-8">
+        <div class="lg:col-span-5 space-y-6">
           
-          <div class="bg-indigo-50 dark:bg-indigo-900/20 p-8 rounded-2xl border border-indigo-100 dark:border-indigo-900/20">
-            <h3 class="text-2xl font-bold text-gray-800 dark:text-white mb-6">
-              <i class="ri-discord-fill text-2xl"></i>
-              Vía Rápida: Discord
-            </h3>
-            <p class="text-indigo-700 dark:text-gray-300 mb-6 text-sm leading-relaxed">
-              La forma más rápida de cotizar es abriendo un ticket en mi servidor. Hablemos en tiempo real.
-            </p>
-            <a 
-              href="https://discord.gg/VdjfVeRm" 
-              target="_blank" 
-              class="inline-flex items-center justify-center gap-2 px-6 py-3 bg-indigo-600 hover:bg-indigo-700 text-white font-semibold rounded-xl transition-all shadow-lg w-full sm:w-auto"
-            >
-              Unirme al Servidor
-            </a>
+          <div class="group relative overflow-hidden bg-[#5865F2] p-8 rounded-2xl shadow-xl transition-transform hover:-translate-y-1">
+            <div class="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity pointer-events-none">
+              <i class="ri-discord-fill text-9xl text-white"></i>
+            </div>
+            
+            <div class="relative z-10 text-white">
+              <h3 class="text-2xl font-bold mb-2 flex items-center gap-2">
+                <i class="ri-discord-fill"></i> Vía Rápida
+              </h3>
+              <p class="text-indigo-100 mb-6 text-sm leading-relaxed">
+                ¿Prefieres un chat fluido? Únete a mi servidor y abre un ticket para cotizar en tiempo real.
+              </p>
+              <a 
+                href="https://discord.gg/EbEtTsyrC5" 
+                target="_blank" 
+                class="inline-flex items-center justify-center gap-2 px-6 py-3 bg-white text-[#5865F2] font-bold rounded-xl hover:bg-indigo-50 transition-all shadow-md w-full"
+              >
+                Unirme al Discord
+              </a>
+            </div>
           </div>
 
-          <div>
-            <h3 class="text-2xl font-bold text-gray-800 dark:text-white mb-6">
-              ¿Por qué encargar una comisión?
+          <div class="bg-white/80 dark:bg-gray-800/80 backdrop-blur-md p-8 rounded-2xl border border-gray-200 dark:border-gray-700 shadow-lg">
+            <h3 class="text-xl font-bold text-gray-800 dark:text-white mb-6 border-b border-gray-100 dark:border-gray-700 pb-4">
+              ¿Qué incluye mi servicio?
             </h3>
             <ul class="space-y-6">
-              <li class="flex gap-4">
-                <div class="w-12 h-12 rounded-full bg-orange-100 dark:bg-orange-900/20 flex items-center justify-center flex-shrink-0 text-orange-600 dark:text-orange-500">
-                  <i class="ri-ruler-2-line text-xl"></i>
+              <li class="flex gap-4 items-start">
+                <div class="w-12 h-12 rounded-xl bg-orange-100 dark:bg-orange-900/40 flex items-center justify-center flex-shrink-0 border border-orange-200 dark:border-orange-800">
+                  <i class="ri-box-3-line text-2xl text-orange-600 dark:text-orange-400"></i>
                 </div>
                 <div>
-                  <h4 class="font-bold text-gray-800 dark:text-white">A tu medida</h4>
-                  <p class="text-sm text-gray-600 dark:text-gray-400 mt-1">
-                    Diseñado específicamente para encajar con el estilo y necesidades de tu juego.
-                  </p>
+                  <h4 class="font-bold text-gray-800 dark:text-white text-sm">Modelado Low-Poly</h4>
+                  <p class="text-xs text-gray-500 dark:text-gray-400 mt-1">Optimizado para cero lag en Roblox.</p>
                 </div>
               </li>
-              <li class="flex gap-4">
-                <div class="w-12 h-12 rounded-full bg-orange-100 dark:bg-orange-900/20 flex items-center justify-center flex-shrink-0 text-orange-600 dark:text-orange-500">
-                  <i class="ri-speed-line text-xl"></i>
+              <li class="flex gap-4 items-start">
+                <div class="w-12 h-12 rounded-xl bg-blue-100 dark:bg-blue-900/40 flex items-center justify-center flex-shrink-0 border border-blue-200 dark:border-blue-800">
+                   <i class="ri-code-s-slash-line text-2xl text-blue-600 dark:text-blue-400"></i>
                 </div>
                 <div>
-                  <h4 class="font-bold text-gray-800 dark:text-white">Optimización Extrema</h4>
-                  <p class="text-sm text-gray-600 dark:text-gray-400 mt-1">
-                    Garantizo topología limpia y bajo poly-count para cero lag.
-                  </p>
+                  <h4 class="font-bold text-gray-800 dark:text-white text-sm">Scripting Lua</h4>
+                  <p class="text-xs text-gray-500 dark:text-gray-400 mt-1">Sistemas funcionales, UI y mecánicas.</p>
                 </div>
               </li>
-              <li class="flex gap-4">
-                <div class="w-12 h-12 rounded-full bg-orange-100 dark:bg-orange-900/20 flex items-center justify-center flex-shrink-0 text-orange-600 dark:text-orange-500">
-                  <i class="ri-lock-2-line text-xl"></i>
+              <li class="flex gap-4 items-start">
+                <div class="w-12 h-12 rounded-xl bg-purple-100 dark:bg-purple-900/40 flex items-center justify-center flex-shrink-0 border border-purple-200 dark:border-purple-800">
+                  <i class="ri-file-zip-line text-2xl text-purple-600 dark:text-purple-400"></i>
                 </div>
                 <div>
-                  <h4 class="font-bold text-gray-800 dark:text-white">Derechos Exclusivos</h4>
-                  <p class="text-sm text-gray-600 dark:text-gray-400 mt-1">
-                    El modelo será 100% tuyo. No lo venderé en la tienda pública.
-                  </p>
+                  <h4 class="font-bold text-gray-800 dark:text-white text-sm">Entrega Lista (.RBXM)</h4>
+                  <p class="text-xs text-gray-500 dark:text-gray-400 mt-1">Archivos listos para arrastrar al Studio.</p>
                 </div>
               </li>
             </ul>
           </div>
-
         </div>
 
-        <div class="bg-white dark:bg-warm-dark-card p-8 md:p-10 rounded-xl shadow-xl border border-gray-100 dark:border-gray-700">
-          <h3 class="text-2xl font-bold text-gray-800 dark:text-white mb-6">
-            Cotiza tu proyecto
-          </h3>
-          
-          <form action="https://formspree.io/f/mbdranbr" method="POST" class="space-y-5">
-            
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
-              <div class="space-y-2">
-                <label for="name" class="text-sm font-medium text-gray-700 dark:text-gray-300">Tu Nombre</label>
-                <input 
-                  type="text" 
-                  id="name" 
-                  name="name" 
-                  required
-                  placeholder="Ej. Juan Pérez"
-                  class="w-full px-4 py-3 rounded-xl bg-gray-50 dark:bg-warm-dark-bg border border-gray-200 dark:border-gray-700 text-gray-800 dark:text-white focus:outline-none focus:ring-2 focus:ring-orange-500 transition-all placeholder:text-gray-400"
-                />
-              </div>
-              <div class="space-y-2">
-                <label for="discord" class="text-sm font-medium text-gray-700 dark:text-gray-300">Usuario de Discord</label>
-                <input 
-                  type="text" 
-                  id="discord" 
-                  name="discord" 
-                  required
-                  placeholder="Ej. usuario#1234"
-                  class="w-full px-4 py-3 rounded-xl bg-gray-50 dark:bg-warm-dark-bg border border-gray-200 dark:border-gray-700 text-gray-800 dark:text-white focus:outline-none focus:ring-2 focus:ring-indigo-600 transition-all placeholder:text-gray-400"
-                />
-              </div>
-            </div>
+        <div class="lg:col-span-7">
+          <div class="bg-white dark:bg-gray-800 p-8 md:p-10 rounded-3xl shadow-2xl border border-gray-100 dark:border-gray-700 relative overflow-hidden">
+            <div class="absolute top-0 right-0 w-32 h-32 bg-orange-500/10 rounded-bl-full pointer-events-none"></div>
 
-            <div class="space-y-2">
-              <label for="type" class="text-sm font-medium text-gray-700 dark:text-gray-300">Tipo de Encargo</label>
-              <select 
-                id="type" 
-                name="type" 
-                class="w-full px-4 py-3 rounded-xl bg-gray-50 dark:bg-warm-dark-bg border border-gray-200 dark:border-gray-700 text-gray-800 dark:text-white focus:outline-none focus:ring-2 focus:ring-orange-500 transition-all cursor-pointer"
-              >
-                <option>Modelado de Personaje (NPC/Avatar)</option>
-                <option>Armaduras / Ropa 3D</option>
-                <option>Armas / Herramientas</option>
-                <option>Assets de Mapa / Props</option>
-                <option>Otro</option>
-              </select>
-            </div>
-
-            <div class="space-y-2">
-              <label for="budget" class="text-sm font-medium text-gray-700 dark:text-gray-300">Presupuesto Estimado (USD)</label>
-              <input 
-                type="text" 
-                id="budget" 
-                name="budget" 
-                placeholder="Ej. $50 - $100"
-                class="w-full px-4 py-3 rounded-xl bg-gray-50 dark:bg-warm-dark-bg border border-gray-200 dark:border-gray-700 text-gray-800 dark:text-white focus:outline-none focus:ring-2 focus:ring-orange-500 transition-all placeholder:text-gray-400"
-              />
-            </div>
-
-            <div class="space-y-2">
-              <label for="message" class="text-sm font-medium text-gray-700 dark:text-gray-300">Detalles de la idea</label>
-              <textarea 
-                id="message" 
-                name="message" 
-                rows="4" 
-                required
-                placeholder="Describe lo que necesitas..."
-                class="w-full px-4 py-3 rounded-xl bg-gray-50 dark:bg-warm-dark-bg border border-gray-200 dark:border-gray-700 text-gray-800 dark:text-white focus:outline-none focus:ring-2 focus:ring-orange-500 transition-all resize-none placeholder:text-gray-400"
-              ></textarea>
-            </div>
-
-            <button 
-              type="submit" 
-              class="w-full py-4 bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white font-bold rounded-xl transition-all duration-300 shadow-lg flex items-center justify-center gap-2 group"
-            >
-              <span>Enviar Solicitud</span>
-              <i class="ri-send-plane-fill group-hover:translate-x-1 transition-transform"></i>
-            </button>
-            
-            <p class="text-xs text-center text-gray-400 mt-4">
-              Responderé en un plazo máximo de 24 horas vía Discord o Email.
+            <h3 class="text-2xl font-bold text-gray-800 dark:text-white mb-2 relative z-10">
+              Cotiza tu encargo
+            </h3>
+            <p class="text-gray-500 dark:text-gray-400 text-sm mb-8 relative z-10">
+                Llena los datos clave y recibe un precio estimado en tu correo.
             </p>
+            
+            <div id="form-success" class="hidden mb-6 p-5 bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800 rounded-xl flex items-start gap-4 animate-bounce-in shadow-sm">
+              <div class="bg-green-100 dark:bg-green-800 rounded-full p-2 text-green-600 dark:text-green-200">
+                  <i class="ri-checkbox-circle-fill text-2xl"></i>
+              </div>
+              <div>
+                <h4 class="font-bold text-green-800 dark:text-green-200 text-base mb-1">¡Gracias por tu confianza!</h4>
+                <p class="text-sm text-green-700 dark:text-green-300 leading-relaxed">
+                    He recibido tu idea con éxito. La revisaré detalladamente y te enviaré una propuesta a tu correo en menos de 24 horas.
+                </p>
+              </div>
+            </div>
 
-          </form>
+            <div id="form-error" class="hidden mb-6 p-4 bg-red-100 dark:bg-red-900/30 border border-red-200 dark:border-red-800 rounded-xl items-center gap-3">
+              <i class="ri-error-warning-fill text-2xl text-red-500"></i>
+              <div>
+                <h4 class="font-bold text-red-800 dark:text-red-200 text-sm">Hubo un error al enviar</h4>
+                <p class="text-xs text-red-700 dark:text-red-300">Es posible que los archivos sean muy pesados (Max 10MB total). Intenta enviar solo texto o contáctame por Discord.</p>
+              </div>
+            </div>
+            
+            <form id="contact-form" action="https://formspree.io/f/mbdgvnea" method="POST" enctype="multipart/form-data" class="space-y-6 relative z-10">
+              
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                <div class="space-y-2">
+                  <label for="name" class="text-xs font-bold uppercase tracking-wide text-gray-500 dark:text-gray-400">Tu Nombre / Nick</label>
+                  <div class="relative">
+                    <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-gray-400">
+                      <i class="ri-user-smile-line text-lg"></i>
+                    </div>
+                    <input type="text" id="name" name="name" required placeholder="Ej. EnriqueDev" class="w-full pl-10 pr-4 py-3 rounded-xl bg-gray-50 dark:bg-gray-900/50 border border-gray-200 dark:border-gray-700 text-gray-800 dark:text-white focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-all placeholder:text-gray-400" />
+                  </div>
+                </div>
+
+                <div class="space-y-2">
+                  <label for="email" class="text-xs font-bold uppercase tracking-wide text-gray-500 dark:text-gray-400">Tu Correo (Importante)</label>
+                  <div class="relative">
+                    <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-gray-400">
+                      <i class="ri-mail-line text-lg"></i>
+                    </div>
+                    <input type="email" id="email" name="email" required placeholder="correo@ejemplo.com" class="w-full pl-10 pr-4 py-3 rounded-xl bg-gray-50 dark:bg-gray-900/50 border border-gray-200 dark:border-gray-700 text-gray-800 dark:text-white focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all placeholder:text-gray-400" />
+                  </div>
+                </div>
+              </div>
+
+              <div class="grid grid-cols-3 gap-6">
+                <div class="col-span-2 space-y-2">
+                    <label for="type" class="text-xs font-bold uppercase tracking-wide text-gray-500 dark:text-gray-400">¿Qué necesitas?</label>
+                    <div class="relative">
+                    <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-gray-400">
+                        <i class="ri-gamepad-line text-lg"></i>
+                    </div>
+                    <select id="type" name="type" class="w-full pl-10 pr-10 py-3 rounded-xl bg-gray-50 dark:bg-gray-900/50 border border-gray-200 dark:border-gray-700 text-gray-800 dark:text-white focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-all cursor-pointer appearance-none">
+                        <option>Personaje 3D</option>
+                        <option>Mapas / Environment (Builder)</option>
+                        <option>Tools / Armas / Accesorios</option>
+                        <option>Scripting / Programación (.lua)</option>
+                        <option>Animaciónes / 3D - (R6 / R15)</option>
+                        <option>UI / Interfaz de Usuario</option>
+                    </select>
+                    <div class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none text-gray-400">
+                        <i class="ri-arrow-down-s-line"></i>
+                    </div>
+                    </div>
+                </div>
+
+                <div class="col-span-1 space-y-2">
+                    <label for="quantity" class="text-xs font-bold uppercase tracking-wide text-gray-500 dark:text-gray-400">Cantidad</label>
+                    <input type="number" id="quantity" name="quantity" min="1" value="1" class="w-full px-4 py-3 rounded-xl bg-gray-50 dark:bg-gray-900/50 border border-gray-200 dark:border-gray-700 text-gray-800 dark:text-white focus:outline-none focus:ring-2 focus:ring-orange-500 text-center" />
+                </div>
+              </div>
+
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                <div class="space-y-2">
+                    <label for="budget" class="text-xs font-bold uppercase tracking-wide text-gray-500 dark:text-gray-400">Presupuesto ($ USD)</label>
+                    <div class="relative">
+                      <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-gray-400">
+                        <i class="ri-money-dollar-circle-line text-lg"></i>
+                      </div>
+                      <input type="number" id="budget" name="budget" placeholder="50" min="1" class="w-full pl-10 pr-4 py-3 rounded-xl bg-gray-50 dark:bg-gray-900/50 border border-gray-200 dark:border-gray-700 text-gray-800 dark:text-white focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent transition-all placeholder:text-gray-400" />
+                    </div>
+                </div>
+
+                <div class="space-y-2">
+                    <label for="attachment" class="text-xs font-bold uppercase tracking-wide text-gray-500 dark:text-gray-400">Referencias (Opcional)</label>
+                    <div class="relative">
+                        <input 
+                            type="file" 
+                            id="attachment" 
+                            name="attachment" 
+                            multiple 
+                            accept="image/*,.pdf,.doc,.zip" 
+                            class="w-full text-xs text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-xs file:font-semibold file:bg-orange-50 file:text-orange-700 hover:file:bg-orange-100 dark:file:bg-orange-900/20 dark:file:text-orange-400 cursor-pointer" 
+                        />
+                    </div>
+                </div>
+              </div>
+
+              <div class="space-y-2">
+                <label for="message" class="text-xs font-bold uppercase tracking-wide text-gray-500 dark:text-gray-400">Detalles clave</label>
+                <div class="relative">
+                  <textarea id="message" name="message" rows="4" required placeholder="Ej: Necesito una espada medieval low-poly con texturas realistas..." class="w-full p-4 rounded-xl bg-gray-50 dark:bg-gray-900/50 border border-gray-200 dark:border-gray-700 text-gray-800 dark:text-white focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-all resize-none placeholder:text-gray-400"></textarea>
+                </div>
+              </div>
+
+              <button id="submit-btn" type="submit" class="w-full py-4 bg-gradient-to-r from-orange-500 to-red-600 hover:from-orange-600 hover:to-red-700 text-white font-bold rounded-xl transition-all duration-300 shadow-lg hover:shadow-orange-500/30 flex items-center justify-center gap-2 group transform active:scale-[0.98]">
+                <span id="btn-text">Enviar Cotización</span>
+                <i id="btn-icon" class="ri-send-plane-fill group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform"></i>
+                <svg id="btn-spinner" class="animate-spin h-5 w-5 text-white hidden" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                  <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                  <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                </svg>
+              </button>
+            </form>
+          </div>
         </div>
-
       </div>
     </div>
   </main>
 </Layout>
+
+<script is:inline>
+  const form = document.getElementById('contact-form');
+  const submitBtn = document.getElementById('submit-btn');
+  const btnText = document.getElementById('btn-text');
+  const btnIcon = document.getElementById('btn-icon');
+  const btnSpinner = document.getElementById('btn-spinner');
+  const successMsg = document.getElementById('form-success');
+  const errorMsg = document.getElementById('form-error');
+
+  form.addEventListener('submit', async function(e) {
+    e.preventDefault();
+
+    // Feedback visual
+    submitBtn.disabled = true;
+    btnText.textContent = "Enviando..."; // Mensaje más genérico
+    btnIcon.classList.add('hidden');
+    btnSpinner.classList.remove('hidden');
+    successMsg.classList.add('hidden');
+    errorMsg.classList.add('hidden');
+
+    const formData = new FormData(form);
+
+    try {
+      const response = await fetch(form.action, {
+        method: form.method,
+        body: formData,
+        headers: {
+            'Accept': 'application/json'
+        }
+      });
+
+      if (response.ok) {
+        form.reset();
+        successMsg.classList.remove('hidden');
+        btnText.textContent = "¡Enviado!";
+        
+        successMsg.scrollIntoView({ behavior: 'smooth', block: 'center' });
+
+        setTimeout(() => {
+             submitBtn.disabled = false;
+             btnText.textContent = "Enviar Cotización";
+             btnIcon.classList.remove('hidden');
+             btnSpinner.classList.add('hidden');
+        }, 5000); // 5 segundos para que lean el mensaje bonito
+      } else {
+        throw new Error('Error al enviar');
+      }
+    } catch (error) {
+      errorMsg.classList.remove('hidden');
+      errorMsg.classList.add('flex');
+      submitBtn.disabled = false;
+      btnText.textContent = "Reintentar";
+      btnIcon.classList.remove('hidden');
+      btnSpinner.classList.add('hidden');
+    }
+  });
+</script>

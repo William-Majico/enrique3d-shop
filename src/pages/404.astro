@@ -3,46 +3,51 @@ import Layout from '../layouts/Layout.astro';
 ---
 
 <Layout title="404: Objeto no encontrado - Enrique 3D">
-  <main class="relative w-full min-h-[75vh] flex flex-col items-center justify-center overflow-hidden bg-warm-cream dark:bg-gray-900 transition-colors duration-300">
+  <main class="relative w-full min-h-[70vh] flex flex-col items-center justify-center overflow-hidden bg-warm-cream dark:bg-[#0f172a] transition-colors duration-300 py-12">
 
-    <div class="absolute inset-0 pointer-events-none perspective-container opacity-40 dark:opacity-20">
+    <div class="absolute inset-0 pointer-events-none perspective-container opacity-30 dark:opacity-20">
       <div class="grid-3d"></div>
     </div>
     
-    <div class="absolute inset-0 bg-gradient-to-t from-warm-cream via-transparent to-warm-cream dark:from-gray-900 dark:via-transparent dark:to-gray-900 pointer-events-none"></div>
+    <div class="absolute inset-0 bg-gradient-to-t from-warm-cream via-transparent to-warm-cream dark:from-[#0f172a] dark:via-transparent dark:to-[#0f172a] pointer-events-none"></div>
 
     <div class="relative z-10 flex flex-col items-center text-center px-4">
       
-      <div class="relative mb-6">
-        <h1 class="text-8xl md:text-9xl font-black text-gray-200 dark:text-gray-800 select-none transition-colors">
+      <div class="relative mb-2">
+        <h1 class="text-[8rem] md:text-[10rem] font-black text-transparent select-none transition-colors leading-none" 
+            style="-webkit-text-stroke: 2px rgba(156, 163, 175, 0.2);">
           404
         </h1>
         
-        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 animate-float">
+        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-[45%] animate-float">
            <div class="relative group">
-             <div class="absolute -bottom-6 left-1/2 -translate-x-1/2 w-16 h-4 bg-black/10 dark:bg-black/40 rounded-[100%] blur-sm animate-shadow-pulse"></div>
+             <div class="absolute -bottom-8 left-1/2 -translate-x-1/2 w-16 h-4 bg-black/10 dark:bg-black/50 rounded-[100%] blur-md animate-shadow-pulse"></div>
              
              <img 
-                src="/favicon.svg" 
-                alt="Enrique 3D Logo" 
-                class="w-20 h-20 md:w-24 md:h-24 object-contain transition-transform duration-300 group-hover:scale-110 cursor-help drop-shadow-[0_4px_10px_rgba(249,115,22,0.3)] dark:drop-shadow-[0_4px_10px_rgba(249,115,22,0.2)]"
+               src="/favicon.svg" 
+               alt="Enrique 3D Logo" 
+               class="w-20 h-20 md:w-28 md:h-28 object-contain transition-transform duration-300 group-hover:scale-110 group-hover:rotate-6 cursor-help drop-shadow-[0_10px_20px_rgba(249,115,22,0.2)]"
              />
              
-             <div class="absolute -top-2 -right-2 bg-white dark:bg-gray-700 text-gray-800 dark:text-white font-bold w-8 h-8 flex items-center justify-center rounded-full text-lg shadow-md border-2 border-orange-100 dark:border-gray-600">?</div>
+             <div class="absolute -top-2 -right-4 bg-white dark:bg-gray-800 text-orange-500 font-black w-8 h-8 flex items-center justify-center rounded-full text-lg shadow-lg border-2 border-orange-100 dark:border-gray-700 animate-bounce-small">?</div>
            </div>
         </div>
       </div>
 
-      <h2 class="text-2xl md:text-3xl font-bold text-gray-800 dark:text-white mb-3 transition-colors">
+      <h2 class="text-2xl md:text-3xl font-extrabold text-gray-800 dark:text-white mb-3 transition-colors tracking-tight">
         Objeto no renderizado
       </h2>
-      <p class="text-gray-500 dark:text-gray-400 text-base md:text-lg max-w-md mb-8 leading-relaxed transition-colors">
-        Parece que este modelo fue eliminado del proyecto o la URL es incorrecta.
+      
+      <p class="text-gray-600 dark:text-gray-400 text-sm md:text-base max-w-md mb-8 leading-relaxed">
+        Ups. Parece que este modelo fue eliminado del proyecto, movido a otra carpeta o la URL es incorrecta.
       </p>
 
-      <a href="/" class="group flex items-center gap-2 bg-white dark:bg-gray-800 text-gray-800 dark:text-white px-6 py-3 rounded-full font-bold border-2 border-gray-200 dark:border-gray-700 hover:border-orange-500 dark:hover:border-orange-500 hover:text-orange-500 transition-all shadow-sm hover:shadow-lg hover:-translate-y-1">
-        <i class="ri-arrow-left-line transition-transform group-hover:-translate-x-1"></i>
-        <span>Volver al inicio</span>
+      <a href="/" class="group relative inline-flex items-center gap-3 px-8 py-3 bg-gray-900 dark:bg-white text-white dark:text-gray-900 rounded-full font-bold shadow-lg hover:shadow-orange-500/25 hover:-translate-y-1 transition-all duration-300 overflow-hidden text-sm md:text-base">
+        <span class="absolute inset-0 bg-gradient-to-r from-orange-500 to-orange-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
+        <span class="relative flex items-center gap-2 group-hover:text-white transition-colors">
+            <i class="ri-arrow-left-line transition-transform group-hover:-translate-x-1"></i>
+            <span>Volver al inicio</span>
+        </span>
       </a>
 
     </div>
@@ -51,9 +56,8 @@ import Layout from '../layouts/Layout.astro';
 </Layout>
 
 <style>
-  /* Mantenemos exactamente los mismos estilos que en la versión anterior */
   .perspective-container {
-    perspective: 800px;
+    perspective: 600px;
     overflow: hidden;
   }
 
@@ -64,11 +68,11 @@ import Layout from '../layouts/Layout.astro';
     width: 200%;
     height: 200%;
     background-image: 
-      linear-gradient(to right, rgba(0, 0, 0, 0.05) 1px, transparent 1px),
-      linear-gradient(to bottom, rgba(0, 0, 0, 0.05) 1px, transparent 1px);
-    background-size: 40px 40px;
-    transform: rotateX(60deg);
-    animation: grid-move 20s linear infinite;
+      linear-gradient(to right, rgba(100, 116, 139, 0.1) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(100, 116, 139, 0.1) 1px, transparent 1px);
+    background-size: 50px 50px;
+    transform: rotateX(70deg);
+    animation: grid-move 15s linear infinite;
   }
 
   :global(.dark) .grid-3d {
@@ -78,23 +82,31 @@ import Layout from '../layouts/Layout.astro';
   }
 
   @keyframes grid-move {
-    0% { transform: rotateX(60deg) translateY(0); }
-    100% { transform: rotateX(60deg) translateY(40px); }
+    0% { transform: rotateX(70deg) translateY(0); }
+    100% { transform: rotateX(70deg) translateY(50px); }
   }
 
   @keyframes float {
-    0%, 100% { transform: translate(-50%, -50%) translateY(0); }
-    50% { transform: translate(-50%, -50%) translateY(-15px); }
+    0%, 100% { transform: translate(-50%, -45%) translateY(0); }
+    50% { transform: translate(-50%, -45%) translateY(-15px); }
   }
   .animate-float {
-    animation: float 4s ease-in-out infinite;
+    animation: float 5s ease-in-out infinite;
   }
 
   @keyframes shadow-pulse {
-    0%, 100% { transform: translateX(-50%) scale(1); opacity: 0.1; }
-    50% { transform: translateX(-50%) scale(0.8); opacity: 0.05; }
+    0%, 100% { transform: translateX(-50%) scale(1); opacity: 0.3; }
+    50% { transform: translateX(-50%) scale(0.6); opacity: 0.1; }
   }
   .animate-shadow-pulse {
-    animation: shadow-pulse 4s ease-in-out infinite;
+    animation: shadow-pulse 5s ease-in-out infinite;
+  }
+
+  @keyframes bounce-small {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-5px); }
+  }
+  .animate-bounce-small {
+      animation: bounce-small 2s ease-in-out infinite;
   }
 </style>

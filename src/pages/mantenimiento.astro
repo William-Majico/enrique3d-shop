@@ -19,9 +19,11 @@
                     colors: {
                         'warm-cream': '#faf8f5',
                         'warm-terracotta': '#f97316',
+                        'discord': '#5865F2',
                     },
                     animation: {
                         'bounce-subtle': 'bounce-subtle 3s ease-in-out infinite',
+                        'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
                     },
                     keyframes: {
                         'bounce-subtle': {
@@ -41,22 +43,35 @@
             document.documentElement.classList.remove('dark');
         }
     </script>
+    
+    <style>
+        /* Patrón de cuadrícula para dar efecto de "Blueprint/Constructor" */
+        .bg-grid-pattern {
+            background-size: 40px 40px;
+            background-image: linear-gradient(to right, rgba(0,0,0,0.05) 1px, transparent 1px),
+                              linear-gradient(to bottom, rgba(0,0,0,0.05) 1px, transparent 1px);
+        }
+        .dark .bg-grid-pattern {
+            background-image: linear-gradient(to right, rgba(255,255,255,0.05) 1px, transparent 1px),
+                              linear-gradient(to bottom, rgba(255,255,255,0.05) 1px, transparent 1px);
+        }
+    </style>
 </head>
-<body class="bg-warm-cream dark:bg-[#111827] text-gray-800 dark:text-white h-screen w-full flex flex-col items-center justify-center overflow-hidden transition-colors duration-500 relative font-sans">
+<body class="bg-warm-cream dark:bg-[#0f172a] text-gray-800 dark:text-white h-screen w-full flex flex-col items-center justify-center overflow-hidden transition-colors duration-500 relative font-sans bg-grid-pattern">
 
-    <button id="theme-toggle" class="absolute top-6 right-6 z-50 p-3 rounded-full bg-white dark:bg-gray-800 text-gray-800 dark:text-yellow-400 shadow-lg border border-gray-200 dark:border-gray-700 hover:scale-110 transition-all duration-300 focus:outline-none group">
+    <button id="theme-toggle" class="absolute top-6 right-6 z-50 p-3 rounded-full bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm text-gray-800 dark:text-yellow-400 shadow-lg border border-gray-200 dark:border-gray-700 hover:scale-110 transition-all duration-300 focus:outline-none group">
         <i class="ri-sun-fill text-xl hidden dark:block"></i>
         <i class="ri-moon-clear-fill text-xl block dark:hidden text-gray-600 group-hover:text-indigo-500"></i>
     </button>
 
     <div class="absolute inset-0 overflow-hidden pointer-events-none">
-        <div class="absolute -top-20 -left-20 w-96 h-96 bg-orange-200 dark:bg-orange-900/20 rounded-full blur-[100px] opacity-60 transition-colors duration-500"></div>
-        <div class="absolute bottom-0 right-0 w-80 h-80 bg-orange-100 dark:bg-orange-800/10 rounded-full blur-[80px] opacity-60 transition-colors duration-500"></div>
+        <div class="absolute top-1/4 left-1/4 w-96 h-96 bg-orange-400/20 dark:bg-orange-600/10 rounded-full blur-[120px] animate-pulse-slow"></div>
+        <div class="absolute bottom-1/4 right-1/4 w-96 h-96 bg-indigo-400/20 dark:bg-indigo-600/10 rounded-full blur-[120px] animate-pulse-slow" style="animation-delay: 2s;"></div>
     </div>
 
     <main class="relative z-10 px-6 text-center max-w-xl mx-auto flex flex-col items-center">
         
-        <div class="relative w-32 h-32 mb-10 flex items-center justify-center perspective-container cursor-pointer group">
+        <div class="relative w-32 h-32 mb-12 flex items-center justify-center perspective-container cursor-pointer group">
             <div class="cube">
                 <div class="face front"></div>
                 <div class="face back"></div>
@@ -74,53 +89,57 @@
                 </div>
             </div>
 
-            <div class="absolute -bottom-6 bg-gray-900 dark:bg-white text-white dark:text-gray-900 text-xs font-bold px-4 py-1.5 rounded-full shadow-xl animate-bounce-subtle border border-gray-100 dark:border-gray-200 transition-colors duration-300">
-                En breve
+            <div class="absolute -bottom-8 flex items-center gap-2 bg-white dark:bg-gray-900 px-4 py-1.5 rounded-full shadow-lg border border-gray-200 dark:border-gray-700 animate-bounce-subtle">
+                <span class="relative flex h-2.5 w-2.5">
+                  <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-orange-400 opacity-75"></span>
+                  <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-orange-500"></span>
+                </span>
+                <span class="text-xs font-bold text-gray-600 dark:text-gray-300">Construyendo...</span>
             </div>
         </div>
 
-        <h1 class="text-4xl md:text-5xl font-bold mb-5 tracking-tight text-gray-900 dark:text-white transition-colors duration-300">
-            Sitio en <span class="text-warm-terracotta">Mantenimiento</span>
+        <h1 class="text-4xl md:text-6xl font-extrabold mb-6 tracking-tight text-gray-900 dark:text-white transition-colors duration-300">
+            Estamos <span class="text-transparent bg-clip-text bg-gradient-to-r from-orange-500 to-red-500">Mejorando</span>
         </h1>
         
-        <p class="text-lg text-gray-600 dark:text-gray-300 mb-12 leading-relaxed transition-colors duration-300">
-            Estamos realizando mejoras importantes en la tienda para brindarte una mejor experiencia. ¡Volveremos en unos minutos!
+        <p class="text-lg text-gray-600 dark:text-gray-400 mb-10 leading-relaxed transition-colors duration-300 max-w-md">
+            La tienda está en mantenimiento para traerte nuevos assets y una mejor experiencia. ¡Volvemos en unos minutos!
         </p>
 
-        <div class="flex flex-col items-center gap-4">
-            <span class="text-xs font-bold tracking-widest text-gray-400 uppercase">Mientras tanto, síguenos en:</span>
+        <div class="flex flex-col items-center gap-5 w-full">
+            <span class="text-xs font-bold tracking-[0.2em] text-gray-400 uppercase">Mientras tanto en redes</span>
             
-            <div class="flex gap-4">
-                 <a href="https://www.tiktok.com/@enrique3d" target="_blank" class="group relative w-12 h-12 flex items-center justify-center bg-white dark:bg-gray-800 rounded-2xl shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 border border-gray-100 dark:border-gray-700">
-                    <i class="ri-tiktok-fill text-xl text-gray-700 dark:text-gray-300 group-hover:text-warm-terracotta transition-colors"></i>
+            <div class="flex gap-4 justify-center w-full">
+                 <a href="https://discord.gg/EbEtTsyrC5" target="_blank" class="group relative flex items-center justify-center gap-2 px-6 py-3 bg-white dark:bg-gray-800 rounded-xl shadow-md hover:shadow-xl hover:-translate-y-1 transition-all duration-300 border border-gray-100 dark:border-gray-700 hover:border-[#5865F2] dark:hover:border-[#5865F2]">
+                    <i class="ri-discord-fill text-2xl text-[#5865F2] group-hover:scale-110 transition-transform"></i>
+                    <span class="font-bold text-gray-700 dark:text-gray-200 group-hover:text-[#5865F2] transition-colors">Discord</span>
                 </a>
-                 <a href="#" class="group relative w-12 h-12 flex items-center justify-center bg-white dark:bg-gray-800 rounded-2xl shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 border border-gray-100 dark:border-gray-700">
-                    <i class="ri-instagram-line text-xl text-gray-700 dark:text-gray-300 group-hover:text-warm-terracotta transition-colors"></i>
+
+                 <a href="https://www.tiktok.com/@enrique_3d" target="_blank" class="group relative flex items-center justify-center gap-2 px-6 py-3 bg-white dark:bg-gray-800 rounded-xl shadow-md hover:shadow-xl hover:-translate-y-1 transition-all duration-300 border border-gray-100 dark:border-gray-700 hover:border-black dark:hover:border-white">
+                    <i class="ri-tiktok-fill text-2xl text-gray-900 dark:text-white group-hover:scale-110 transition-transform"></i>
+                    <span class="font-bold text-gray-700 dark:text-gray-200 group-hover:text-black dark:group-hover:text-white transition-colors">TikTok</span>
                 </a>
             </div>
         </div>
 
     </main>
     
-    <div class="absolute bottom-6 text-sm text-gray-400 opacity-60">
-        &copy; {new Date().getFullYear()} Enrique 3D
+    <div class="absolute bottom-6 text-sm text-gray-400 opacity-60 font-mono">
+        &copy; {new Date().getFullYear()} Enrique 3D Studio
     </div>
 
     <script>
-        // Revisar estado del servidor cada 2 segundos
+        // Check cada 5 segundos para no saturar
         setInterval(() => {
             fetch('/', { method: 'HEAD' })
                 .then(response => {
-                    // Si el servidor responde con la URL final que NO es mantenimiento
-                    // (significa que nos redirigió al Home o nos dio el Home directamente)
+                    // Si la URL final ya no es /mantenimiento, recargamos al home
                     if (!response.url.includes('/mantenimiento')) {
                         window.location.href = '/';
                     }
                 })
-                .catch(() => {
-                    // Si falla, seguimos intentando en silencio
-                });
-        }, 2000);
+                .catch(() => {});
+        }, 5000);
     </script>
 
     <script>
@@ -143,45 +162,28 @@
 </html>
 
 <style>
-    .perspective-container {
-        perspective: 800px;
-    }
-
+    /* Estilos del Cubo 3D */
+    .perspective-container { perspective: 1000px; }
     .cube {
-        width: 80px;
-        height: 80px;
+        width: 80px; height: 80px;
         position: relative;
         transform-style: preserve-3d;
-        animation: rotateCube 12s infinite linear;
-        /* Al hacer hover en el contenedor padre (.perspective-container), pausamos el cubo */
+        animation: rotateCube 15s infinite linear;
     }
-    
-    /* Pausar rotación al pasar el mouse */
-    .perspective-container:hover .cube {
-        animation-play-state: paused;
-    }
-    
-    /* El logo interno sigue girando (o puedes pausarlo también si quieres) */
-    .perspective-container:hover .inner-logo {
-        animation-play-state: paused;
-    }
+    .perspective-container:hover .cube { animation-play-state: paused; }
+    .perspective-container:hover .inner-logo { animation-play-state: paused; }
 
     .face {
         position: absolute;
-        width: 80px;
-        height: 80px;
-        background: rgba(249, 115, 22, 0.05);
-        border: 2px solid rgba(249, 115, 22, 0.5); 
-        box-shadow: 0 0 10px rgba(249, 115, 22, 0.1);
-        
-        /* Transiciones suaves para la animación de expansión */
-        transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275), 
-                    border-color 0.3s, 
-                    box-shadow 0.3s, 
-                    background-color 0.3s;
+        width: 80px; height: 80px;
+        background: rgba(249, 115, 22, 0.03); /* Más sutil */
+        border: 1px solid rgba(249, 115, 22, 0.4); 
+        box-shadow: 0 0 15px rgba(249, 115, 22, 0.05);
+        backdrop-filter: blur(2px);
+        transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     }
 
-    /* --- ESTADOS NORMALES --- */
+    /* Posiciones Caras */
     .front  { transform: rotateY(0deg) translateZ(40px); }
     .back   { transform: rotateY(180deg) translateZ(40px); }
     .right  { transform: rotateY(90deg) translateZ(40px); }
@@ -189,28 +191,24 @@
     .top    { transform: rotateX(90deg) translateZ(40px); }
     .bottom { transform: rotateX(-90deg) translateZ(40px); }
 
-    /* --- ESTADOS HOVER (EFECTO DESPIECE/EXPLOSIÓN) --- */
-    /* Aumentamos el translateZ de 40px a 90px para separar las caras */
-    .perspective-container:hover .front  { transform: rotateY(0deg) translateZ(90px); }
-    .perspective-container:hover .back   { transform: rotateY(180deg) translateZ(90px); }
-    .perspective-container:hover .right  { transform: rotateY(90deg) translateZ(90px); }
-    .perspective-container:hover .left   { transform: rotateY(-90deg) translateZ(90px); }
-    .perspective-container:hover .top    { transform: rotateX(90deg) translateZ(90px); }
-    .perspective-container:hover .bottom { transform: rotateX(-90deg) translateZ(90px); }
+    /* Efecto Explosión al Hover */
+    .perspective-container:hover .front  { transform: rotateY(0deg) translateZ(80px); }
+    .perspective-container:hover .back   { transform: rotateY(180deg) translateZ(80px); }
+    .perspective-container:hover .right  { transform: rotateY(90deg) translateZ(80px); }
+    .perspective-container:hover .left   { transform: rotateY(-90deg) translateZ(80px); }
+    .perspective-container:hover .top    { transform: rotateX(90deg) translateZ(80px); }
+    .perspective-container:hover .bottom { transform: rotateX(-90deg) translateZ(80px); }
 
-    /* Efectos visuales adicionales en hover (Brillo intenso) */
     .perspective-container:hover .face {
-        border-color: rgba(249, 115, 22, 0.9);
-        background: rgba(249, 115, 22, 0.15);
-        box-shadow: 0 0 25px rgba(249, 115, 22, 0.4);
+        border-color: rgba(249, 115, 22, 0.8);
+        background: rgba(249, 115, 22, 0.1);
+        box-shadow: 0 0 30px rgba(249, 115, 22, 0.2);
     }
 
     .inner-logo {
-        position: absolute;
-        top: 50%;
-        left: 50%;
+        position: absolute; top: 50%; left: 50%;
         transform: translate(-50%, -50%);
-        animation: rotateCube 12s infinite reverse linear;
+        animation: rotateCube 15s infinite reverse linear;
     }
 
     @keyframes rotateCube {
