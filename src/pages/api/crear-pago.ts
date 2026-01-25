@@ -1,18 +1,13 @@
 import type { APIRoute } from 'astro';
-// Importamos tu base de datos para asegurar el precio correcto
 import products from '../../data/products.json';
 
 export const POST: APIRoute = async ({ request }) => {
-  // 1. CONFIGURACIÓN
-  // Detecta si es producción o local para generar los links de retorno correctamente
+  // 1. CONFIGURACIÓN BÁSICA
   const isProd = import.meta.env.PROD;
   const baseUrl = isProd ? "https://enrique3d.shop" : "http://localhost:4321";
   
-  // Endpoint de n1co (Si en el futuro te dan acceso a producción real, cambia .shop por .com si es necesario)
-  // CAMBIO: Usamos .com en lugar de .shop
-  const N1CO_API_URL = "https://api.n1co.com/paymentlink/checkout";
-
-  // Leemos las credenciales seguras
+  // URL OFICIAL DE PRODUCCIÓN DE N1CO
+  const N1CO_API_URL = "https://api-pay.n1co.shop/api/paymentlink/checkout"; 
   const N1CO_SECRET = import.meta.env.N1CO_SECRET;
   const N1CO_LOCATION_CODE = import.meta.env.N1CO_LOCATION_CODE;
 
@@ -20,37 +15,33 @@ export const POST: APIRoute = async ({ request }) => {
     const body = await request.json();
     const { productId } = body; 
 
-    // 2. SEGURIDAD: Buscamos el producto real
+    // 2. SEGURIDAD: Validamos que el producto exista en tu base de datos
     const product = products.find(p => p.id === productId);
 
     if (!product) {
       return new Response(JSON.stringify({ error: "Producto no encontrado" }), { status: 404 });
     }
 
-    // Verificamos que las llaves existan para no dar errores raros
+    // 3. SEGURIDAD: Verificamos credenciales del servidor
     if (!N1CO_SECRET || !N1CO_LOCATION_CODE) {
-      console.error("Faltan credenciales de N1CO");
-      return new Response(JSON.stringify({ error: "Error de configuración en el servidor" }), { status: 500 });
+      console.error("Faltan credenciales en el servidor");
+      return new Response(JSON.stringify({ error: "Error interno de configuración" }), { status: 500 });
     }
 
-    // 3. PREPARAR IMAGEN ABSOLUTA
-    // n1co necesita la URL completa (https://...) para mostrar la foto
     const imagenAbsoluta = product.images[0].startsWith("http") 
       ? product.images[0] 
       : `${baseUrl}${product.images[0]}`;
 
-    // 4. CREAR EL PAYLOAD (DATOS) PARA N1CO
+    // 4. PREPARAMOS LOS DATOS PARA N1CO
+    // Nota: successUrl incluye ?id=... para que la página de gracias sepa qué mostrar
     const n1coPayload = {
-      orderReference: `E3D-${product.id}-${Date.now()}`, // ID único de orden
+      orderReference: `E3D-${product.id}-${Date.now()}`, 
       orderName: "Enrique3D Shop",
-      orderDescription: `Compra de asset: ${product.title}`,
-      amount: parseFloat(product.price), 
+      orderDescription: `Compra: ${product.title}`,
       locationCode: N1CO_LOCATION_CODE, 
       currency: "USD",
-      // Redirecciones
-      successUrl: `${baseUrl}/gracias`, 
-      cancelUrl: `${baseUrl}/producto/${product.id}`, // Si cancela, vuelve al producto
-      // Detalle visual (Ticket de compra)
+      successUrl: `${baseUrl}/gracias?id=${product.id}`, 
+      cancelUrl: `${baseUrl}/producto/${product.id}`,
       lineItems: [
         {
           product: {
@@ -65,7 +56,9 @@ export const POST: APIRoute = async ({ request }) => {
       ]
     };
 
-    // 5. ENVIAR A N1CO
+    console.log("Iniciando cobro real con N1CO...");
+
+    // 5. CONEXIÓN CON LA PASARELA
     const response = await fetch(N1CO_API_URL, {
       method: 'POST',
       headers: {
@@ -75,25 +68,33 @@ export const POST: APIRoute = async ({ request }) => {
       body: JSON.stringify(n1coPayload)
     });
 
-    const data = await response.json();
-
-    if (!response.ok) {
-      console.error("Error N1CO:", data);
-      return new Response(JSON.stringify({ error: "La pasarela rechazó la solicitud", detalle: data }), { status: 400 });
+    // Manejo de respuesta (Text primero para evitar errores de parseo)
+    const rawText = await response.text();
+    let data;
+    try {
+        data = JSON.parse(rawText);
+    } catch (e) {
+        console.error("Error crítico: N1CO no devolvió JSON", rawText);
+        return new Response(JSON.stringify({ error: "Error de comunicación con el banco" }), { status: 500 });
     }
 
-    // Extraemos la URL de pago
-    const urlPago = data.paymentLinkUrl || data.url || data.data?.url;
+    if (!response.ok) {
+      console.error("Cobro rechazado por N1CO:", data);
+      return new Response(JSON.stringify({ error: "No se pudo procesar el pago", detalle: data }), { status: 400 });
+    }
+
+    // Obtenemos la URL de pago
+    const urlPago = data.paymentLinkUrl || data.url || data.data?.url || data.data?.paymentLinkUrl;
 
     if (!urlPago) {
        return new Response(JSON.stringify({ error: "No se recibió enlace de pago" }), { status: 500 });
     }
 
-    // Devolvemos la URL al frontend para que redirija
+    // 6. ÉXITO: Enviamos al cliente a pagar
     return new Response(JSON.stringify({ url: urlPago }), { status: 200 });
 
   } catch (error) {
-    console.error(error);
-    return new Response(JSON.stringify({ error: (error as any).message }), { status: 500 });
+    console.error("Error del servidor:", error);
+    return new Response(JSON.stringify({ error: "Error interno del servidor" }), { status: 500 });
   }
 }

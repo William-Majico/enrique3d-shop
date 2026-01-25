@@ -1,11 +1,19 @@
 ---
+// Importante: Activamos modo servidor para leer la URL
+export const prerender = false;
+
 import Layout from '../layouts/Layout.astro';
 import products from '../data/products.json';
 
-// --- LÓGICA (EL CEREBRO) ---
+// --- LÓGICA (EL CEREBRO ADAPTADO A N1CO) ---
 const url = Astro.url;
-const idTransaccion = url.searchParams.get('idTransaccion');
-const referenciaCompleta = url.searchParams.get('identificadorEnlaceComercio');
+
+// 1. Buscamos el ID directo (que mandamos desde crear-pago.ts)
+const productIdParam = url.searchParams.get('id');
+
+// 2. Intentamos capturar referencias de N1CO (si las manda) o ponemos valores por defecto
+const idTransaccion = url.searchParams.get('n1co_id') || 'Procesado-Exitósamente';
+const referenciaCompleta = productIdParam ? `ORDEN-N1CO-${productIdParam.toUpperCase()}` : 'Referencia General';
 
 // Variables por defecto
 let downloadUrl = '';
@@ -13,17 +21,12 @@ let productTitle = 'Producto Digital';
 let productPrice = '0.00';
 let productImage = ''; 
 let productDesc = 'Gracias por tu compra.';
-let productId = '';
-let productFormats = ['.ZIP']; // Valor por defecto si no encuentra nada
+let productFormats = ['.RAR']; // Valor por defecto
 
-// Procesamos la referencia de Wompi
-if (referenciaCompleta) {
+// 3. Procesamos el producto usando el ID directo
+if (productIdParam) {
   try {
-    let limpio = referenciaCompleta.replace('ENRIQUE3D-', '');
-    const ultimoGuion = limpio.lastIndexOf('-');
-    productId = limpio.substring(0, ultimoGuion);
-
-    const purchasedProduct = products.find(p => p.id === productId);
+    const purchasedProduct = products.find(p => p.id === productIdParam);
 
     if (purchasedProduct) {
       downloadUrl = purchasedProduct.downloadUrl;
@@ -32,18 +35,17 @@ if (referenciaCompleta) {
       productImage = purchasedProduct.images[0];
       productDesc = purchasedProduct.description;
       
-      // --- LÓGICA NUEVA PARA FORMATOS ---
-      // Busca "Formato" o "formatos" en tus specs y crea una lista
+      // --- LÓGICA PARA FORMATOS ---
       if (purchasedProduct.specs) {
         const rawFormats = purchasedProduct.specs['Formato'] || purchasedProduct.specs['formatos'] || '';
         if (rawFormats) {
-            // Separa por comas y quita espacios extra (ej: ".fbx, .blend" -> [".fbx", ".blend"])
+            // Separa por comas y quita espacios extra
             productFormats = rawFormats.split(',').map(f => f.trim());
         }
       }
     }
   } catch (error) {
-    console.error("Error procesando referencia:", error);
+    console.error("Error buscando producto:", error);
   }
 }
 
@@ -112,11 +114,11 @@ const fechaHoy = new Date().toLocaleDateString('es-ES', { year: 'numeric', month
           
           <div class="space-y-3">
             <div class="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-1 sm:gap-4 p-4 bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm">
-              <span class="text-sm font-medium text-gray-600 dark:text-gray-400">ID de Transacción:</span>
-              <span class="font-mono text-sm font-bold text-gray-900 dark:text-white break-all">{idTransaccion || 'Pendiente...'}</span>
+              <span class="text-sm font-medium text-gray-600 dark:text-gray-400">Estado:</span>
+              <span class="font-mono text-sm font-bold text-green-600 dark:text-green-400 break-all">Aprobado</span>
             </div>
             <div class="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-1 sm:gap-4 p-4 bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm">
-              <span class="text-sm font-medium text-gray-600 dark:text-gray-400">Referencia Wompi:</span>
+              <span class="text-sm font-medium text-gray-600 dark:text-gray-400">Referencia:</span>
               <span class="font-mono text-sm font-bold text-gray-900 dark:text-white break-all text-xs">{referenciaCompleta}</span>
             </div>
             <div class="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-1 sm:gap-4 p-4 bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm">

@@ -1,23 +1,21 @@
 ---
-export const prerender = true;
+// 1. IMPORTANTE: Activamos modo servidor para que funcionen las APIs de pago
+export const prerender = false;
+
 import Layout from "../../layouts/Layout.astro";
 import products from "../../data/products.json";
 
-export async function getStaticPaths() {
-  return products.map((product) => ({
-    params: { id: product.id },
-    props: { product },
-  }));
-}
+// 2. LÓGICA DE SERVIDOR (Buscamos el producto por ID en tiempo real)
+const { id } = Astro.params;
+const product = products.find((p) => p.id === id);
 
-const { product } = Astro.props;
-
+// 3. Si el producto no existe, redirigimos al inicio
 if (!product) {
-  return Astro.redirect("/"); // Si el producto no existe, te devuelve al inicio
+  return Astro.redirect("/");
 }
 
+// Funciones auxiliares para video/imagen
 const isVideo = (filename: string) => filename.toLowerCase().endsWith(".mp4");
-
 const posterImage = product.images.find((img) => !isVideo(img)) || "";
 
 // --- LÓGICA DE RELACIONADOS ---
@@ -34,16 +32,13 @@ const relatedProducts = otherProducts
 >
   <main class="pt-24 md:pt-32 pb-16 md:pb-24 px-4 md:px-8">
     <div class="max-w-7xl mx-auto">
-      <a
-        href="/"
-        class="inline-flex items-center gap-2 text-gray-500 hover:text-orange-500 dark:text-gray-400 dark:hover:text-orange-400 transition-colors mb-6 font-medium group"
-      >
-        <i
-          class="ri-arrow-left-line group-hover:-translate-x-1 transition-transform"
-        ></i>
+      <a href="/" class="inline-flex items-center gap-2 text-gray-500 hover:text-orange-500 dark:text-gray-400 dark:hover:text-orange-400 transition-colors mb-6 font-medium group">
+        <i class="ri-arrow-left-line group-hover:-translate-x-1 transition-transform"></i>
         <span>Volver a Tienda</span>
       </a>
+      
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12">
+        {/* COLUMNA IZQUIERDA: GALERÍA */}
         <div class="w-full">
           <div class="w-full h-full flex flex-col gap-4">
             <div
@@ -84,6 +79,7 @@ const relatedProducts = otherProducts
                 }
               </div>
 
+              {/* Botones de navegación */}
               <button
                 id="prev-btn"
                 class="hidden md:flex absolute left-4 top-1/2 -translate-y-1/2 z-40 w-12 h-12 items-center justify-center rounded-full bg-white/90 text-gray-800 shadow-xl hover:bg-orange-500 hover:text-white transition-all cursor-pointer border border-gray-100 hover:scale-110 active:scale-95"
@@ -97,9 +93,8 @@ const relatedProducts = otherProducts
                 <i class="ri-arrow-right-s-line text-2xl"></i>
               </button>
 
-              <div
-                class="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-3 md:hidden z-30 pointer-events-none items-center p-2 rounded-full bg-black/20 backdrop-blur-sm"
-              >
+              {/* Puntos de navegación móvil */}
+              <div class="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-3 md:hidden z-30 pointer-events-none items-center p-2 rounded-full bg-black/20 backdrop-blur-sm">
                 {
                   product.images.map((_, index) => (
                     <div
@@ -110,9 +105,8 @@ const relatedProducts = otherProducts
               </div>
             </div>
 
-            <div
-              class="flex gap-2 md:gap-3 overflow-x-auto pb-2 scrollbar-hide snap-x snap-mandatory"
-            >
+            {/* Miniaturas */}
+            <div class="flex gap-2 md:gap-3 overflow-x-auto pb-2 scrollbar-hide snap-x snap-mandatory">
               {
                 product.images.map((media, index) => (
                   <button
@@ -142,60 +136,50 @@ const relatedProducts = otherProducts
           </div>
         </div>
 
+        {/* COLUMNA DERECHA: INFO Y PAGO */}
         <div class="w-full">
           <div class="h-full flex flex-col">
             <div class="mb-6 md:mb-8">
               <p class="text-sm text-gray-500 dark:text-gray-400 mb-2">
                 Modelo 3D
               </p>
-              <h1
-                class="text-2xl md:text-4xl font-bold text-gray-800 dark:text-white mb-4 tracking-tight"
-              >
+              <h1 class="text-2xl md:text-4xl font-bold text-gray-800 dark:text-white mb-4 tracking-tight">
                 {product.title}
               </h1>
-
+              
               <div class="flex items-center gap-3 mb-4">
-                <p
-                  class="text-2xl md:text-3xl font-bold text-gray-800 dark:text-white"
-                >
-                  ${product.price}
-                  <span class="text-sm font-medium text-gray-500">USD</span>
+                <p class="text-2xl md:text-3xl font-bold text-gray-800 dark:text-white">
+                  ${product.price} <span class="text-sm font-medium text-gray-500">USD</span>
                 </p>
 
-                {/* Verificamos si existe onSale y es true */}
-                {
-                  product.onSale && (
-                    <div class="flex items-center gap-2">
-                      <p class="text-lg md:text-xl text-gray-400 line-through decoration-orange-500/40">
-                        ${product.oldPrice}
-                      </p>
-                      <span
-                        class={`
-        ${product.badge?.bgColor || "bg-orange-500"} 
-        ${product.badge?.textColor || "text-white"} 
-        text-[8px] md:text-xs font-bold px-2.5 py-1 rounded uppercase animate-pulse shadow-sm
-      `}
-                      >
-                        {product.badge?.text || "¡Oferta!"}
-                      </span>
-                    </div>
-                  )
-                }
+                {/* Badge de Oferta Mejorado */}
+                {product.onSale && (
+                  <div class="flex items-center gap-2">
+                    <p class="text-lg md:text-xl text-gray-400 line-through decoration-orange-500/40">
+                      ${product.oldPrice}
+                    </p>
+                    <span 
+                      class:list={[
+                        "text-[10px] md:text-xs font-bold px-2.5 py-1 rounded uppercase animate-pulse shadow-sm",
+                        product.badge?.bgColor || "bg-orange-500",
+                        product.badge?.textColor || "text-white"
+                      ]}
+                    >
+                      {product.badge?.text || "¡OFERTA!"}
+                    </span>
+                  </div>
+                )}
               </div>
             </div>
 
             <div class="mb-6 md:mb-8">
-              <p
-                class="text-sm text-gray-600 dark:text-gray-300 leading-relaxed"
-              >
+              <p class="text-sm text-gray-600 dark:text-gray-300 leading-relaxed">
                 {product.description}
               </p>
             </div>
 
             <div class="mb-6 md:mb-8 flex-grow">
-              <h2
-                class="text-sm font-semibold text-gray-800 dark:text-white mb-4 uppercase tracking-wide"
-              >
+              <h2 class="text-sm font-semibold text-gray-800 dark:text-white mb-4 uppercase tracking-wide">
                 Características
               </h2>
               <div class="space-y-3 text-sm">
@@ -237,10 +221,7 @@ const relatedProducts = otherProducts
         </div>
       </div>
 
-      <div
-        style="margin-top: 4rem;"
-        class="mt-32 border-t border-gray-200 dark:border-gray-800 pt-16"
-      >
+      <div class="mt-32 border-t border-gray-200 dark:border-gray-800 pt-16">
         <h2 class="text-2xl font-bold text-gray-800 dark:text-white mb-8">
           También te podría interesar
         </h2>
@@ -278,13 +259,13 @@ const relatedProducts = otherProducts
 </Layout>
 
 <script is:inline>
+  // LÓGICA DEL CARRUSEL
   const container = document.getElementById("carousel-container");
   const prevBtn = document.getElementById("prev-btn");
   const nextBtn = document.getElementById("next-btn");
   const dots = document.querySelectorAll(".dot");
   const thumbs = document.querySelectorAll(".thumbnail-btn");
-  const videos = container.querySelectorAll(".carousel-video");
-
+  const videos = container?.querySelectorAll(".carousel-video") || [];
   let currentIndex = 0;
   const totalSlides = dots.length;
 
@@ -314,39 +295,44 @@ const relatedProducts = otherProducts
       }
     });
 
-    // AQUÍ OCURRE LA MAGIA DEL PRELOAD="NONE"
-    videos.forEach((video) => {
-      const slideParent = video.closest("div");
-      const slideIndex = parseInt(slideParent.getAttribute("data-index"));
-      if (slideIndex === index) {
-        // Al hacer .play(), el navegador entiende que AHORA sí debe descargar el video
-        video.play().catch((e) => {});
-        video.setAttribute("controls", "true");
-      } else {
-        video.pause();
-        video.currentTime = 0;
-        video.removeAttribute("controls");
-      }
-    });
+    // Reproducción inteligente de video
+    if (videos.length > 0) {
+        videos.forEach((video) => {
+        const slideParent = video.closest("div");
+        const slideIndex = parseInt(slideParent.getAttribute("data-index"));
+        if (slideIndex === index) {
+            video.play().catch((e) => {});
+            video.setAttribute("controls", "true");
+        } else {
+            video.pause();
+            video.currentTime = 0;
+            video.removeAttribute("controls");
+        }
+        });
+    }
   };
 
-  container.addEventListener("scroll", () => {
-    const slideWidth = container.offsetWidth;
-    const newIndex = Math.round(container.scrollLeft / slideWidth);
-    if (newIndex !== currentIndex && newIndex >= 0 && newIndex < totalSlides) {
-      updateState(newIndex);
-    }
-  });
+  if (container) {
+    container.addEventListener("scroll", () => {
+        const slideWidth = container.offsetWidth;
+        const newIndex = Math.round(container.scrollLeft / slideWidth);
+        if (newIndex !== currentIndex && newIndex >= 0 && newIndex < totalSlides) {
+        updateState(newIndex);
+        }
+    });
+  }
 
   const manualScroll = (index) => {
+    if(!container) return;
     const slideWidth = container.offsetWidth;
     container.scrollTo({ left: index * slideWidth, behavior: "smooth" });
   };
 
-  nextBtn.addEventListener("click", () => {
+  if (nextBtn) nextBtn.addEventListener("click", () => {
     manualScroll((currentIndex + 1) % totalSlides);
   });
-  prevBtn.addEventListener("click", () => {
+  
+  if (prevBtn) prevBtn.addEventListener("click", () => {
     manualScroll((currentIndex - 1 + totalSlides) % totalSlides);
   });
 
@@ -359,15 +345,15 @@ const relatedProducts = otherProducts
 
   setTimeout(() => updateState(0), 100);
 
-  // --- LÓGICA DE PAGO ---
+  // --- LÓGICA DE PAGO N1CO (INTEGRADA) ---
   window.comprar = async (id, btn) => {
     const originalContent = btn.innerHTML;
     // Feedback de carga
-    btn.innerHTML = `<span class="animate-pulse">Cargando...</span>`;
+    btn.innerHTML = `<span class="animate-pulse">Procesando...</span>`;
     btn.disabled = true;
+    btn.classList.add('opacity-75', 'cursor-not-allowed');
     
     try {
-      // AQUÍ ESTÁ LA CLAVE: Enviamos { productId: id }
       const respuesta = await fetch("/api/crear-pago", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -376,18 +362,26 @@ const relatedProducts = otherProducts
         }),
       });
 
-      const datos = await respuesta.json();
+      // Leemos texto primero por si hay error HTML
+      const rawText = await respuesta.text();
+      let datos;
+      try {
+          datos = JSON.parse(rawText);
+      } catch (e) {
+          throw new Error("Error del servidor: " + rawText);
+      }
 
-      if (datos.url) {
-        window.location.href = datos.url; // Nos vamos a n1co
+      if (respuesta.ok && datos.url) {
+        window.location.href = datos.url;
       } else {
-        throw new Error(datos.error || "No se pudo generar el pago");
+        throw new Error(datos.error || "No se pudo iniciar el pago");
       }
     } catch (error) {
       console.error(error);
       alert("Error: " + error.message);
       btn.innerHTML = originalContent;
       btn.disabled = false;
+      btn.classList.remove('opacity-75', 'cursor-not-allowed');
     }
   };
 </script>
