@@ -42,10 +42,15 @@ import products from "../data/products.json";
               data-title={product.title.toLowerCase()}
             >
               <div class="relative w-full aspect-square mb-4 overflow-hidden rounded-xl bg-gray-50 dark:bg-gray-800">
-                {/* Etiqueta de Oferta */}
+                {/* Etiqueta de Oferta en el Grid */}
                 {product.onSale && (
-                  <span class="absolute top-2 left-2 z-10 bg-orange-500 text-white text-[10px] font-bold px-2 py-1 rounded shadow-sm">
-                    OFERTA
+                  <span
+                    class={`absolute top-2 left-2 z-10 
+      ${product.badge?.bgColor || "bg-orange-500"} 
+      ${product.badge?.textColor || "text-white"} 
+      text-[10.5px] font-bold px-2 py-1 rounded shadow-md`}
+                  >
+                    {product.badge?.text || "OFERTA"}
                   </span>
                 )}
 

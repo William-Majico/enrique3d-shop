@@ -34,8 +34,13 @@ const relatedProducts = otherProducts
 >
   <main class="pt-24 md:pt-32 pb-16 md:pb-24 px-4 md:px-8">
     <div class="max-w-7xl mx-auto">
-      <a href="/" class="inline-flex items-center gap-2 text-gray-500 hover:text-orange-500 dark:text-gray-400 dark:hover:text-orange-400 transition-colors mb-6 font-medium group">
-        <i class="ri-arrow-left-line group-hover:-translate-x-1 transition-transform"></i>
+      <a
+        href="/"
+        class="inline-flex items-center gap-2 text-gray-500 hover:text-orange-500 dark:text-gray-400 dark:hover:text-orange-400 transition-colors mb-6 font-medium group"
+      >
+        <i
+          class="ri-arrow-left-line group-hover:-translate-x-1 transition-transform"
+        ></i>
         <span>Volver a Tienda</span>
       </a>
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12">
@@ -148,23 +153,34 @@ const relatedProducts = otherProducts
               >
                 {product.title}
               </h1>
-              
+
               <div class="flex items-center gap-3 mb-4">
-                <p class="text-2xl md:text-3xl font-bold text-gray-800 dark:text-white">
-                  ${product.price} <span class="text-sm font-medium text-gray-500">USD</span>
+                <p
+                  class="text-2xl md:text-3xl font-bold text-gray-800 dark:text-white"
+                >
+                  ${product.price}
+                  <span class="text-sm font-medium text-gray-500">USD</span>
                 </p>
 
                 {/* Verificamos si existe onSale y es true */}
-                {product.onSale && (
-                  <div class="flex items-center gap-2">
-                    <p class="text-lg md:text-xl text-gray-400 line-through decoration-orange-500/40">
-                      ${product.oldPrice}
-                    </p>
-                    <span class="bg-orange-500 text-white text-[10px] font-bold px-2 py-0.5 rounded uppercase animate-pulse">
-                      ¡Oferta!
-                    </span>
-                  </div>
-                )}
+                {
+                  product.onSale && (
+                    <div class="flex items-center gap-2">
+                      <p class="text-lg md:text-xl text-gray-400 line-through decoration-orange-500/40">
+                        ${product.oldPrice}
+                      </p>
+                      <span
+                        class={`
+        ${product.badge?.bgColor || "bg-orange-500"} 
+        ${product.badge?.textColor || "text-white"} 
+        text-[8px] md:text-xs font-bold px-2.5 py-1 rounded uppercase animate-pulse shadow-sm
+      `}
+                      >
+                        {product.badge?.text || "¡Oferta!"}
+                      </span>
+                    </div>
+                  )
+                }
               </div>
             </div>
 
@@ -347,11 +363,11 @@ const relatedProducts = otherProducts
   window.comprar = async (id, btn) => {
     // Guardamos el texto original (ej: contenido del botón)
     const originalContent = btn.innerHTML;
-    
+
     // Feedback visual de carga
     btn.innerHTML = `<span class="animate-pulse">Procesando...</span>`;
     btn.disabled = true;
-    btn.classList.add('opacity-75', 'cursor-not-allowed');
+    btn.classList.add("opacity-75", "cursor-not-allowed");
 
     try {
       // Solo enviamos el ID. El servidor sabe el precio.
@@ -359,7 +375,7 @@ const relatedProducts = otherProducts
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          productId: id
+          productId: id,
         }),
       });
 
@@ -376,7 +392,7 @@ const relatedProducts = otherProducts
       // Restauramos el botón si falla
       btn.innerHTML = originalContent;
       btn.disabled = false;
-      btn.classList.remove('opacity-75', 'cursor-not-allowed');
+      btn.classList.remove("opacity-75", "cursor-not-allowed");
     }
   };
 </script>
